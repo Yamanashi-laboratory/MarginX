@@ -1,0 +1,171 @@
+**** **** **** **** **** **** **** **** **** **** **** 
+*JSIM CONTROL FILE FOR CADENCE BY KAMEDA@CQ.JP.NEC.COM
+**** **** **** **** **** **** **** **** **** **** ****
+
+*JSIM MODEL
+**HSTP**
+.MODEL JJMOD JJ(RTYPE=1, VG=2.8MV, CAP=0.064PF, R0=100OHM, RN=17OHM, ICRIT=0.1MA)
+
+
+*** NETLIST FILE ***
+**** **** **** **** **** **** **** ****+
+*** LIB : HSTP_MATSUOKA_LIB
+*** CELL: NDROEX_VER3_SCOPE
+*** VIEW: SCHEMATIC
+*** APR 29 18:45:35 2023
+**** **** **** **** **** **** **** ****
+
+
+*** JTL
+.SUBCKT JTL         31          2        32
+***       DIN      DOUT
+R1                32        33   8.32OHM
+LPIN              31        27   0.840PH FCHECK
+LPR1              33        27   3.588PH FCHECK
+L2                34        35   4.776PH FCHECK
+L3                35         2   1.620PH FCHECK
+L1                27        34   2.467PH FCHECK
+LP2               36         0   0.218PH FCHECK
+LP1               37         0   0.224PH FCHECK
+B2                35        36  JJMOD AREA=2.130
+RS2               35        36   5.31OHM *SHUNT=11.30
+B1                34        37  JJMOD AREA=2.130
+RS1               34        37   5.31OHM *SHUNT=11.30
+.ENDS
+
+*** SINK
+.SUBCKT SINK         31        38
+***       DIN
+R1                38        39   8.32OHM
+R2                40         0   4.02OHM
+LPIN              31        41   0.840PH FCHECK
+LPR1              39        41   3.588PH FCHECK
+L3                37        40   4.792PH FCHECK
+L1                41        37   2.475PH FCHECK
+LP1               35         0   0.218PH FCHECK
+B1                37        35  JJMOD AREA=2.130
+RS1               37        35   5.31OHM *SHUNT=11.30
+.ENDS
+
+*** IJTL
+.SUBCKT IJTL         31          2
+***       DIN      DOUT
+L1                31        16   4.776PH FCHECK
+L3                16         2   1.620PH FCHECK
+LP1               36         0   0.218PH FCHECK
+B1                16        36  JJMOD AREA=2.130
+RS1               16        36   5.31OHM *SHUNT=11.30
+.ENDS
+
+
+*** NDROEX_VER3
+.SUBCKT NDROEX_VER3          1          2          3          4          5          6          7          8        11
+***       CLK      DOUT     RESET  RESETOUT       XIN      XOUT       YIN      YOUT
+
+krst  LRST    L3               0.150
+*FIX
+
+kx    LX    L2              -0.071
+*FIX
+
+ky    LY    L2              -0.073
+*FIX
+
+
+l2    22    21               4.478pH
+l3    23    22               4.689pH
+l4    19    16               0.581pH
+l5    16    18               0.618pH
+l6     1    28               2.583pH
+l7    28    29               1.351pH
+l8    26    18               1.239pH
+l9    14    12               4.342pH
+l10    18    14               1.183pH
+l11    12     2               0.910pH
+
+LP1               25         0   0.681PH FCHECK
+LP2               24         0   0.695PH FCHECK
+LP4               27         0   0.346PH FCHECK
+LP6               17         0   0.233PH FCHECK
+LP7               13         0   0.276PH FCHECK
+
+LPR1              20        21   0.312PH FCHECK
+LPR2              15        16   0.200PH FCHECK
+LPR3              30        28   3.637PH FCHECK
+
+lrst     3     4               9.840pH
+*MAX=15
+
+lx     5     6               9.480pH
+*MAX=15
+
+
+ly     7     8               9.063pH
+*MAX=15
+
+
+r1    11    20              22.153ohm
+*FIX
+r2    15    11              19.085ohm
+*FIX
+r3    11    30               8.320ohm
+*FIX
+
+b1     21    25  jjmod area=2.338     
+RS1    21    25               4.833ohm *SHUNT=11.300
+*MIN=1.7
+*MAX=2.5
+
+b2     23    24  jjmod area=2.720     
+RS2    23    24               4.154ohm *SHUNT=11.300
+*MAX=2.5
+b3     22    19  jjmod area=1.177     
+RS3    22    19               9.601ohm *SHUNT=11.300
+*MIN=1
+b4     29    27  jjmod area=2.430     
+RS4    29    27               4.650ohm *SHUNT=11.300
+*MAX=2.5
+b5     29    26  jjmod area=2.670     
+RS5    29    26               4.233ohm *SHUNT=11.300
+b6     14    17  jjmod area=2.703     
+RS6    14    17               4.181ohm *SHUNT=11.300
+b7     12    13  jjmod area=2.449     
+RS7    12    13               4.614ohm *SHUNT=11.300
+*MIN=1.7
+*MAX=2.5
+
+.ENDS
+
+*** TOP CELL: NDROEX_VER3_SCOPE
+XI19       NDROEX_VER3         42         43         44          0         46          0         48          0         51
+
+IINRST             0        44  PWL(0PS 0MA 650PS 0MA 651PS 2MA 680PS 2MA 681PS 0MA 750PS 0MA 751PS 2MA 780PS 2MA 781PS 0MA)
+IINx               0        46  PWL(0PS 0MA 150PS 0MA 151PS 2MA 180PS 2MA 181PS 0MA 350PS 0MA 351PS 2MA 380PS 2MA 381PS 0MA 450PS 0MA 451PS 2MA 480PS 2MA 481PS 0MA)
+IINy               0        48  PWL(0PS 0MA 250PS 0MA 251PS 2MA 280PS 2MA 281PS 0MA 350PS 0MA 351PS 2MA 380PS 2MA 381PS 0MA 450PS 0MA 451PS 2MA 480PS 2MA 481PS 0MA)
+
+vb    51     0   PWL(0ps 0mV    50ps                  2.500mV)
+*FIX
+VINCLK            33         0  PULSE(0.0MV 1.034MV 100ps 1ps 1ps 1ps 100pS)
+
+XI10             IJTL         33         50
+XI11              JTL         50         42         51
+XI12              JTL         43         34         51
+XI58             SINK         34         51
+
+*** NETLIST FILE ***
+
+.TRAN  0.1PS 1NS 0NS 1PS
+.FILE ex04_out_out.CSV
+.PRINT PHASE B1.XI19
+.PRINT PHASE B2.XI19
+.PRINT PHASE B5.XI19
+.PRINT PHASE B6.XI19
+
+*.print devv Vinclk
+*.print devv B4.XI19
+*.print devv B6.XI19
+*.print devi IINx
+*.print devi IINy
+*.print devi IINRST
+
+.end

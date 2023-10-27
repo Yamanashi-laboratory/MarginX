@@ -1,0 +1,114 @@
+**** **** **** **** **** **** **** **** **** **** **** 
+*JSIM control file for CADENCE by kameda@cq.jp.nec.com
+**** **** **** **** **** **** **** **** **** **** ****
+
+*JSIM model
+**HSTP**
+*.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.064pF, R0=100ohm, Rn=17ohm, Icrit=0.1mA)
+**OPEN**
+*.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.218pF, R0=200ohm, Rn=17ohm, Icrit=0.1mA)
+**Low Jc**
+.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.5pF, R0=5000ohm, Rn=17ohm, Icrit=0.1mA)
+
+
+*** netlist file ***
+**** **** **** **** **** **** **** ****+
+*** Lib : 1kp_nakamura_lib
+*** Cell: jjinductance_jtl2
+*** View: schematic
+*** Jul 25 14:53:39 2023
+**** **** **** **** **** **** **** ****
+
+*** jtl
+.subckt jtl          1          2         9
+***       din      dout
+L3                 3         2  17.330pH fcheck
+LP2                4         0   0.250pH fcheck
+L2                 5         3  47.790pH fcheck
+LP1                6         0   0.360pH fcheck
+L1                 7         5  24.320pH fcheck
+LPR1               8         7   1.950pH fcheck
+LPIN               1         7   7.360pH fcheck
+R1                 9         8  26.66ohm
+B2                 3         4  jjmod area=0.21
+RS2                3         4  12.06ohm *SHUNT=2.57
+B1                 5         6  jjmod area=0.21
+RS1                5         6  12.06ohm *SHUNT=2.57
+.ends
+
+*** sink
+.subckt sink          1         9
+***       din
+R1                 9        10  26.60ohm
+R2                11         0   4.84ohm
+LPIN               1        12   9.520pH fcheck
+LPR1              10        12   1.740pH fcheck
+L3                13        11  49.310pH fcheck
+L1                12        13  23.420pH fcheck
+LP1               14         0   0.280pH fcheck
+B1                13        14  jjmod area=0.21
+RS1               13        14  12.06ohm *SHUNT=2.57
+.ends
+
+*** ijtl
+.subckt ijtl          1          2
+***       din      dout
+L1                 1        15  47.760pH fcheck
+L3                15         2  16.200pH fcheck
+LP1               16         0   0.218pH fcheck
+B1                15        16  jjmod area=0.21
+RS1               15        16  12.05ohm *SHUNT=2.57
+.ends
+
+*** top cell: jjinductance_jtl2
+L13               17         0   0.330pH fcheck
+L12                7         5  24.340pH fcheck
+L11               18         7   1.700pH fcheck
+L10                5         9   5.500pH fcheck
+LPR2              12        6   1.700pH fcheck
+L9                 4        20   5.500pH fcheck
+L8                21         0   0.240pH fcheck
+L7                 3         6   5.500pH fcheck
+L6                22         0   0.240pH fcheck
+L5                23        11  17.080pH fcheck
+L4                24         0   0.240pH fcheck
+L0                25         7   7.230pH fcheck
+
+B3      5    17  jjmod area=0.203     
+RS3     5    17              12.691ohm *SHUNT=2.570
+B8     27    24  jjmod area=0.155     
+RS8    27    24              16.629ohm *SHUNT=2.570
+B12     28    22  jjmod area=0.146     
+RS12    28    22              17.657ohm *SHUNT=2.570
+B16     23    21  jjmod area=0.192     
+RS16    23    21              13.420ohm *SHUNT=2.570
+
+BI4      9     8  jjmod area=0.643     
+BI5      8    26  jjmod area=0.522     
+BI6     26     3  jjmod area=0.641     
+BI7      3    27  jjmod area=0.469     
+BI9      6    19  jjmod area=0.743     
+BI10     19     4  jjmod area=0.743     
+BI11      4    28  jjmod area=0.469     
+BI13     20    16  jjmod area=0.404     
+BI14     16    14  jjmod area=0.404     
+BI15     14    23  jjmod area=0.404     
+XI15              jtl         29         25         10
+XI16              jtl         30         29         10
+XI18              jtl         31         32         10
+XI17              jtl         11         31         10
+XI20             sink         32         10
+VB    10     0   PWL(0ps 0mV    50ps                  0.800mV)
+Vindin            33         0  PWL(0ps 0mV 100ps 0mV 105ps 0.4136mV 110ps 0mV 200ps 0mV 205ps 0.4136mV 210ps 0mV)
+XI19             ijtl         33         30
+R0    10    18              34.681ohm
+R2    10    12              42.126ohm
+
+*** netlist file ***
+
+.tran 0.1ps 400ps 0ps 1ps:
+.FILE jjind_out.CSV
+.print phase B3
+.print phase B8
+.print phase B12
+.print phase B16
