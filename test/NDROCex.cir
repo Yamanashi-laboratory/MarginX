@@ -1,0 +1,169 @@
+**** **** **** **** **** **** **** **** **** **** **** 
+*JSIM CONTROL FILE FOR CADENCE BY KAMEDA@CQ.JP.NEC.COM
+**** **** **** **** **** **** **** **** **** **** ****
+
+*JSIM MODEL
+**HSTP**
+.MODEL JJMOD JJ(RTYPE=1, VG=2.8MV, CAP=0.064PF, R0=100OHM, RN=17OHM, ICRIT=0.1MA)
+**OPEN**
+*.MODEL JJMOD JJ(RTYPE=1, VG=2.8MV, CAP=0.218PF, R0=200OHM, RN=17OHM, ICRIT=0.1MA)
+**LOW JC**
+*.MODEL JJMOD JJ(RTYPE=1, VG=2.8MV, CAP=0.05PF, R0=200OHM, RN=170OHM, ICRIT=10UA)
+
+
+*** NETLIST FILE ***
+**** **** **** **** **** **** **** ****+
+*** LIB : ADP_MATSUOKA_LIB
+*** CELL: NDROCEX_NEW_VER6TEST
+*** VIEW: SCHEMATIC
+*** MAY 22 05:01:58 2023
+**** **** **** **** **** **** **** ****
+
+*** IJTL
+.SUBCKT IJTL          1          2
+***       DIN      DOUT
+LP2                3         0   0.198PH FCHECK
+L2                 4         2   1.976PH FCHECK
+L1                 1         4   4.534PH FCHECK
+B1                 4         3  JJMOD AREA = 2.170
+RS1                4         3   5.20OHM *SHUNT=11.30
+.ENDS
+
+*** JTL
+.SUBCKT JTL          1          2         5
+***       DIN      DOUT
+R1                 5         6   8.32OHM
+LP1                7         0   0.096PH FCHECK
+LP2                3         0   0.099PH FCHECK
+L1                 8         9   2.288PH FCHECK
+L3                 4         2   1.966PH FCHECK
+L2                 9         4   4.506PH FCHECK
+LPR1               6         8   0.177PH FCHECK
+LPIN               1         8   0.317PH FCHECK
+B1                 9         7  JJMOD AREA = 2.160
+RS1                9         7   5.23OHM *SHUNT=11.30
+B2                 4         3  JJMOD AREA = 2.160
+RS2                4         3   5.23OHM *SHUNT=11.30
+.ENDS
+
+*** SINK
+.SUBCKT SINK          1         5
+***       DIN
+R2                 4         0   4.08OHM
+R1                 5         6   8.32OHM
+LP1                7         0   0.130PH FCHECK
+L1                 8         9   2.272PH FCHECK
+L2                 9         4   4.766PH FCHECK
+LPR1               6         8   0.177PH FCHECK
+LPIN               1         8   0.317PH FCHECK
+B1                 9         7  JJMOD AREA = 2.170
+RS1                9         7   5.21OHM *SHUNT=11.30
+.ENDS
+
+*** TOP CELL: NDROCEX_NEW_VER6TEST
+l1 44 42 2.344PH FCHECK
+l2 42 38 0.670PH FCHECK
+l3 37 38 1.800PH FCHECK
+l4 39 38 1.800PH FCHECK
+l5 32 36 3.851PH FCHECK 
+*FIX
+l6 31 35 3.851PH FCHECK 
+*FIX
+l7 30 34 1.423PH FCHECK 
+*FIX
+l8 31 32 2.435PH FCHECK 
+*FIX
+l9 29 33 1.423PH FCHECK 
+*FIX
+l10 27 21 3.73PH FCHECK
+l11 26 22 3.730PH FCHECK
+l12 30 27 0.571PH FCHECK
+l13 29 26 0.571PH FCHECK
+l14 21 13 1.990PH FCHECK
+l15 22 15 1.990PH FCHECK
+
+LP9                0        19   0.226PH FCHECK
+LP10               0        24   0.182PH FCHECK
+LP11               0        25   0.173PH FCHECK
+LP8                0        28   0.226PH FCHECK
+LP5               40         0   0.302PH FCHECK
+LP4               41         0   0.184PH FCHECK
+LP1               43         0   0.250PH FCHECK
+LPR1              45        44   4.384PH FCHECK
+LPCLK             17        44   1.071PH FCHECK
+
+LY                20         0  10.312PH FCHECK
+LX                23         0  10.500PH FCHECK
+LLFB               7         0  31.806PH FCHECK
+LRST               3         0  12.500PH FCHECK
+
+r1 10 45 8.340OHM *FIX
+
+b1                42        43  JJMOD AREA = 2.1
+RS1               42        43   6.31OHM *SHUNT=11.30
+b2                37        30  JJMOD AREA = 2.05
+RS2 37 30 7.599OHM
+b3                39        29  JJMOD AREA = 1.95
+RS3 39 29 7.684OHM
+b4                36        41  JJMOD AREA = 1.8
+RS4 36 41 5.082OHM
+b5                35        40  JJMOD AREA = 1.8
+RS5 35 40 5.241OHM
+b6                32        34  JJMOD AREA = 1.000
+RS6 32 34 11.300OHM
+b7                31        33  JJMOD AREA = 1.000
+RS7 31 33 11.300OHM
+b8                27        28  JJMOD AREA = 1.000
+RS8 27 28 11.300OHM
+b9                26        19  JJMOD AREA = 1.000
+RS9 26 19 11.300OHM
+b10               21        24  JJMOD AREA = 1.7
+RS10              21        24   6.31OHM *SHUNT=11.30
+b11               22        25  JJMOD AREA = 1.7
+RS11              22        25   6.31OHM *SHUNT=11.30
+
+K0                LLFB         L7 0.123
+K1                LLFB         L8 -0.235
+K2                LLFB         L9 0.123
+
+KX                 LX         L5 -0.0814
+KRST             LRST         L6 -0.150
+KY                 LY         L5 -0.0830
+
+
+XI13             SINK         14         10
+XI10             SINK         16         10
+XI33             IJTL         11         12
+XI2               JTL         13         14         10
+XI3               JTL         15         16         10
+XI1               JTL         12         17         10
+
+vB 10 0 PWL(0PS 0MV 50PS 2.500MV) *FIX
+iBLFB              0         7  PWL(0PS 0UA 50PS 500UA) *FIX
+
+VINCLK            11         0  PULSE(0MV 1.034MV 100PS 1PS 1PS 1PS 100PS)
+
+IINY                 0        20  PWL(0PS 0MA 330PS 0MA 331PS 2MA 380PS 2MA 381PS 0MA)
+IINDATA            0        23  PWL(0PS 0MA 330PS 0MA 331PS 2MA 380PS 2MA 381PS 0MA)
+IINRST             0         3  PWL(0PS 0MA 530PS 0MA 531PS 2MA 580PS 2MA 581PS 0MA)
+
+*** NETLIST FILE ***
+.TRAN 0.1PS 950PS 0PS:
+.PRINT PHASE XI33_B1
+.PRINT PHASE XI1_B1
+.PRINT PHASE XI1_B2
+.PRINT PHASE B1
+.PRINT PHASE B8
+.PRINT PHASE B10
+.PRINT PHASE B3
+.PRINT PHASE B4
+.PRINT PHASE B9
+.PRINT PHASE B11
+.PRINT PHASE B2
+.PRINT PHASE B5
+.PRINT PHASE XI2_B1
+.PRINT PHASE XI2_B2
+.PRINT PHASE XI13_B1
+.PRINT PHASE XI3_B1
+.PRINT PHASE XI3_B2
+.PRINT PHASE XI10_B1

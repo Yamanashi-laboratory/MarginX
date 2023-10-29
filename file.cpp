@@ -36,7 +36,7 @@ int readJudgementFile(vector<int> &elej, vector<judge> &jud, string &judgefilena
     }
     while ( getline(file,line) ) {
         element:
-        if( line.find("element") != string::npos ){
+        if( line.find("B") != string::npos || line.find("b") != string::npos ){
             x++;
             num_jud = 0;
             while ( getline(file,line) ) {

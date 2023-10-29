@@ -1,0 +1,304 @@
+**** **** **** **** **** **** **** **** **** **** **** 
+*JSIM control file for CADENCE by kameda@cq.jp.nec.com
+**** **** **** **** **** **** **** **** **** **** ****
+
+*JSIM model
+**HSTP**
+.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.064pF, R0=100ohm, Rn=17ohm, Icrit=0.1mA)
+**OPEN**
+*.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.218pF, R0=200ohm, Rn=17ohm, Icrit=0.1mA)
+**Low Jc**
+*.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.5pF, R0=5000ohm, Rn=17ohm, Icrit=0.1mA)
+
+
+*** netlist file ***
+**** **** **** **** **** **** **** ****+
+*** Lib : hstp_yahata_lib
+*** Cell: DRORCsch_ver2.1
+*** View: schematic
+*** Sep 29 12:59:03 2023
+**** **** **** **** **** **** **** ****
+
+*** ijtl
+.subckt ijtl          1          2
+***       din      dout
+L1                 1         3   4.776pH fcheck
+L3                 3         2   1.620pH fcheck
+LP1                4         0   0.218pH fcheck
+B1                 3         4  jjmod area=2.13
+RS1                3         4   5.31ohm *SHUNT=11.30
+.ends
+
+*** jtl
+.subckt jtl          1          2         5
+***       din      dout
+R1                 5         6   8.32ohm
+LPIN               1         7   0.840pH fcheck
+LPR1               6         7   3.588pH fcheck
+L2                 8         9   4.776pH fcheck
+L3                 9         2   1.620pH fcheck
+L1                 7         8   2.467pH fcheck
+LP2                4         0   0.218pH fcheck
+LP1               10         0   0.224pH fcheck
+B2                 9         4  jjmod area=2.13
+RS2                9         4   5.31ohm *SHUNT=11.30
+B1                 8        10  jjmod area=2.13
+RS1                8        10   5.31ohm *SHUNT=11.30
+.ends
+
+*** sink
+.subckt sink          1        11
+***       din
+R1                11        12   8.32ohm
+R2                13         0   4.02ohm
+LPIN               1        14   0.840pH fcheck
+LPR1              12        14   3.588pH fcheck
+L3                10        13   4.792pH fcheck
+L1                14        10   2.475pH fcheck
+LP1                9         0   0.218pH fcheck
+B1                10         9  jjmod area=2.13
+RS1               10         9   5.31ohm *SHUNT=11.30
+.ends
+
+*** top cell: DRORCsch_ver2.1
+LPA               88        56   1.000pH fcheck
+LPAB              59        57   1.000pH fcheck
+LPB               87        54   1.000pH fcheck
+LPBB              41        39   1.000pH fcheck
+
+LP1               53         0   0.200pH fcheck
+LP2               26         0   0.200pH fcheck
+LP3               52         0   0.200pH fcheck
+LP4               47         0   0.200pH fcheck
+LP5               77         0   0.200pH fcheck
+LP11              85         0   0.200pH fcheck
+LP13              73         0   0.200pH fcheck
+LP14              72         0   0.200pH fcheck
+LP15              69         0   0.200pH fcheck
+LP16              68         0   0.200pH fcheck
+LP17              46         0   0.200pH fcheck
+LP18              61         0   0.200pH fcheck
+LP19              64         0   0.200pH fcheck
+LP22              38         0   0.200pH fcheck
+LP23              44         0   0.200pH fcheck
+LP24              25         0   0.200pH fcheck
+LP27              32         0   0.200pH fcheck
+LP28              29         0   0.200pH fcheck
+
+LPR1              56        86   3.500pH fcheck
+LPR2              27        28   3.500pH fcheck
+LPR3              54        84   3.500pH fcheck
+LPR4              78        79   3.500pH fcheck
+LPR5              57        58   3.500pH fcheck
+LPR6              39        40   3.500pH fcheck
+LPR7              34        36   3.500pH fcheck
+LPR8              30        33   3.500pH fcheck
+
+
+l1                56        50   3.300pH fcheck
+*SYN=9
+l2                27        14   3.300pH fcheck
+l3                54        48   3.300pH fcheck
+*SYN=9
+l4                50        51   3.300pH fcheck
+*SYN=10
+l5                14        70   1.000pH fcheck
+l6                48        49   3.300pH fcheck
+*SYN=10
+l7                51        82   1.300pH fcheck
+*SYN=11
+l8                55        49   1.300pH fcheck
+*SYN=11
+l9                11        78   0.500pH fcheck
+l10               70        13   1.600pH fcheck
+l11               78        83   3.300pH fcheck
+l12               70        80   1.600pH fcheck
+l13               81         8   3.800pH fcheck
+l14               75        76   2.300pH fcheck
+l15                8        74   2.300pH fcheck
+l16               75         4   0.500pH fcheck
+l17               74         9   0.500pH fcheck
+l18                4        10   5.000pH fcheck
+l19                9        65   4.000pH fcheck
+l20               10        67   2.000pH fcheck
+l21               65        66   2.000pH fcheck
+l22               71         0  20.000pH fcheck
+l23               57        45   3.300pH fcheck
+*SYN=12
+l30               39        37   3.300pH fcheck
+*SYN=12
+l24               45         3   3.300pH fcheck
+l25                3        60   1.000pH fcheck
+l26               51        62   6.000pH fcheck
+*SYN=13
+l27               62        63   1.000pH fcheck
+l28               49        42   6.000pH fcheck
+*SYN=13
+l29               42        43   1.000pH fcheck
+
+l31               37        23   3.300pH fcheck
+l32               23        24   1.000pH fcheck
+l33               34        35   3.300pH fcheck
+l34               30        31   3.300pH fcheck
+
+
+r1                86        97   8.32ohm
+*FIX
+r2                28        97   9.60ohm
+r3                84        97   8.32ohm
+*FIX
+r4                79        97   9.60ohm
+r5                58        97   8.32ohm
+*FIX
+r6                40        97   8.32ohm
+*FIX
+r7                36        97   9.60ohm
+r8                33        97   9.60ohm
+
+b1                50        53  jjmod area=2.13
+RS1               50        53   5.30ohm *SHUNT=11.30
+*FIX
+
+b2                14        26  jjmod area=2.13
+RS2               14        26   5.30ohm *SHUNT=11.30
+
+b3                48        52  jjmod area=2.13
+RS3               48        52   5.30ohm *SHUNT=11.30
+*FIX
+
+b4                51        47  jjmod area=2.13
+RS4               51        47   5.30ohm *SHUNT=11.30
+*SYN=1
+
+b5                49        77  jjmod area=2.13
+RS5               49        77   5.30ohm *SHUNT=11.30
+*SYN=1
+
+b6                82        11  jjmod area=1.80
+RS6               82        11   6.28ohm *SHUNT=11.30
+*SYN=2
+
+b7                55        11  jjmod area=1.80
+RS7               55        11   6.28ohm *SHUNT=11.30
+*SYN=2
+
+b8                13        75  jjmod area=1.00
+RS8               13        75  11.30ohm *SHUNT=11.30
+b9                83        81  jjmod area=2.10
+RS9               83        81   5.38ohm *SHUNT=11.30
+b10               80        74  jjmod area=1.50
+RS10              80        74   7.53ohm *SHUNT=11.30
+b11               81        85  jjmod area=2.00
+RS11              81        85   5.65ohm *SHUNT=11.30
+b12                8        76  jjmod area=0.80
+RS12               8        76  14.12ohm *SHUNT=11.30
+b13                4        73  jjmod area=0.70
+RS13               4        73  16.14ohm *SHUNT=11.30
+b14                9        72  jjmod area=1.05
+RS14               9        72  10.76ohm *SHUNT=11.30
+b15               10        69  jjmod area=1.00
+RS15              10        69  11.30ohm *SHUNT=11.30
+b16               65        68  jjmod area=1.25
+RS16              65        68   9.04ohm *SHUNT=11.30
+
+b17               45        46  jjmod area=2.13
+RS17              45        46   5.30ohm *SHUNT=11.30
+*FIX
+
+b18                3        61  jjmod area=2.13
+RS18               3        61   5.30ohm *SHUNT=11.30
+*SYN=3
+
+b19               62        64  jjmod area=2.13
+RS19              62        64   5.30ohm *SHUNT=11.30
+*SYN=3
+
+b20               60        34  jjmod area=1.80
+RS20              60        34   6.28ohm *SHUNT=11.30
+*SYN=4
+
+b21               63        34  jjmod area=1.80
+RS21              63        34   6.28ohm *SHUNT=11.30
+*SYN=4
+
+b22               37        38  jjmod area=2.13
+RS22              37        38   5.30ohm *SHUNT=11.30
+*FIX
+
+b23               42        44  jjmod area=2.13
+RS23              42        44   5.30ohm *SHUNT=11.30
+*SYN=5
+b24               23        25  jjmod area=2.13
+RS24              23        25   5.30ohm *SHUNT=11.30
+*SYN=5
+
+b25               43        30  jjmod area=1.80
+RS25              43        30   6.28ohm *SHUNT=11.30
+*SYN=6
+b26               24        30  jjmod area=1.80
+RS26              24        30   6.28ohm *SHUNT=11.30
+*SYN=6
+
+b27               35        32  jjmod area=2.13
+RS27              35        32   5.30ohm *SHUNT=11.30
+*SYN=7
+b28               31        29  jjmod area=2.13
+RS28              31        29   5.30ohm *SHUNT=11.30
+*SYN=7
+
+b29               35        27  jjmod area=1.80
+RS29              35        27   6.28ohm *SHUNT=11.30
+*SYN=8
+b30               31        27  jjmod area=1.80
+RS30              31        27   6.28ohm *SHUNT=11.30
+*SYN=8
+
+k2                L13        L22 0.300
+k1                L14        L22 0.350
+
+Xjtlbbar2         jtl         98         41         97
+Xjtlbbar1         jtl         16         98         97
+Xjtlabar2         jtl         99         59         97
+Xitlabar1         jtl         18         99         97
+Xjtlc2            jtl        100        101         97
+Xjtlcbar2         jtl        102        103         97
+Xjtlc1            jtl         66        100         97
+Xjtlcbar1         jtl         67        102         97
+Xjtlb2            jtl        104         87         97
+Xjtlb1            jtl         20        104         97
+Xjtla2            jtl        105         88         97
+Xjtla1            jtl         22        105         97
+Xsinkc           sink        101         97
+Xsinkcbar        sink        103         97
+Xijlbbar         ijtl         15         16
+Xijlabar         ijtl         17         18
+Xijtlb           ijtl         19         20
+Xijtla           ijtl         21         22
+
+
+
+
+vb                97         0  PWL(0ps 0mv 50ps 2.5mV)
+ib                 0        71  PWL(0ps 0mA 50ps 0.5mA)
+
+
+Vina              21         0  PWL(0ps 0mv                                     200ps 0mV 202ps 1.034mV 204ps 0mV                                       400ps 0mV 402ps 1.034mV 404ps 0mV   )
+Vinabar           17         0  PWL(0ps 0mv 100ps 0mV 102ps 1.034mV 104ps 0mV                                       300ps 0mV 302ps 1.034mV 304ps 0mV                                       )
+Vinb              19         0  PWL(0ps 0mv                                                                         300ps 0mV 302ps 1.034mV 304ps 0mV   400ps 0mV 402ps 1.034mV 404ps 0mV   )
+Vinbbar           15         0  PWL(0ps 0mv 100ps 0mV 102ps 1.034mV 104ps 0mV   200ps 0mV 202ps 1.034mV 204ps 0mV                                                                           )
+
+
+.tran 0.5ps 500ps 0ps 1ps
+.FILE MARGIN.CSV
+
+
+.print phase B1
+.print phase B2
+.print phase B3
+.print phase B8
+.print phase B10
+.print phase B11
+.print phase B12
+.print phase B13
+.print phase B14
+.end
