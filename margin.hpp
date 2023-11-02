@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 
-#define PATH "/home/matsuoka/MarginX/CPP/"
+#define PATH "/programs/matsuoka/MarginX/"
 
 
 struct judge;
