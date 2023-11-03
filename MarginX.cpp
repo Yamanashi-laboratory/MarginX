@@ -12,7 +12,6 @@
 #include <iomanip> 
 #include <string>
 #include <sstream>
-#include <Python.h>
 #include <filesystem>
 #include "makecir.hpp"
 #include "judge.hpp"
