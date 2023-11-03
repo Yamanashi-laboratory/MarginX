@@ -12,7 +12,6 @@
 #include <iomanip> 
 #include <string>
 #include <sstream>
-#include <Python.h>
 #include <filesystem>
 #include "makecir.hpp"
 #include "judge.hpp"
@@ -34,23 +33,12 @@ int main(int argc, const char *argv[]) {
     board *top, *top2;                //結果を格納する構造体(共有メモリにアタッチする)
     ele_cou *cou;                     //様々な数を格納する構造体(file.hpp 参照)
     vector<ele_unit> element;         //測定素子の情報を格納する構造体を格納する配列
-    string filename = argv[1];     //サーキットファイル名　
-    string judgefilename = argv[1];   //judgementファイル名
     opt_num *opt;
-    vector<string> arg_arr;           //コマンドライン引数が格納されている動的配列
+    vector<string> arg_arr;    
+        
+       //コマンドライン引数が格納されている動的配列
     for (int i = 0; i < argc; i++){   //コマンドライン引数が格納されている静的配列の要素を動的配列に格納
         arg_arr.emplace_back(argv[i]);
-    }
-    int jud_flg = 0;
-    for(int i = 0; i < arg_arr.size(); i++){
-        if(jud_flg == 1){
-           judgefilename = arg_arr[i];
-           cout << judgefilename << endl;
-           jud_flg = 0;
-        }
-        if(arg_arr[i] == "-j"){
-            jud_flg = 1;
-        }
     }
 
     start = time(NULL);
@@ -70,6 +58,80 @@ int main(int argc, const char *argv[]) {
     cout << "                                                                            Version 2.0               \n";
 
     cout << " ~~ Parallel Algorithm with Josim ~~ " << endl << endl;
+
+    if(arg_arr.size() == 1){
+        cout << " MarginX is Calculator and Circuit Optimizer from Yamanashi Lab, YNU" << endl;
+        cout << " Pleae prepare some files to calculate margin or to optimize your circuit!" << endl << endl;
+        return 0;
+    }
+
+    if(arg_arr[1] == "-h"){ // Output help
+        cout << " MarginX : Margin Calculator and Circuit Optimizer from Yamanashi Lab, YNU" << endl;
+        cout << "           Created by Sho Matsuoka (in 2023) and Nakaishi Sotaro (in 2017)" << endl;
+        cout << endl << endl;
+        cout << " MarginX help" << endl;
+        cout << "--------------------------------------------------------------------------" << endl << endl;
+        cout << " You must prepare 2 Files: Circuit File which is suitable for JoSIM" << endl;
+        cout << " and Judgement File which defines correct operations " << endl;
+        cout << " In Circuit File, you must output phase of Josephson Junction (JJ)" << endl;
+        cout << " Example :)  .print phase B1.XI10 " << endl << endl;
+        cout << " In Judgement File, you must write switchign time of JJs like below." << endl;
+        cout << " \"begining tim\"   \"end time\"  \"phase \" " << endl;
+        cout << " If the phase of targeted JJ is passed between begining time and end time," << endl;
+        cout << " it is regarded as correct operation. " << endl;
+        cout << " Phases of JJ are standardized with π" << endl;
+        cout << " Example :)  B1 " << endl;
+        cout << "             100   200   1" << endl;
+        cout << "             300   400   3" << endl;
+        cout << "             400   500   5" << endl << endl;
+        cout << "             B3  " << endl;
+        cout << "             200   300   -1" << endl;
+        cout << "             300   400   -3" << endl;
+        cout << "             900   1000  -5" << endl;
+        cout << "                    ・ " << endl;
+        cout << "                    ・ " << endl;
+        cout << "                    ・ " << endl << endl;
+        cout << " Note that you must make Judgement file name the same as Circuit file name  " << endl;
+        cout << " without extension." << endl << endl;;
+        cout << "--------------------------------------------------------------------------" << endl << endl;
+        cout << "There are some commands below." << endl << endl;
+        cout << " -d            |   You can see the details of results. you can also see them   " << endl;
+        cout << " (details)     |   in outputted text file.    " << endl;
+        cout << "               |         " << endl;
+        cout << "               |         " << endl;
+        cout << " -f            |   the output of a figure of Margins. You can also make   " << endl;
+        cout << " (figure)      |   figures of Margins from CSV file normally outputted " << endl;
+        cout << "               |         " << endl;
+        cout << "               |         " << endl;
+        cout << " -o            |   change outputted file name. You must write new outputted   " << endl;
+        cout << " (output)      |   file name without extension to the right of \"-o\"" << endl;
+        cout << "               |         " << endl;
+        cout << "               |         " << endl;
+        cout << " -j            |   Specify optional name of Judgement File. You must write     " << endl;
+        cout << " (jud file)    |   optional judgement file name without extensionto the "<< endl;
+        cout << "               |   right of \"-j\"" << endl;
+        cout << "               |         " << endl;
+        cout << "               |         " << endl << endl;
+        cout << " Example :)  marginx ex02 -j ex01 -o hoge" << endl << endl << endl;
+        return 0;
+    } 
+
+    string filename = arg_arr[1];     //サーキットファイル名　
+    string judgefilename = arg_arr[1];   //judgementファイル名
+
+    int jud_flg = 0;
+    for(int i = 0; i < arg_arr.size(); i++){
+        if(jud_flg == 1){
+           judgefilename = arg_arr[i];
+           cout << judgefilename << endl;
+           jud_flg = 0;
+        }
+        if(arg_arr[i] == "-j"){
+            jud_flg = 1;
+        }
+    }
+
+
     /*開始時間を表示*/
     time(&start);
     tps = localtime(&start);
