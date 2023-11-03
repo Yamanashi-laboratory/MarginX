@@ -61,7 +61,8 @@ int main(int argc, const char *argv[]) {
 
     if(arg_arr.size() == 1){
         cout << " MarginX is Calculator and Circuit Optimizer from Yamanashi Lab, YNU" << endl;
-        cout << " Pleae prepare some files to calculate margin or to optimize your circuit!" << endl << endl;
+        cout << " Pleae prepare some files to calculate margin or to optimize your circuit!" << endl;
+        cout << " If you want some infomation, you can use \"-h\" command to know about MarginX." << endl << endl;
         return 0;
     }
 
