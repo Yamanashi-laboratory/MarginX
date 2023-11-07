@@ -81,7 +81,8 @@ int main(int argc, const char *argv[]) {
         cout << " If the phase of targeted JJ is passed between begining time and end time," << endl;
         cout << " it is regarded as correct operation. " << endl;
         cout << " Phases of JJ are standardized with π" << endl;
-        cout << " Example :)  B1 " << endl;
+        cout << " Example :)  " << endl;
+        cout << "             B1 " << endl;
         cout << "             100   200   1" << endl;
         cout << "             300   400   3" << endl;
         cout << "             400   500   5" << endl << endl;
@@ -113,7 +114,7 @@ int main(int argc, const char *argv[]) {
         cout << "               |   right of \"-j\"" << endl;
         cout << "               |         " << endl;
         cout << "               |         " << endl << endl;
-        cout << " Example :)  marginx ex02 -j ex01 -o hoge" << endl << endl << endl;
+        cout << " Example :)  ./Marginx ex02 -j ex01 -o hoge -f" << endl << endl << endl;
         return 0;
     } 
 
