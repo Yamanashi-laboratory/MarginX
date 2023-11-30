@@ -34,10 +34,8 @@ int main(int argc, const char *argv[]) {
     ele_cou *cou;                     //様々な数を格納する構造体(file.hpp 参照)
     vector<ele_unit> element;         //測定素子の情報を格納する構造体を格納する配列
     opt_num *opt;
-    vector<string> arg_arr;    
-        
-       //コマンドライン引数が格納されている動的配列
-    for (int i = 0; i < argc; i++){   //コマンドライン引数が格納されている静的配列の要素を動的配列に格納
+    vector<string> arg_arr;           //コマンドライン引数が格納されている動的配列
+    for (int i = 0; i < argc; i++){   //コマンドライン引数が格納されている静的配列(argv)の要素を動的配列(arg_arr)に格納
         arg_arr.emplace_back(argv[i]);
     }
 
@@ -118,7 +116,7 @@ int main(int argc, const char *argv[]) {
         return 0;
     } 
 
-    string filename = arg_arr[1];     //サーキットファイル名　
+    string filename = arg_arr[1];        //サーキットファイル名　
     string judgefilename = arg_arr[1];   //judgementファイル名
 
     int jud_flg = 0;
