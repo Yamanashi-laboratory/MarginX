@@ -43,18 +43,18 @@ RS2                4         3   5.23ohm *SHUNT=11.30
 *** opt_dff
 .subckt opt_dff         10          1          2        29
 ***       clk       din      dout
-b6     18     7  jjmod area=2.183     
-RS6    18     7               5.177ohm *SHUNT=11.300
-b5     11     4  jjmod area=0.869     
-RS5    11     4              13.006ohm *SHUNT=11.300
-b4     19    20  jjmod area=1.181     
-RS4    19    20               9.565ohm *SHUNT=11.300
-b3     14    15  jjmod area=0.732     
-RS3    14    15              15.437ohm *SHUNT=11.300
-b2     12    13  jjmod area=0.621     
-RS2    12    13              18.196ohm *SHUNT=11.300
-b1     16    17  jjmod area=1.328     
-RS1    16    17               8.508ohm *SHUNT=11.300
+b6     18     7  jjmod area=2.659     
+RS6    18     7               4.249ohm *SHUNT=11.300
+b5     11     4  jjmod area=1.321     
+RS5    11     4               8.556ohm *SHUNT=11.300
+b4     19    20  jjmod area=1.374     
+RS4    19    20               8.227ohm *SHUNT=11.300
+b3     14    15  jjmod area=1.644     
+RS3    14    15               6.875ohm *SHUNT=11.300
+b2     12    13  jjmod area=1.208     
+RS2    12    13               9.356ohm *SHUNT=11.300
+b1     16    17  jjmod area=1.598     
+RS1    16    17               7.071ohm *SHUNT=11.300
 LPR3              22        21   0.159pH fcheck
 LPR2              26        25   0.156pH fcheck
 LPR1              23        24   0.104pH fcheck
@@ -66,17 +66,17 @@ LP3               15         0   0.104pH fcheck
 LP2               13         0   0.094pH fcheck
 LPIN               1        25   0.328pH fcheck
 L9                16        19   0.042pH fcheck
-l8    18     2               2.462pH
-l7    25    12               1.090pH
-l6    21    11               2.050pH
-l5    12    14               1.859pH
-l4    19    18               4.143pH
-l3    24    16               5.963pH
-l2    14    24               0.667pH
-l1    11    17               1.284pH
-r3    29    22              31.469ohm
-r2    29    26              26.224ohm
-r1    29    23              87.410ohm
+l8    18     2               1.531pH
+l7    25    12               2.322pH
+l6    21    11               1.848pH
+l5    12    14               2.954pH
+l4    19    18               4.006pH
+l3    24    16               5.887pH
+l2    14    24               1.265pH
+l1    11    17               2.208pH
+r3    29    22              18.533ohm
+r2    29    26              16.111ohm
+r1    29    23              40.969ohm
 .ends
 
 *** sink
@@ -96,7 +96,7 @@ RS1                9         7   5.21ohm *SHUNT=11.30
 *** top cell: test_dff
 Vinclk            30         0  PWL(0ps 0mv 100ps 0mv 101ps 1.035mv 102ps 1.035mv 103ps 0mv 300ps 0mv 301ps 1.035mv 302ps 1.035mv 303ps 0mv 400ps 0mv 401ps 1.035mv 402ps 1.035mv 403ps 0mv 600ps 0mv 601ps 1.035mv 602ps 1.035mv 603ps 0mv)
 Vindin               31         0  PWL(0ps 0mv 200ps 0mv 201ps 1.035mv 202ps 1.035mv 203ps 0mv 500ps 0mv 501ps 1.035mv 502ps 1.035mv 503ps 0mv)
-vb    32     0   PWL(0ps 0mV    50ps                  2.500mV)
+vb    32     0   PWL(0ps 0mV    20ps                  2.500mV)
 *FIX
 XI1              ijtl         30         33
 XI3              ijtl         31         34
@@ -108,7 +108,7 @@ XI7              sink         36         32
 
 *** netlist file ***
 .tran 0.1ps 750ps 0ps 1ps
-.FILE dff_out.CSV
+.FILE ./test/dff_out.CSV
 
 .print phase B1.XI5
 .print phase B3.XI5
