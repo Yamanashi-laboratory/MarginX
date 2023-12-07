@@ -43,7 +43,7 @@ void optimize(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,
     cout << " 4: The Sum of Critical Margin and Bias Margin * 2 " << endl;
     cout << " 5: Others (input yourself)" << endl;
     cout << "" << endl;
-    cout << " Selected Mode : ";
+    cout << " Selected Score : ";
     cin >> mode;
 
     switch(mode){
