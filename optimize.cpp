@@ -22,6 +22,7 @@
 #include <random>
 #include <regex>
 #include <algorithm>
+#include <ctime>
 
 using namespace std;
 
@@ -31,6 +32,9 @@ void optimize(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,
     int mode = 0;
     double CM_power = 1;
     double BM_power = 1;
+    int count = 0;
+    time_t start, now;
+    string sharp = "";
 
     cout << " Select the Kind of Score" << endl;
     cout << " 1: Only Critical Margin " << endl;
@@ -73,12 +77,13 @@ void optimize(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,
             break;
     }
 
+    start = time(NULL);
     opt_num *opt;
     int shmid;
     double cri_bias_sum = 0;
     int CMM_num = 1;
     vector<ele_unit> element_ini = element;
-    cout << "  Optimizing Circuit..." << endl << endl;
+    cout << endl;
     if ((shmid = shmget(IPC_PRIVATE, sizeof(opt_num), 0666)) == -1) {
         cout << "can't make shared memory" << endl;
         exit(EXIT_FAILURE);
@@ -130,40 +135,43 @@ void optimize(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,
         for (int i = 0; i < MULTI_NUM; i++) {
             wait(NULL);
         }
+
+        now = time(NULL);
+        double progress = static_cast<double>(m + 1) / static_cast<double>(MONTE_CARLO) * 100;
+        if(static_cast<int>(progress) - count >= 2){
+            sharp += "O";
+            count = static_cast<int>(progress);
+        }
+        //cout << "\x1B[1K";
+        cout << " Optimizing...   "   << " [" << setw(50) << left <<  sharp << "]" <<setw(6) << right << progress << " % " <<  right << setw(5) <<static_cast<int>(static_cast<double>(now - start) / static_cast<double>(m+ 1) * (MONTE_CARLO - (m + 1))) << " seconds remaining"
+                                                    << "   ( success : " << opt->success << " )" << endl;
+        cout << "\x1B[1B";    //カーソルを１行下に移動させる
+        cout << "\x1B[1A";    //カーソルを１行上に移動させる
+
         if( opt->success != 0 ){
-            cout << "success = " << left << setw(5) << opt->success;
-            for(int s = 0; s < opt->success; s++){
-                cout << "#";
-            }
-            cout << endl;
+
             //if(opt->success >= opt->suc_max){  //成功数が過去最大以上だったら値を置き換える
                 //opt->suc_max = opt->success;
                 //cout << " changed value" << endl;
-                for(int i = 0; i < element.size(); i++){
-                    element[i].value = opt->sum_value[i] / opt->success;
-                    if(element[i].value < element[i].MIN){
-                        element[i].value = element[i].MIN;
-                    }
-                }
-            //}
-        }/*
-        if( opt->success >= opt->suc_max){
-            opt->suc_max = opt->success;
             for(int i = 0; i < element.size(); i++){
-                opt->best_value[i] =element[i].value;
+                element[i].value = opt->sum_value[i] / opt->success;
+                if(element[i].value < element[i].MIN){
+                        element[i].value = element[i].MIN;
+                }
+                if(element[i].value > element[i].MAX){
+                        element[i].value = element[i].MAX;
+                }
+                if(element[i].FIX == 1){
+                    element[i].value = element_ini[i].value;
+                }
             }
-        }*/
-        for(int i = 0; i < element.size(); i++){
-            if(element[i].FIX == 1){
-                element[i].value = element_ini[i].value;
-            }
+            
         }
-        
         opt->success = 0;
         for(int i = 0; i < element.size(); i++){
             opt->sum_value[i] = 0;
         }
-
+        
     }
     critical_margin_method(element, elej, jud, data_cir, cou, arg_arr);
     cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
@@ -318,7 +326,7 @@ void critical_margin_method(vector<ele_unit> &element, vector<int> &elej, vector
         //全て中央値に変更した際のクリティカルマージンがもとのものより大きかったら、elementの値をcopyに格納していた中央値に変更し、正常動作しなければelementの値はそのまま（スルー）
         if(min({-copy[find_critical(copy)].margin_L, copy[find_critical(copy)].margin_H}) > min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H})){
             element = copy;
-            cout << endl << " Changed All Elements!" << endl;
+            cout << endl << " Changed All Elements" << endl;
             Margin(element, elej, jud, data_cir, cou, arg_arr, 0);
         }
     }
@@ -335,7 +343,7 @@ void critical_margin_method(vector<ele_unit> &element, vector<int> &elej, vector
             break;
         }
         cri_num_pre = cri_num;
-        cout << endl << " ~ Critical Margin Method try " << j + 1 << " ~" << endl;
+        cout << endl << " ~ Critical Margin Method  "<<  GetOrdinalNumber(static_cast<int>(j + 1)) << " trial" << " ~" << endl;
         cout << " Critical Element : " << element[cri_num].element << endl;
         if(element[cri_num].value > 0){
             element[cri_num].value +=  ((element[cri_num].margin_H + element[cri_num].margin_L) / 2) / 100 * element[cri_num].value;
@@ -351,7 +359,6 @@ void critical_margin_method(vector<ele_unit> &element, vector<int> &elej, vector
 
     }
     cout << " Critical Margin Method is over!" << endl; 
-    make_cir_last(element, data_cir, cou, arg_arr);
 
 }
 
@@ -362,14 +369,17 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou
     int mode = 0;
     double CM_power = 1;
     double BM_power = 1;
+    int count = 0;
+    time_t start, now;
+    string sharp = "";
 
     cout << " Select the Kind of Score" << endl;
     cout << " 1: Only Critical Margin " << endl;
     cout << " 2: Only Bias Margin" << endl;
     cout << " 3: The Sum of Critical Margin and Bias Margin" << endl;
     cout << " 4: The Sum of Critical Margin and Bias Margin * 2 " << endl;
-    cout << " 5: Others ( input yourself )" << endl;
-    cout << " Selected Mode : ";
+    cout << " 5: Others ( input yourself )" << endl << endl;
+    cout << "  Selected Score : ";
     cin >> mode;
 
     switch(mode){
@@ -403,7 +413,7 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou
             break;
     }
 
-
+    start = time(NULL);
 
     
     opt_num *opt;
@@ -411,7 +421,7 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou
     double cri_bias_sum = 0;
     int Margin_num = 1;
     vector<ele_unit> element_ini = element;
-    cout << "  Optimizing Circuit..." << endl << endl;
+    cout <<  endl;
     if ((shmid = shmget(IPC_PRIVATE, sizeof(opt_num), 0666)) == -1) {
         cout << "can't make shared memory" << endl;
         exit(EXIT_FAILURE);
@@ -423,8 +433,9 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou
     for (int m = 0; m < MONTE_CARLO; m++){
         //途中経過
         if( m % (MONTE_CARLO / 10 ) == 0){
-            opt->suc_max = 0;
-            cout << " This is the progress midway. " << endl;
+            opt->suc_max = 0; 
+            cout << " This is the progress midway   ( the " << GetOrdinalNumber(static_cast<int>(Margin_num)) 
+                 << " check )                                                                                             " << endl;
             Margin(element, elej, jud, data_cir, cou, arg_arr, 2);
             //cri_bias_sum = min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
             cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
@@ -446,7 +457,7 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou
                 if(pid[i] == 0){       
                     opt_num  *shmaddr;
                     if ((shmaddr = (opt_num*)shmat(shmid, NULL, 0)) == (void *)-1) {
-                        printf("childL can't load memory\n");
+                        cout << "childL can't load memory" << endl;
                         exit(EXIT_FAILURE);
                     }
                     opt_ele(element,data_cir,cou,elej,jud,shmaddr);
@@ -466,34 +477,44 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou
         for (int i = 0; i < MULTI_NUM; i++) {
             wait(NULL);
         }
-        if( opt->success != 0 ){    // 開発者確認用
-            cout << "success = " << left << setw(5) << opt->success;
-            for(int s = 0; s < opt->success; s++){
-                cout << "#";
-            }
-            cout << endl;
-        double progress = static_cast<double>(m) / static_cast<double>(MONTE_CARLO) * 100;
-        //cout << "\r" << " Optimizing...   " << progress << " %" ;
 
+        now = time(NULL);
+        double progress = static_cast<double>(m + 1) / static_cast<double>(MONTE_CARLO) * 100;
+        if(static_cast<int>(progress) - count >= 2){
+            sharp += "O";
+            count = static_cast<int>(progress);
+        }
+        //cout << "\x1B[1K";
+        cout << " Optimizing...   "   << " [" << setw(50) << left <<  sharp << "]" <<setw(6) << right << progress << " % " <<  right << setw(5) <<static_cast<int>(static_cast<double>(now - start) / static_cast<double>(m+ 1) * (MONTE_CARLO - (m + 1))) << " seconds remaining"
+                                                    << "   ( success : " << opt->success << " )" << endl;
+        cout << "\x1B[1B";    //カーソルを１行下に移動させる
+        cout << "\x1B[1A";    //カーソルを１行上に移動させる
+        //cout << "\r";
+
+        if( opt->success != 0 ){    // 開発者確認用
+            //cout << "success = " << left << setw(5) << opt->success;
+            //for(int s = 0; s < opt->success; s++){
+                //cout << "#";
+            //}
+            //cout << endl;
 
             //if(opt->success >= opt->suc_max){  //成功数が過去最大以上だったら値を置き換える <- 毎回置き換えた方がいい結果が出ていたので不要(?)
                 //opt->suc_max = opt->success;
             //cout << " changed value" << endl;
+
         for(int i = 0; i < element.size(); i++){
             element[i].value = opt->sum_value[i] / opt->success;   // 新たなパラメータに置き換える
             if(element[i].value < element[i].MIN){  //新たなパラメータが最小値を下回っていたらパラメータを最小値に置き換える
                     element[i].value = element[i].MIN;
             }
-            if(element[i].value > element[i].MAX){  //新たなパラメータが最大値を下回っていたらパラメータを最大値に置き換える
+            if(element[i].value > element[i].MAX){  //新たなパラメータが最大値を上回っていたらパラメータを最大値に置き換える
                     element[i].value = element[i].MAX;
             }
-        }
-        
-        for(int i = 0; i < element.size(); i++){   //FIXが入っているパラメータの値が変化してしまう場合があるので、都度元の値に置き換える
             if(element[i].FIX == 1){
                 element[i].value = element_ini[i].value;
             }
         }
+        
 
         }
         /*

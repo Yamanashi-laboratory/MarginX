@@ -34,10 +34,8 @@ int main(int argc, const char *argv[]) {
     ele_cou *cou;                     //様々な数を格納する構造体(file.hpp 参照)
     vector<ele_unit> element;         //測定素子の情報を格納する構造体を格納する配列
     opt_num *opt;
-    vector<string> arg_arr;    
-        
-       //コマンドライン引数が格納されている動的配列
-    for (int i = 0; i < argc; i++){   //コマンドライン引数が格納されている静的配列の要素を動的配列に格納
+    vector<string> arg_arr;           //コマンドライン引数が格納されている動的配列
+    for (int i = 0; i < argc; i++){   //コマンドライン引数が格納されている静的配列(argv)の要素を動的配列(arg_arr)に格納
         arg_arr.emplace_back(argv[i]);
     }
 
@@ -55,7 +53,7 @@ int main(int argc, const char *argv[]) {
     cout << "                                                        Gg                                                \n";
     cout << "                                                gg.   .gg                                                  \n";
     cout << "                                                 'gGGGg'                                                   \n";
-    cout << "                                                                            Version 2.0               \n";
+    cout << "                                                                            Version 2.1               \n";
 
     cout << " ~~ Parallel Algorithm with Josim ~~ " << endl << endl;
 
@@ -118,7 +116,7 @@ int main(int argc, const char *argv[]) {
         return 0;
     } 
 
-    string filename = arg_arr[1];     //サーキットファイル名　
+    string filename = arg_arr[1];        //サーキットファイル名　
     string judgefilename = arg_arr[1];   //judgementファイル名
 
     int jud_flg = 0;
@@ -169,10 +167,10 @@ int main(int argc, const char *argv[]) {
     cout << " 0. Remove Intermediary File" << endl;
     cout << " 1. Judge" << endl;
     cout << " 2. Calculate Margin" << endl;
-    cout << " 3. Optimization with Critical Margin Method" << endl;
-    cout << " 4. Optimization with Monte Carlo Method" << endl;
-    cout << " 5. Optimization with Monte Carlo and Critical Margin Method" << endl << endl;
-    cout << "  Selected mode : ";
+    cout << " 3. Optimization with Critical Margin Method (CMM)" << endl;
+    cout << " 4. Optimization with Monte Carlo Method (MCM)" << endl;
+    cout << " 5. Optimization with MCM and CMM" << endl << endl;
+    cout << "  Selected Mode : ";
     cin >> menu_num;
     cout << endl;
 
@@ -213,6 +211,7 @@ int main(int argc, const char *argv[]) {
         }
         else if (cmd == "-c"){     // -f があった場合、 matplotlib を用いたグラフを出力
             critical_margin_method(element, elej, jud, data_cir, cou, arg_arr);
+            make_cir_last(element, data_cir, cou, arg_arr);
             menu_flg++;
             break;
         }
