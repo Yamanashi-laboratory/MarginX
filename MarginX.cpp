@@ -123,7 +123,6 @@ int main(int argc, const char *argv[]) {
     for(int i = 0; i < arg_arr.size(); i++){
         if(jud_flg == 1){
            judgefilename = arg_arr[i];
-           cout << judgefilename << endl;
            jud_flg = 0;
         }
         if(arg_arr[i] == "-j"){
