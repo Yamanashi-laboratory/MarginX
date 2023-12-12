@@ -194,6 +194,7 @@ int make_cir_last(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *
             ciroutname << arg_arr[i + 1] << ".cir";
         }
     }
+    cout << " Output File : " << ciroutname.str() << endl << endl;
     ofstream fpin(ciroutname.str());
     string shunt;
     int y = 0;
@@ -240,7 +241,7 @@ int make_cir_last(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *
                         << "PWL(0ps 0mV " <<setw(10) <<  setprecision(3) << "20ps   " << setw(20) <<  setprecision(3)<< element[y].value << "mA)" << endl;
                     break;
             }
-        
+            transform((element[y].element).begin(), (element[y].element).end(), (element[y].element).begin(), ::toupper); 
             y++;
         }
         else if(x == cou->fileoutline){
