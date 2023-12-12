@@ -32,7 +32,7 @@ int readJudgementFile(vector<int> &elej, vector<judge> &jud, string &judgefilena
     /* ファイルのオープン */
     ifstream file(judgefilename);
     if (!file.is_open()) {
-        cerr << "Please select judgement file."  << endl;
+        cerr << " Please select judgement file."  << endl;
         return 0;
     }
     while ( getline(file,line) ) {
