@@ -27,7 +27,7 @@ int main(int argc, const char *argv[]){
     string replacementText = "            commandname << \"josim_v265 OPTIMIZE\" << getpid() << \".cir > /dev/null\"; ";   
     int lineNumberToReplace;
     for (int i = 0; i < lines.size(); i++){
-        if( line.find("josim OPTIMIZE") != string::npos){
+        if( lines[i].find("josim OPTIMIZE") != string::npos){
             lineNumberToReplace = i;    
         }
     }
@@ -56,7 +56,7 @@ int main(int argc, const char *argv[]){
     // ファイルの10行目を変換する（0ベースのインデックスなので9行目）
     vector<int> linenums;
     for (int i = 0; i < lines2.size(); i++){
-        if( line2.find("josim OPTIMIZE") != string::npos){
+        if( lines2[i].find("josim OPTIMIZE") != string::npos){
             linenums.emplace_back(i);  
         }
     }
@@ -89,7 +89,7 @@ int main(int argc, const char *argv[]){
     string replacementText2 = "            commandname << \"josim_v265 MARGIN\" << getpid() << \".cir > /dev/null\"; ";   
     int lineNumberToReplace2;
     for (int i = 0; i < lines3.size(); i++){
-        if( line3.find("josim MARGIN") != string::npos){
+        if( lines3[i].find("josim MARGIN") != string::npos){
             lineNumberToReplace2 = i;    
         }
     }
