@@ -32,7 +32,7 @@ int main(int argc, const char *argv[]){
     //string replacementText = "            commandname << \"josim_v265 OPTIMIZE\" << getpid() << \".cir > /dev/null\"; ";   
     int lineNumberToReplace;
     for (int i = 0; i < lines.size(); i++){
-        if( lines[i].find("josim OPTIMIZE") != string::npos){
+        if( lines[i].find("commandname << \"josim") != string::npos){
             lineNumberToReplace = i;    
         }
     }
@@ -62,7 +62,7 @@ int main(int argc, const char *argv[]){
     
     vector<int> linenums;
     for (int i = 0; i < lines2.size(); i++){
-        if( lines2[i].find("josim OPTIMIZE") != string::npos){
+        if( lines2[i].find("commandname << \"josim") != string::npos){
             linenums.emplace_back(i);  
         }
     }
@@ -97,7 +97,7 @@ int main(int argc, const char *argv[]){
     //string replacementText2 = "            commandname << \"josim_v265 MARGIN\" << getpid() << \".cir > /dev/null\"; ";   
     int lineNumberToReplace2;
     for (int i = 0; i < lines3.size(); i++){
-        if( lines3[i].find("josim MARGIN") != string::npos){
+        if( lines3[i].find("commandname << \"josim") != string::npos){
             lineNumberToReplace2 = i;    
         }
     }
