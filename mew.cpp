@@ -10,6 +10,9 @@
 
 using namespace std;
 int main(int argc, const char *argv[]){
+    string command;
+    cout << "Please input the command which executes JoSIM. ex:) josim_v265, josim-cli, josim etc..." << endl;
+    cin >> command;
     ifstream fmarginx("MarginX.cpp");
     if (!fmarginx){
         cout << "can't open file!" << endl;
@@ -24,14 +27,16 @@ int main(int argc, const char *argv[]){
     fmarginx.close();
 
     // ファイルの10行目を変換する（0ベースのインデックスなので9行目）
-    string replacementText = "            commandname << \"josim_v265 OPTIMIZE\" << getpid() << \".cir > /dev/null\"; ";   
+    stringstream replace1;
+    replace1 <<  "            commandname << \"" << command << " OPTIMIZE\" << getpid() << \".cir > /dev/null\"; ";
+    //string replacementText = "            commandname << \"josim_v265 OPTIMIZE\" << getpid() << \".cir > /dev/null\"; ";   
     int lineNumberToReplace;
     for (int i = 0; i < lines.size(); i++){
         if( lines[i].find("josim OPTIMIZE") != string::npos){
             lineNumberToReplace = i;    
         }
     }
-    lines[lineNumberToReplace] = replacementText;
+    lines[lineNumberToReplace] = replace1.str();
 
     // ファイルに変更内容を書き込む
     ofstream outputFile("MarginX.cpp");
@@ -54,6 +59,7 @@ int main(int argc, const char *argv[]){
     }
     fopt.close();
     // ファイルの10行目を変換する（0ベースのインデックスなので9行目）
+    
     vector<int> linenums;
     for (int i = 0; i < lines2.size(); i++){
         if( lines2[i].find("josim OPTIMIZE") != string::npos){
@@ -61,7 +67,7 @@ int main(int argc, const char *argv[]){
         }
     }
     for(int num : linenums){
-        lines2[num] = replacementText;
+        lines2[num] = replace1.str();
     }
     // ファイルに変更内容を書き込む
     ofstream outputFile2("optimize.cpp");
@@ -86,14 +92,16 @@ int main(int argc, const char *argv[]){
     fmargin.close();
 
     // ファイルの10行目を変換する（0ベースのインデックスなので9行目）
-    string replacementText2 = "            commandname << \"josim_v265 MARGIN\" << getpid() << \".cir > /dev/null\"; ";   
+    stringstream replace2;
+    replace2 <<  "            commandname << \"" << command << " MARGIN\" << getpid() << \".cir > /dev/null\"; ";
+    //string replacementText2 = "            commandname << \"josim_v265 MARGIN\" << getpid() << \".cir > /dev/null\"; ";   
     int lineNumberToReplace2;
     for (int i = 0; i < lines3.size(); i++){
         if( lines3[i].find("josim MARGIN") != string::npos){
             lineNumberToReplace2 = i;    
         }
     }
-    lines3[lineNumberToReplace2] = replacementText2;
+    lines3[lineNumberToReplace2] = replace2.str();
 
     // ファイルに変更内容を書き込む
     ofstream outputFile3("margin.cpp");
