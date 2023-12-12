@@ -298,7 +298,7 @@ int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<int> &elej,
     string unit;
     stringstream commandname, delete_cir, delete_out, out_det, out_fig, out_csv;
     vector<ele_unit> copy = element;
-    commandname << "josim MARGIN" << getpid() << ".cir > /dev/null";
+    commandname << "josim MARGIN" << getpid() << ".cir > /dev/null"; 
     delete_cir << "rm -f MARGIN" << getpid() << ".cir";
     delete_out << "rm -f CIRCUIT" << getpid() << ".CSV";
 

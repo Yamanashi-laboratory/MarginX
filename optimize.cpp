@@ -213,7 +213,7 @@ void opt_ele(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,v
     std::normal_distribution<> normG(1, 0.1);    // (平均, 分散)
     vector<ele_unit> copy = element;   //現在の各素子の情報elementをcopyにコピー
     stringstream commandname, delete_cir, delete_out;
-    commandname << "josim OPTIMIZE" << getpid() << ".cir > /dev/null";
+    commandname << "josim OPTIMIZE" << getpid() << ".cir > /dev/null"; 
     delete_cir << "rm -f OPTIMIZE" << getpid() << ".cir";
     delete_out << "rm -f CIRCUIT" << getpid() << ".CSV";
 
@@ -291,7 +291,7 @@ void opt_ele(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,v
 
 void critical_margin_method(vector<ele_unit> &element, vector<int> &elej, vector<judge> &jud, vector<string> &data_cir, ele_cou *cou, vector<string> &arg_arr){
     stringstream commandname, delete_cir, delete_out, out_det, out_fig, out_csv;
-    commandname << "josim OPTIMIZE" << getpid() << ".cir > /dev/null";
+    commandname << "josim OPTIMIZE" << getpid() << ".cir > /dev/null"; 
     delete_cir << "rm -f OPTIMIZE" << getpid() << ".cir";
     delete_out << "rm -f CIRCUIT" << getpid() << ".CSV";
 
@@ -598,7 +598,7 @@ void opt_ele2(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,
     std::normal_distribution<> norm(1, 0.05);    // (平均, 分散)
     vector<ele_unit> copy = element;   //現在の各素子の情報elementをcopyにコピー
     stringstream commandname, delete_cir, delete_out;
-    commandname << "josim OPTIMIZE" << getpid() << ".cir > /dev/null";
+            commandname << "josim OPTIMIZE" << getpid() << ".cir > /dev/null"; 
     delete_cir << "rm -f OPTIMIZE" << getpid() << ".cir";
     delete_out << "rm -f CIRCUIT" << getpid() << ".CSV";
 

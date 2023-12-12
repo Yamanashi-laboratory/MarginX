@@ -221,7 +221,7 @@ int main(int argc, const char *argv[]) {
         }
         else if (cmd == "-jc"){     // -f があった場合、 matplotlib を用いたグラフを出力
             stringstream commandname;
-            commandname << "josim OPTIMIZE" << getpid() << ".cir > /dev/null";
+            commandname << "josim OPTIMIZE" << getpid() << ".cir > /dev/null"; 
             make_cir_opt(element, data_cir,cou);
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
