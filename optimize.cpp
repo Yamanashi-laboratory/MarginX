@@ -437,6 +437,7 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou
             cout << " This is the progress midway   ( the " << GetOrdinalNumber(static_cast<int>(Margin_num)) 
                  << " check )                                                                                             " << endl;
             Margin(element, elej, jud, data_cir, cou, arg_arr, 2);
+            make_cir_last(element, data_cir, cou, arg_arr);            
             //cri_bias_sum = min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
             cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
             if( cri_bias_sum > opt->cri_bias_best ){
@@ -563,9 +564,33 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou
 
 }
 
+string GetOrdinalNumber(int num){
+    string res = to_string(num);
+    if(num == 11 || num == 12){
+        res += "th";
+    }
+    else{
+        switch (num % 10){
+        case 1:
+            res += "st";
+            break;
+        case 2:
+            res += "nd";
+            break;
 
+        case 3:
+            res += "rd";
+            break;
 
+        default:
+            res += "th";
+            break;
+        }
+    }
+    return res;
+} 
 
+/*
 void opt_ele2(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,vector<int> &elej, vector<judge> &jud, opt_num *opt, gauss *gau){
 
     std::random_device rnd;
@@ -636,30 +661,7 @@ void opt_ele2(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,
 
 
 }
+*/
 
-string GetOrdinalNumber(int num){
-    string res = to_string(num);
-    if(num == 11 || num == 12){
-        res += "th";
-    }
-    else{
-        switch (num % 10){
-        case 1:
-            res += "st";
-            break;
-        case 2:
-            res += "nd";
-            break;
 
-        case 3:
-            res += "rd";
-            break;
-
-        default:
-            res += "th";
-            break;
-        }
-    }
-    return res;
-} 
 

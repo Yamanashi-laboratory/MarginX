@@ -26,7 +26,8 @@ int readJudgementFile(vector<int> &elej, vector<judge> &jud, string &judgefilena
     int x = 0;
     int y = 0;
     int num_jud = 0;
-    int btime = 0, etime = 0, phase = 0;
+    int btime = 0, etime = 0;
+    double phase = 0;
 
     /* ファイルのオープン */
     ifstream file(judgefilename);

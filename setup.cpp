@@ -13,7 +13,6 @@ int main(int argc, const char *argv[]){
     ifstream fmargin("margin.hpp");
     if (!fmargin){
         cout << "can't open file!" << endl;
-        cin.get();
         return 0;
     }
     // 実行ファイルのパスを取得
