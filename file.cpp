@@ -132,7 +132,9 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
             liness.clear();
             liness.str("");
             data_cir.emplace_back(line); // insert line to data_cir
+
             if (flg_shunt_B == 1){
+                if(line.find("RS") == 0 || line.find("Rs") == 0){
                     i1 = line.rfind("=");
                     if (i1 != string::npos){
                         line.insert(i1 + 1, " ");
@@ -141,6 +143,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness >> ignore >> ignore >> ignore >> ignore >> ignore >> value;
                     cou->IcRs = value;
                     flg_shunt_B = 2;
+                }
             }
             else if (flg_shunt_P == 1){
                     i1 = line.rfind("=");
@@ -153,6 +156,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     cou->count_PI++;
                     flg_shunt_P = 2;
             }
+
             if(line.find("*MIN") != string::npos){
                 double MIN;
                 line.insert(line.find("=") ,"  ");
@@ -180,6 +184,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  SYN;
                 (element.back()).SYN = SYN;
             }
+            
             switch (judge_element(line)) {
                 case 1:
                     i1 = line.rfind("p");

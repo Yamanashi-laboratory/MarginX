@@ -43,18 +43,18 @@ RS2                4         3   5.23ohm *SHUNT=11.30
 *** opt_dff
 .subckt opt_dff         10          1          2        29
 ***       clk       din      dout
-b6     18     7  jjmod area=2.659     
-RS6    18     7               4.249ohm *SHUNT=11.300
-b5     11     4  jjmod area=1.321     
-RS5    11     4               8.556ohm *SHUNT=11.300
-b4     19    20  jjmod area=1.374     
-RS4    19    20               8.227ohm *SHUNT=11.300
-b3     14    15  jjmod area=1.644     
-RS3    14    15               6.875ohm *SHUNT=11.300
-b2     12    13  jjmod area=1.208     
-RS2    12    13               9.356ohm *SHUNT=11.300
-b1     16    17  jjmod area=1.598     
-RS1    16    17               7.071ohm *SHUNT=11.300
+b6     18     7  jjmod area=2.203     
+RS6    18     7               5.130ohm *SHUNT=11.300
+b5     11     4  jjmod area=1.365     
+RS5    11     4               8.278ohm *SHUNT=11.300
+b4     19    20  jjmod area=1.728     
+RS4    19    20               6.538ohm *SHUNT=11.300
+b3     14    15  jjmod area=1.400     
+RS3    14    15               8.074ohm *SHUNT=11.300
+b2     12    13  jjmod area=1.833     
+RS2    12    13               6.165ohm *SHUNT=11.300
+b1     16    17  jjmod area=1.718     
+RS1    16    17               6.576ohm *SHUNT=11.300
 LPR3              22        21   0.159pH fcheck
 LPR2              26        25   0.156pH fcheck
 LPR1              23        24   0.104pH fcheck
@@ -66,17 +66,17 @@ LP3               15         0   0.104pH fcheck
 LP2               13         0   0.094pH fcheck
 LPIN               1        25   0.328pH fcheck
 L9                16        19   0.042pH fcheck
-l8    18     2               1.531pH
-l7    25    12               2.322pH
-l6    21    11               1.848pH
-l5    12    14               2.954pH
-l4    19    18               4.006pH
-l3    24    16               5.887pH
-l2    14    24               1.265pH
-l1    11    17               2.208pH
-r3    29    22              18.533ohm
-r2    29    26              16.111ohm
-r1    29    23              40.969ohm
+l8    18     2               1.326pH
+l7    25    12               2.491pH
+l6    21    11               1.274pH
+l5    12    14               2.876pH
+l4    19    18               3.612pH
+l3    24    16               7.753pH
+l2    14    24               0.790pH
+l1    11    17               1.875pH
+r3    29    22              16.490ohm
+r2    29    26               8.320ohm
+r1    29    23              21.440ohm
 .ends
 
 *** sink
