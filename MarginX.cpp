@@ -234,6 +234,8 @@ int main(int argc, const char *argv[]) {
                 cout << " This Circuit Does Not Work Correctly.";
             }
             menu_flg++;
+                        make_cir_last(element, data_cir, cou, arg_arr);
+
             break;
         }
         else if (cmd == "-om"){     // -f があった場合、 matplotlib を用いたグラフを出力

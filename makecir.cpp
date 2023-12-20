@@ -27,7 +27,7 @@ int make_cir(double new_value, int ele_num, vector<ele_unit> &element, vector<st
     for (int x = 0; x < data_cir.size(); x++) {
         if(x == cou->line_num_arr[y] ){
             if(y == ele_num ){
-            switch(element[y].ide_num){
+            switch(element[y].ide_num){ // マージンを測定している素子なら新しいデータに書き換える
                 case 0:
                     fpin <<  element[y].element << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << new_value << "pH" << endl;
                     break;
@@ -66,7 +66,7 @@ int make_cir(double new_value, int ele_num, vector<ele_unit> &element, vector<st
             y++;
             }
             else{
-            switch(element[y].ide_num){
+            switch(element[y].ide_num){ // マージンを測定していない素子なら初期値を書き込む
                 case 0:
                     fpin <<  element[y].element << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << element[y].value << "pH" << endl;
                     break;

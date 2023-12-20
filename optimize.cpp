@@ -326,7 +326,14 @@ void critical_margin_method(vector<ele_unit> &element, vector<int> &elej, vector
         //全て中央値に変更した際のクリティカルマージンがもとのものより大きかったら、elementの値をcopyに格納していた中央値に変更し、正常動作しなければelementの値はそのまま（スルー）
         if(min({-copy[find_critical(copy)].margin_L, copy[find_critical(copy)].margin_H}) > min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H})){
             element = copy;
-            cout << endl << " Changed All Elements" << endl;
+        for(int i = 0; i < element.size(); i++){
+            if(element[i].value < element[i].MIN){  //新たなパラメータが最小値を下回っていたらパラメータを最小値に置き換える
+                    element[i].value = element[i].MIN;
+            }
+            if(element[i].value > element[i].MAX){  //新たなパラメータが最大値を上回っていたらパラメータを最大値に置き換える
+                    element[i].value = element[i].MAX;
+            }
+        }            cout << endl << " Changed All Elements" << endl;
             Margin(element, elej, jud, data_cir, cou, arg_arr, 0);
         }
     }
@@ -339,7 +346,11 @@ void critical_margin_method(vector<ele_unit> &element, vector<int> &elej, vector
     for(int j = 0; j < CRITICAL_NUM; j++){
         cri_num = find_critical(element);
         if(cri_num_pre == cri_num){
-            cout << " " <<element[cri_num].element << " is the critical element again." << endl;
+            cout << " " << element[cri_num].element << " is the critical element again." << endl;
+            break;
+        }
+        if(element[cri_num].FIX == 1){
+            cout << "chan't change the parameter of " <<  element[cri_num].element << " (FIX)" << endl;
             break;
         }
         cri_num_pre = cri_num;
@@ -354,6 +365,9 @@ void critical_margin_method(vector<ele_unit> &element, vector<int> &elej, vector
         if(element[cri_num].value < element[cri_num].MIN){
             element[cri_num].value = element[cri_num].MIN;
         }
+        if(element[cri_num].value > element[cri_num].MAX){
+            element[cri_num].value = element[cri_num].MAX;
+        }        
         synchro_opt(element, cri_num);
         Margin(element, elej, jud, data_cir, cou, arg_arr, 2);
 
