@@ -109,6 +109,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
     int flg_shunt_P = 0;
     int line_num = 0;
     int i, i1, i2, i3;
+    range range;
 
     string cirfilename = filename + ".cir";
     string inpfilename = filename + ".inp";
@@ -157,7 +158,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     flg_shunt_P = 2;
             }
 
-            if(line.find("*MIN") != string::npos){
+            if(line.find("*MIN") == 0){
                 double MIN;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -165,7 +166,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  MIN;
                 (element.back()).MIN = MIN;
             }
-            if(line.find("*MAX") != string::npos){
+            if(line.find("*MAX") == 0){
                 double MAX;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -173,10 +174,10 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  MAX;
                 (element.back()).MAX = MAX;
             }
-            if(line.find("*FIX") != string::npos){
+            if(line.find("*FIX") == 0){
                 (element.back()).FIX = 1;
             }
-            if(line.find("*SYN") != string::npos){
+            if(line.find("*SYN") == 0){
                 double SYN;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -184,7 +185,136 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  SYN;
                 (element.back()).SYN = SYN;
             }
-            
+
+            if(line.find("*LMIN") == 0){
+                double LMIN;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  LMIN;
+                range.LMIN = LMIN;
+            }
+            if(line.find("*LMAX") == 0){
+                double LMAX;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  LMAX;
+                range.LMAX = LMAX;
+            }
+            if(line.find("*KMIN") == 0){
+                double KMIN;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  KMIN;
+                range.KMIN = KMIN;
+            }
+            if(line.find("*KMAX") == 0){
+                double KMAX;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  KMAX;
+                range.KMAX = KMAX;
+            }            
+            if(line.find("*BMIN") == 0){
+                double BMIN;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  BMIN;
+                range.BMIN = BMIN;
+            }
+            if(line.find("*BMAX") == 0){
+                double BMAX;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  BMAX;
+                range.BMAX = BMAX;
+            }
+            if(line.find("*BIMIN") == 0){
+                double BIMIN;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  BIMIN;
+                range.BIMIN = BIMIN;
+            }        
+            if(line.find("*BIMAX") == 0){
+                double BIMAX;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  BIMAX;
+                range.BIMAX = BIMAX;
+            }            
+            if(line.find("*PIMIN") == 0){
+                double PIMIN;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  PIMIN;
+                range.PIMIN = PIMIN;
+            }        
+            if(line.find("*PIMAX") == 0){
+                double PIMAX;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  PIMAX;
+                range.PIMAX = PIMAX;
+            }            
+            if(line.find("*RMIN") == 0){
+                double RMIN;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  RMIN;
+                range.RMIN = RMIN;
+            }
+            if(line.find("*RMAX") == 0){
+                double RMAX;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  RMAX;
+                range.RMAX = RMAX;
+            }
+            if(line.find("*VMIN") == 0){
+                double VMIN;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  VMIN;
+                range.VMIN = VMIN;
+            }
+            if(line.find("*VMAX") == 0){
+                double VMAX;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  VMAX;
+                range.VMAX = VMAX;
+            }
+            if(line.find("*IMIN") == 0){
+                double IMIN;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  IMIN;
+                range.IMIN = IMIN;
+            }
+            if(line.find("*IMAX") == 0){
+                double IMAX;
+                line.insert(line.find("=") ,"  ");
+                line.insert(line.find("=") + 1 ,"  ");
+                liness << line;
+                liness >> ignore >> ignore >>  IMAX;
+                range.IMAX = IMAX;
+            }
+
             switch (judge_element(line)) {
                 case 1:
                     i1 = line.rfind("p");
@@ -196,7 +326,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line;
                     liness >> name >> node1 >> node2 >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({0, line_num, name, node1, node2, triple_digits(value), 0, 0, 0, 1000, 0, 0});
+                    element.push_back({0, line_num, name, node1, node2, triple_digits(value), 0, 0, range.LMIN, range.LMAX, 0, 0});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_L++;
                     break;
@@ -204,7 +334,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line;
                     liness >> name >> node1 >> node2 >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({1, line_num, name, node1, node2, triple_digits(value), 0, 0, -1, 1000, 0, 0});
+                    element.push_back({1, line_num, name, node1, node2, triple_digits(value), 0, 0, range.KMIN, range.LMAX, 0, 0});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_K++;
                     break;
@@ -216,7 +346,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line; 
                     liness >> name >> node1 >> node2 >> ignore >> ignore >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({2, line_num, name, node1, node2, triple_digits(value), 0, 0, 0, 1000, 0, 0});
+                    element.push_back({2, line_num, name, node1, node2, triple_digits(value), 0, 0, range.BMIN, range.BMAX, 0, 0});
                     flg_shunt_B += 1;
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_B++;
@@ -229,7 +359,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line;
                     liness >> name >> node1 >> node2 >> ignore >> ignore >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({3, line_num, name, node1, node2, triple_digits(value), 0, 0, 0, 1000, 0, 0});
+                    element.push_back({3, line_num, name, node1, node2, triple_digits(value), 0, 0, range.BIMIN, range.BIMAX, 0, 0});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_BI++;
                     break;
@@ -241,7 +371,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line;
                     liness >> name >> node1 >> node2 >> ignore >> ignore >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({4, line_num, name, node1, node2, triple_digits(value), 0, 0, 0, 1000, 0, 0});
+                    element.push_back({4, line_num, name, node1, node2, triple_digits(value), 0, 0, range.PIMIN, range.PIMAX, 0, 0});
                     flg_shunt_P = 1;
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_PI++;
@@ -256,7 +386,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line;
                     liness >> name >> node1 >> node2 >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({5, line_num, name, node1, node2, triple_digits(value), 0, 0, 0, 1000, 0, 0});
+                    element.push_back({5, line_num, name, node1, node2, triple_digits(value), 0, 0, range.RMIN, range.RMAX, 0, 0});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_R++;
                     break;
@@ -270,7 +400,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line;
                     liness >> name >> node1 >> node2 >> ignore >> ignore  >> ignore >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({6, line_num, name, node1, node2, triple_digits(value), 0, 0, 0, 1000, 0, 0});
+                    element.push_back({6, line_num, name, node1, node2, triple_digits(value), 0, 0, range.IMIN, range.IMAX, 0, 0});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_V++;
                     break;
@@ -284,7 +414,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line;
                     liness >> name >> node1 >> node2 >> ignore >> ignore  >> ignore >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({7, line_num, name, node1, node2, triple_digits(value), 0, 0, 0, 1000, 0, 0});
+                    element.push_back({7, line_num, name, node1, node2, triple_digits(value), 0, 0, range.VMIN, range.VMAX, 0, 0});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_I++;
                     break;
@@ -293,15 +423,27 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     break;
 
             }
-        if(line.find(".FILE") != string::npos ){
+        if(line.find(".FILE") == 0 || line.find(".file") == 0 || line.find(".File") == 0){// .if there is ".FILE" line, store the line number.
             cou->fileoutline = line_num;
         }
+
+        else if(line.find(".tran") == 0 || line.find(".TRAN") == 0){// .if there is ".tran" or ".TRAN" line, store the line number and insert an empty line.
+            cou->tranline = line_num;
+            data_cir.emplace_back(" ");    
+            line_num++;
+        }
+
         line_num++;
     }
     if(element.size() == 0){
         cout << " Error : No target element." << endl;
         return;
     }
+    if(cou->fileoutline == -1){ // .FILE の行がなかったら、.tranの次の行(tranline + 1) に ".FILE hogehoge.csv" を挿入
+        cou->fileoutline = cou->tranline + 1;
+        data_cir[cou->tranline + 1] = ".FILE hogehoge.csv";    
+    }
+
     cou->sum_B  = cou->count_L + cou->count_K;
     cou->sum_BI = cou->count_L + cou->count_K + cou->count_B;
     cou->sum_PI = cou->count_L + cou->count_K + cou->count_B + cou->count_BI;

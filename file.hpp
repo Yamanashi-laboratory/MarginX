@@ -21,6 +21,25 @@ struct ele_unit{
     int SYN;
 };
 
+struct range{
+    double LMIN = 0;
+    double LMAX = 1000;
+    double KMIN = -1;
+    double KMAX = 1;
+    double BMIN = 0;
+    double BMAX = 3;
+    double BIMIN = 0;
+    double BIMAX = 3;
+    double PIMIN = 0;
+    double PIMAX = 3;
+    double RMIN = 0;
+    double RMAX = 1000;
+    double VMIN = -10;
+    double VMAX = 10;
+    double IMIN = -10;
+    double IMAX = 10;
+};
+
 struct opt_num{
     int success = 0;
     int suc_max = 0;
@@ -44,7 +63,8 @@ struct gauss{
 struct ele_cou{
     double IcRs = 11.3; // nennnotame shokiti
     double IcRs_PI = 11.3; // nennnotame shokiti
-    int fileoutline = 0;
+    int fileoutline = -1; // 初期値から変わったかの判別用に -1 としている
+    int tranline = -1;   // the line number of ".TRAN"
     int count_L = 0;
     int count_K = 0;
     int count_B = 0;

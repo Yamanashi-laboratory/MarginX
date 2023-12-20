@@ -2,6 +2,8 @@
 *JSIM control file for CADENCE by kameda@cq.jp.nec.com
 **** **** **** **** **** **** **** **** **** **** ****
 
+
+*RMAX=30
 *JSIM model
 .model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.064pF, R0=100ohm, Rn=16ohm, Icrit=0.1mA)
 
@@ -76,7 +78,7 @@ l2                14        24   1.508pH fcheck
 l1                11        17   3.302pH fcheck
 r3                29        22   8.32ohm
 r2                29        26   8.32ohm
-r1                29        23  21.44ohm  *FIX
+r1                29        23  21.44ohm  
 .ends
 
 *** sink
@@ -95,8 +97,8 @@ RS1                9         7   5.21ohm *SHUNT=11.30
 
 *** top cell: test_dff
 Vinclk            30         0  PWL(0ps 0mv 100ps 0mv 101ps 1.035mv 102ps 1.035mv 103ps 0mv 300ps 0mv 301ps 1.035mv 302ps 1.035mv 303ps 0mv 400ps 0mv 401ps 1.035mv 402ps 1.035mv 403ps 0mv 600ps 0mv 601ps 1.035mv 602ps 1.035mv 603ps 0mv)
-Vindin               31         0  PWL(0ps 0mv 200ps 0mv 201ps 1.035mv 202ps 1.035mv 203ps 0mv 500ps 0mv 501ps 1.035mv 502ps 1.035mv 503ps 0mv)
-vb                32         0  PWL(0ps 0mv 20ps 2.5mv)  *FIX
+Vindin            31         0  PWL(0ps 0mv 200ps 0mv 201ps 1.035mv 202ps 1.035mv 203ps 0mv 500ps 0mv 501ps 1.035mv 502ps 1.035mv 503ps 0mv)
+vb                32         0  PWL(0ps 0mv 20ps 2.5mv)  
 *FIX
 XI1              ijtl         30         33
 XI3              ijtl         31         34
@@ -108,8 +110,6 @@ XI7              sink         36         32
 
 *** netlist file ***
 .tran 0.1ps 750ps 0ps 1ps
-.FILE MARGIN.CSV
-
 .print phase B1.XI5
 .print phase B3.XI5
 .print phase B4.XI5
