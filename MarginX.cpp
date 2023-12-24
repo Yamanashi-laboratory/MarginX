@@ -168,7 +168,8 @@ int main(int argc, const char *argv[]) {
     cout << " 2. Calculate Margin" << endl;
     cout << " 3. Optimization with Critical Margin Method (CMM)" << endl;
     cout << " 4. Optimization with Monte Carlo Method (MCM)" << endl;
-    cout << " 5. Optimization with MCM and CMM" << endl << endl;
+    cout << " 5. Optimization with MCM and CMM" << endl;
+    cout << " 6. Endless Optimization with MCM" << endl << endl;
     cout << "  Selected Mode : ";
     cin >> menu_num;
     cout << endl;
@@ -191,6 +192,9 @@ int main(int argc, const char *argv[]) {
             break;
         case 5:
             arg_arr.emplace_back("-op");
+            break;
+        case 6:
+            arg_arr.emplace_back("-eom");
             break;
         default:
             cout << " Please input a correct number." << endl;
@@ -240,6 +244,11 @@ int main(int argc, const char *argv[]) {
         }
         else if (cmd == "-om"){     // -f があった場合、 matplotlib を用いたグラフを出力
             optimize_monte(element,data_cir,cou,elej,jud, arg_arr);
+            menu_flg++;
+            break;
+        }
+        else if (cmd == "-eom"){     // -f があった場合、 matplotlib を用いたグラフを出力
+            optimize_monte_ul(element,data_cir,cou,elej,jud, arg_arr);
             menu_flg++;
             break;
         }

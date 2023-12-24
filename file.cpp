@@ -21,6 +21,9 @@ using namespace std;
 int readJudgementFile(vector<int> &elej, vector<judge> &jud, string &judgefilename){
     //FILE *fp = NULL;
     string line, ignore;
+
+    vector<string> elej2;
+
     stringstream dvwords;
     judgefilename += ".txt";
     int x = 0;
@@ -39,6 +42,7 @@ int readJudgementFile(vector<int> &elej, vector<judge> &jud, string &judgefilena
         element:
         if( line.find("B") != string::npos || line.find("b") != string::npos ){
             x++;
+            elej2.emplace_back(line);
             num_jud = 0;
             while ( getline(file,line) ) {
                     dvwords.clear();

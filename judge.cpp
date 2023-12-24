@@ -90,7 +90,7 @@ int judge_operation (vector<int> &elej, vector<judge> &jud){
         bline = (jud[jud_sumall + jud_sum].btime - data[0][0] )/ time_scale;  //該当範囲の開始行
         eline = (jud[jud_sumall + jud_sum].etime - data[0][0] )/ time_scale;  //該当範囲の終了行
         judgephase = jud[jud_sumall + jud_sum].phase;
-        for(y = bline; y < eline; y++){                       //judgementファイルの各行に記載された該当範囲を探索
+        for(y = bline; y < data.size(); y++){                       //judgementファイルの各行に記載された該当範囲を探索
                 if(lkey == 0 && data[y][x] < judgephase){     // x番目の素子について記述通りのスイッチをしているか確認
                     lkey++;
                     ukey = -1;
@@ -110,7 +110,7 @@ int judge_operation (vector<int> &elej, vector<judge> &jud){
                 else if(lkey == 2 || ukey == 2){
                     jud_sum++;
                     judgephase = jud[jud_sumall + jud_sum].phase;
-                    bline = (jud[jud_sumall + jud_sum].btime - data[0][0] )/ time_scale;
+                    y = (jud[jud_sumall + jud_sum].btime - data[0][0] )/ time_scale;
                     eline = (jud[jud_sumall + jud_sum].etime - data[0][0] )/ time_scale;
                     lkey = 0;
                     ukey = 0;
@@ -131,5 +131,56 @@ int judge_operation (vector<int> &elej, vector<judge> &jud){
     /* 条件を満たしてないため0を返す */
     return 0;
 }
+
+
+
+/*正常動作の判定条件*/
+int judge_operation2 (vector<string> &elej, vector<vector<judge>> &jud){
+    int x;
+    int bline, eline;
+    int ok_flg;
+    double judgephase;
+
+    /* Josimの結果を配列に格納 */
+    vector<vector<double>> data = readJOSIMData();
+
+    //rowsにCSVファイルを格納した配列の要素数を格納（CSVファイルの行数 - 1）
+    //time_scaleに出力データの時間間隔を格納
+    double time_scale = data[1][0] - data[0][0];
+
+
+    /* 正常動作判定*/
+    for(x = 1; x < data[0].size() - 1 ; x++){
+        for(int num = 0; num < jud[x - 1].size(); num++){  // x番目の素子のnum回目のジャッジ
+            bline = (jud[x - 1][num].btime - data[0][0] )/ time_scale;  //該当範囲の開始行
+            eline = (jud[x - 1][num].etime - data[0][0] )/ time_scale;  //該当範囲の終了行
+            judgephase = jud[x - 1][0].phase;
+            ok_flg = 0;
+            if(data[bline][x] < judgephase){
+                for(int line = bline; line < eline; line++){
+                    if(data[line][x] > judgephase){
+                        ok_flg = 1;
+                    }
+                }
+            }
+            else {
+                for(int line = bline; line < eline; line++){
+                    if(data[line][x] < judgephase){
+                        ok_flg = 1;
+                    }
+                }
+            }
+
+            if(ok_flg == 0){
+                cout << elej[x - 1] << " : " << jud[x - 1][num].btime << " " << jud[x - 1][num].etime << jud[x - 1][num].phase << endl;
+                return 0;
+            }
+
+        }   
+    }
+        return 1;
+
+}
+
 
 

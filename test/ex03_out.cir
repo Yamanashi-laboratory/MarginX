@@ -42,31 +42,31 @@ B12               25        26  jjmod area=2.16
 RS12              25        26   1.73ohm *SHUNT=3.73
 B0                27        28  jjmod area=2.16
 RS0               27        28   1.73ohm *SHUNT=3.73
-b10     29    30  jjmod area=1.802     
-RS10    29    30               2.070ohm *SHUNT=3.730
-b11     31    32  jjmod area=2.101     
-RS11    31    32               1.775ohm *SHUNT=3.730
-b5     33    34  jjmod area=2.788     
-RS5    33    34               1.338ohm *SHUNT=3.730
-b7     35    36  jjmod area=2.104     
-RS7    35    36               1.773ohm *SHUNT=3.730
-b8     36    37  jjmod area=1.361     
-RS8    36    37               2.740ohm *SHUNT=3.730
-b4     38    33  jjmod area=2.321     
-RS4    38    33               1.607ohm *SHUNT=3.730
-b9     39    40  jjmod area=1.031     
-RS9    39    40               3.617ohm *SHUNT=3.730
+b10     29    30  jjmod area=1.933     
+RS10    29    30               1.929ohm *SHUNT=3.730
+b11     31    32  jjmod area=2.237     
+RS11    31    32               1.667ohm *SHUNT=3.730
+b5     33    34  jjmod area=2.621     
+RS5    33    34               1.423ohm *SHUNT=3.730
+b7     35    36  jjmod area=2.246     
+RS7    35    36               1.661ohm *SHUNT=3.730
+b8     36    37  jjmod area=1.456     
+RS8    36    37               2.562ohm *SHUNT=3.730
+b4     38    33  jjmod area=2.464     
+RS4    38    33               1.514ohm *SHUNT=3.730
+b9     39    40  jjmod area=1.107     
+RS9    39    40               3.370ohm *SHUNT=3.730
 B24               41        42  jjmod area=2.16
 RS24              41        42   1.73ohm *SHUNT=3.73
-b3     43    44  jjmod area=2.248     
-RS3    43    44               1.660ohm *SHUNT=3.730
-b6     45    46  jjmod area=2.250     
-RS6    45    46               1.658ohm *SHUNT=3.730
-b1     47    48  jjmod area=2.152     
-RS1    47    48               1.733ohm *SHUNT=3.730
+b3     43    44  jjmod area=2.409     
+RS3    43    44               1.548ohm *SHUNT=3.730
+b6     45    46  jjmod area=2.398     
+RS6    45    46               1.556ohm *SHUNT=3.730
+b1     47    48  jjmod area=2.318     
+RS1    47    48               1.609ohm *SHUNT=3.730
 
-b2     47    49  jjmod area=2.062     
-RS2    47    49               1.809ohm *SHUNT=3.730
+b2     47    49  jjmod area=2.180     
+RS2    47    49               1.711ohm *SHUNT=3.730
 ***mid = 1.641
 
 L64                2         0   0.205pH fcheck
@@ -121,19 +121,19 @@ L15               75        25   2.379pH fcheck
 L0                76        75   0.270pH fcheck
 LPIN              50        75   0.359pH fcheck
 L60               41        66   1.890pH fcheck
-l11    29    31               4.263pH
+l11    29    31               4.791pH
 LP10              30         0   0.112pH fcheck
 LP11              32         0   0.120pH fcheck
 L12               31        54   2.096pH fcheck
-l2    49    77               2.401pH
+l2    49    77               2.639pH
 LP8               37         0   0.255pH fcheck
-l14    36    78               0.700pH
-l8    33    39               2.311pH
+l14    36    78               0.784pH
+l8    33    39               2.584pH
 LP5               34         0   0.268pH fcheck
-l13    77    29               0.727pH
-l9    40    79               0.359pH
-l10    79    77               0.356pH
-l7    78    39               2.815pH
+l13    77    29               0.806pH
+l9    40    79               0.399pH
+l10    79    77               0.396pH
+l7    78    39               3.173pH
 LPR5              80        79   0.205pH fcheck
 LPR4              81        78   0.328pH fcheck
 L58               16         0   0.205pH fcheck
@@ -147,8 +147,8 @@ LPCLK             60        86   0.203pH fcheck
 LPR1              87        86   0.239pH fcheck
 L1                86        47   2.137pH fcheck
 LP6               46         0   0.112pH fcheck
-l6    45    35               3.174pH
-l4    43    38               2.339pH
+l6    45    35               3.535pH
+l4    43    38               2.594pH
 LP3               44         0   0.156pH fcheck
 LP1               48         0   0.177pH fcheck
 R16               59         0   10.00ohm
@@ -160,8 +160,8 @@ R8                98        68   8.34ohm
 R7                98        70  16.65ohm
 R6                98        74  16.65ohm
 R0                98        76   8.34ohm
-r5    80    98              28.923ohm
-r4    98    81              30.077ohm
+r5    80    98              30.039ohm
+r4    98    81              31.565ohm
 R2                98        84   8.34ohm
 R3                98        82   8.34ohm
 R1                98        87   8.34ohm
@@ -171,9 +171,10 @@ V0                51         0  PWL(0ps 0mV 550ps 0mV 552ps 1.034mV 554ps 0mV 65
 V1                52         0  PWL(0ps 0mV 750ps 0mV 752ps 1.034mV 754ps 0mV 850ps 0mV 852ps 1.034mV 854ps 0mV)
 V2                53         0  PWL(0ps 0mV 500ps 0mV 502ps 1.034mV 504ps 0mV 600ps 0mV 602ps 1.034mV 604ps 0mV 700ps 0mV 702ps 1.034mV 704ps 0mV 800ps 0mV 802ps 1.034mV 804ps 0mV 900ps 0mV 902ps 1.034mV 904ps 0mV 1000ps 0mV 1002ps 1.034mV 1004ps 0mV 1100ps 0mV 1102ps 1.034mV 1104ps 0mV)
 
-vb    98     0   PWL(0ps 0mV    50ps                  2.500mV)
+vb    98     0   PWL(0ps 0mV    20ps                  2.500mV)
 *FIX
 .tran 0.1ps 1.2ns 0.4ns 0.2ps
+ 
 
 .FILE ex03_out.CSV
 
