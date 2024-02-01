@@ -24,8 +24,8 @@ using namespace std;
 
 int main(int argc, const char *argv[]) {
     int shmid;                        // 共有メモリのIDを格納
-    vector<judge> jud;                //judgementファイルの各行(開始時間　終了時間　位相) を格納
-    vector<int> elej;                 //各判定素子の判定回数を格納
+    vector<vector<judge>> jud;                //judgementファイルの各行(開始時間　終了時間　位相) を格納
+    vector<string> elej;                 //各判定素子の判定回数を格納
     vector<string> data_cir;          //サーキットファイルを格納
     time_t start, end;                //開始時間と終了時間
     struct tm *tps, *tpe;             //開始時間と終了時間
@@ -231,14 +231,10 @@ int main(int argc, const char *argv[]) {
                 cout << "error:1" << endl;
             }
             //正常動作したら
-            else if(judge_operation(elej, jud) == 1){ 
-                cout << " OK! This Circuit Works Correctly.";
-            }
-            else{
-                cout << " This Circuit Does Not Work Correctly.";
-            }
+            judge_operation(elej, jud, 1);
+
             menu_flg++;
-                        make_cir_last(element, data_cir, cou, arg_arr);
+            //make_cir_last(element, data_cir, cou, arg_arr);
 
             break;
         }
@@ -267,7 +263,6 @@ int main(int argc, const char *argv[]) {
             return 0;
     }
 
-    cout << " \n\n Finish!!\n\n";
     //終了時間を取得
     time(&end);
     tpe = localtime(&end);

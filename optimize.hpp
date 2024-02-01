@@ -17,12 +17,12 @@ struct opt_num;
 struct gauss;
 
 
-void optimize(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, ele_cou *cou,std::vector<int> &elej, std::vector<judge> &jud, std::vector<std::string>& arg_arr);
-void optimize_monte(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, ele_cou *cou,std::vector<int> &elej, std::vector<judge> &jud, std::vector<std::string>& arg_arr);
-void optimize_monte_ul(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, ele_cou *cou,std::vector<int> &elej, std::vector<judge> &jud, std::vector<std::string>& arg_arr);
-void opt_ele(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, ele_cou *cou,std::vector<int> &elej, std::vector<judge> &jud,opt_num *opt);
-void opt_ele2(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, ele_cou *cou,std::vector<int> &elej, std::vector<judge> &jud, opt_num *opt, gauss *gau);
-void critical_margin_method(std::vector<ele_unit> &element, std::vector<int> &elej, std::vector<judge> &jud ,std::vector<std::string>& data_cir, ele_cou *cou, std::vector<std::string>& arg_arr);
+void optimize(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, ele_cou *cou,std::vector<std::string> &elej, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
+void optimize_monte(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, ele_cou *cou,std::vector<std::string> &elej, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
+void optimize_monte_ul(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, ele_cou *cou,std::vector<std::string> &elej, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
+void opt_ele(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, ele_cou *cou,std::vector<std::string> &elej, std::vector<std::vector<judge>> &jud,opt_num *opt);
+void opt_ele2(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, ele_cou *cou,std::vector<std::string> &elej, std::vector<std::vector<judge>> &jud, opt_num *opt, gauss *gau);
+void critical_margin_method(std::vector<ele_unit> &element, std::vector<std::string> &elej, std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, ele_cou *cou, std::vector<std::string>& arg_arr);
 std::string GetOrdinalNumber(int num);
 
 

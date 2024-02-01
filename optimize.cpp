@@ -26,7 +26,7 @@
 
 using namespace std;
 
-void optimize(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,vector<int> &elej, vector<judge> &jud, vector<string> &arg_arr){
+void optimize(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,vector<string> &elej, vector<vector<judge>> &jud, vector<string> &arg_arr){
 
 
     int mode = 0;
@@ -155,7 +155,7 @@ void optimize(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,
                 //cout << " changed value" << endl;
             for(int i = 0; i < element.size(); i++){
                 element[i].value = opt->sum_value[i] / opt->success;
-                /*
+                
                 if(element[i].value < element[i].MIN){
                         element[i].value = element[i].MIN;
                 }
@@ -164,7 +164,7 @@ void optimize(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,
                 }
                 if(element[i].FIX == 1){
                     element[i].value = element_ini[i].value;
-                }*/
+                }
             }
             
         }
@@ -203,7 +203,7 @@ void optimize(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,
 }
 
 
-void opt_ele(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,vector<int> &elej, vector<judge> &jud, opt_num *opt){
+void opt_ele(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,vector<string> &elej, vector<vector<judge>> &jud, opt_num *opt){
 
     std::random_device rnd;
     std::mt19937 mt(rnd()); 
@@ -286,7 +286,7 @@ void opt_ele(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,v
     if(system((commandname.str()).c_str()) == -1){
         cout << "error:1" << endl;
     }
-    else if(judge_operation(elej, jud) == 1){ //正常動作したら
+    else if(judge_operation(elej, jud, 0) == 1){ //正常動作したら
         opt->success += 1;
         for(int i = 0; i < copy.size(); i++){
             opt->sum_value[i] += copy[i].value;
@@ -301,7 +301,7 @@ void opt_ele(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,v
 }
 
 
-void critical_margin_method(vector<ele_unit> &element, vector<int> &elej, vector<judge> &jud, vector<string> &data_cir, ele_cou *cou, vector<string> &arg_arr){
+void critical_margin_method(vector<ele_unit> &element, vector<string> &elej, vector<vector<judge>> &jud, vector<string> &data_cir, ele_cou *cou, vector<string> &arg_arr){
     stringstream commandname, delete_cir, delete_out, out_det, out_fig, out_csv;
     commandname << "josim OPTIMIZE" << getpid() << ".cir > /dev/null"; 
     delete_cir << "rm -f OPTIMIZE" << getpid() << ".cir";
@@ -333,7 +333,7 @@ void critical_margin_method(vector<ele_unit> &element, vector<int> &elej, vector
         cout << "error:1" << endl;
     }
     //正常動作したら
-    else if(judge_operation(elej, jud) == 1){ 
+    else if(judge_operation(elej, jud, 0) == 1){ 
         Margin(copy, elej, jud, data_cir, cou, arg_arr, 1); //全て中央値に変更した際のクリティカルマージンをチェック
         //全て中央値に変更した際のクリティカルマージンがもとのものより大きかったら、elementの値をcopyに格納していた中央値に変更し、正常動作しなければelementの値はそのまま（スルー）
         if(min({-copy[find_critical(copy)].margin_L, copy[find_critical(copy)].margin_H}) > min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H})){
@@ -390,7 +390,7 @@ void critical_margin_method(vector<ele_unit> &element, vector<int> &elej, vector
 
 
 
-void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,vector<int> &elej, vector<judge> &jud, vector<string> &arg_arr){
+void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,vector<string> &elej, vector<vector<judge>> &jud, vector<string> &arg_arr){
 
     int mode = 0;
     double CM_power = 1;
@@ -531,7 +531,7 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou
 
         for(int i = 0; i < element.size(); i++){
             element[i].value = opt->sum_value[i] / opt->success;   // 新たなパラメータに置き換える
-            /*
+            
             if(element[i].value < element[i].MIN){  //新たなパラメータが最小値を下回っていたらパラメータを最小値に置き換える
                     element[i].value = element[i].MIN;
             }
@@ -540,7 +540,7 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou
             }
             if(element[i].FIX == 1){
                 element[i].value = element_ini[i].value;
-            }*/
+            }
         }
         
 
@@ -590,7 +590,7 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, ele_cou
 }
 
 
-void optimize_monte_ul(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,vector<int> &elej, vector<judge> &jud, vector<string> &arg_arr){
+void optimize_monte_ul(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,vector<string> &elej, vector<vector<judge>> &jud, vector<string> &arg_arr){
     int mode = 0;
     int CM_choice, BM_choice;
     double CM_th = 0;
@@ -604,15 +604,19 @@ void optimize_monte_ul(vector<ele_unit> &element, vector<string> &data_cir, ele_
     cout << " 1 : Yes" << endl << " 2 : No" << endl << " Selected : ";
     cin >> CM_choice;
     if(CM_choice == 1){
-        cout << endl << " Please input the threshhold of Critical Margin : " ;
+        cout << endl << " Please input the threshold of Critical Margin : " ;
         cin >> CM_th;
     }
     cout << " Do you Set the MIN of the Bias Margin ?" << endl;
     cout << " 1 : Yes" << endl << " 2 : No" << endl << " Selected : ";
     cin >> BM_choice;
     if(BM_choice == 1){
-        cout << endl << " Please input the threshhold of Bias Margin : " ;
+        cout << endl << " Please input the threshold of Bias Margin : " ;
         cin >> BM_th;
+    }
+    if(CM_choice != 1 && BM_choice != 1){
+        cout << endl <<  " Please set the threshold of Margin!" << endl;
+        return;
     }
 
     cout << " Select the Kind of Score" << endl;
@@ -748,7 +752,7 @@ void optimize_monte_ul(vector<ele_unit> &element, vector<string> &data_cir, ele_
 
         for(int i = 0; i < element.size(); i++){
             element[i].value = opt->sum_value[i] / opt->success;   // 新たなパラメータに置き換える
-            /*
+            
             if(element[i].value < element[i].MIN){  //新たなパラメータが最小値を下回っていたらパラメータを最小値に置き換える
                     element[i].value = element[i].MIN;
             }
@@ -757,7 +761,7 @@ void optimize_monte_ul(vector<ele_unit> &element, vector<string> &data_cir, ele_
             }
             if(element[i].FIX == 1){
                 element[i].value = element_ini[i].value;
-            }*/
+            }
         }
         
 
@@ -813,7 +817,7 @@ string GetOrdinalNumber(int num){
 } 
 
 /*
-void opt_ele2(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,vector<int> &elej, vector<judge> &jud, opt_num *opt, gauss *gau){
+void opt_ele2(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,vector<string> &elej, vector<vector<judge>> &jud, opt_num *opt, gauss *gau){
 
     std::random_device rnd;
     std::mt19937 mt(rnd()); 
@@ -870,7 +874,7 @@ void opt_ele2(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *cou,
     if(system((commandname.str()).c_str()) == -1){
         cout << "error:1" << endl;
     }
-    else if(judge_operation(elej, jud) == 1){ //正常動作したら
+    else if(judge_operation(elej, jud, 0) == 1){ //正常動作したら
         opt->success += 1;
         for(int i = 0; i < copy.size(); i++){
             opt->sum_value[i] += copy[i].value;

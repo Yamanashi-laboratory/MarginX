@@ -22,7 +22,7 @@
 
 using namespace std;
 
-void Margin(vector<ele_unit> &element, vector<int> &elej, vector<judge> &jud, vector<string> &data_cir, ele_cou *cou, vector<string> &arg_arr, int menu){
+void Margin(vector<ele_unit> &element, vector<string> &elej, vector<vector<judge>> &jud, vector<string> &data_cir, ele_cou *cou, vector<string> &arg_arr, int menu){
     if(menu == 0 || menu == 2){
         cout << " Calculating Margins...                                                                                                             " << endl << endl;
     }
@@ -290,7 +290,7 @@ void Margin(vector<ele_unit> &element, vector<int> &elej, vector<judge> &jud, ve
 
 
 /* 全素子のマージン測定 */  
-int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<int> &elej, vector<judge> &jud, board *top, vector<string> &data_cir, ele_cou *cou){
+int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<string> &elej, vector<vector<judge>> &jud, board *top, vector<string> &data_cir, ele_cou *cou){
     int check = 0;
     int order_num = 0;
     int outline_num = 0;
@@ -358,7 +358,7 @@ int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<int> &elej,
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
-            else if(judge_operation(elej, jud) == 0){
+            else if(judge_operation(elej, jud, 0) == 0){
                 HIGH = HIGH - pow(10 , order_num - check);
                 synchro(copy, ele_num, HIGH);
                 check += 1;
@@ -388,7 +388,7 @@ int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<int> &elej,
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
-            if(judge_operation(elej, jud) == 0){
+            if(judge_operation(elej, jud, 0) == 0){
                 LOW = LOW + pow(10 , order_num - check);
                 synchro(copy, ele_num, LOW);
                 check += 1;
@@ -414,7 +414,7 @@ int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<int> &elej,
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
-            if(judge_operation(elej, jud) == 0){
+            if(judge_operation(elej, jud, 0) == 0){
                 HIGH = HIGH - pow(10 , order_num - check);
                 synchro(copy, ele_num, HIGH);
                 check += 1;
@@ -432,7 +432,7 @@ int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<int> &elej,
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
-            else if(judge_operation(elej, jud) == 0){
+            else if(judge_operation(elej, jud, 0) == 0){
                 LOW = LOW + pow(10 , order_num - check);
                 synchro(element, ele_num, LOW);
                 check += 1;
