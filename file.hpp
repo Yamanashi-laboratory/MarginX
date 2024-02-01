@@ -98,7 +98,7 @@ struct board{
 };
 
 
-int readJudgementFile(std::vector<int> &elej, std::vector<judge> &jud, std::string &judgefilename);
+int readJudgementFile(std::vector<std::string> &elej, std::vector<std::vector<judge>> &jud, std::string &judgefilename);
 double triple_digits(double num);
 void make_data_cir(std::vector<std::string>& data_cir, std::string &filename, std::vector<ele_unit> &element, ele_cou *cou);
 int find_parameter(char *data);

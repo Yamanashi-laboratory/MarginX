@@ -18,9 +18,12 @@
 using namespace std;
 
 /* 判定基準ファイルの読み込み */
-int readJudgementFile(vector<int> &elej, vector<judge> &jud, string &judgefilename){
+int readJudgementFile(vector<string> &elej, vector<vector<judge>> &jud, string &judgefilename){
     //FILE *fp = NULL;
     string line, ignore;
+    
+    vector<judge> elej_unit;
+
     stringstream dvwords;
     judgefilename += ".txt";
     int x = 0;
@@ -35,11 +38,6 @@ int readJudgementFile(vector<int> &elej, vector<judge> &jud, string &judgefilena
         cerr << " Please select judgement file."  << endl;
         return 0;
     }
-    while ( getline(file,line) ) {
-        element:
-        if( line.find("B") != string::npos || line.find("b") != string::npos ){
-            x++;
-            num_jud = 0;
             while ( getline(file,line) ) {
                     dvwords.clear();
                     dvwords.str("");
@@ -48,20 +46,19 @@ int readJudgementFile(vector<int> &elej, vector<judge> &jud, string &judgefilena
                     phase = 0;
                     dvwords << line;
                     dvwords >> btime >> etime >> phase;
-                    if(btime == 0){
-                        elej.emplace_back(num_jud);                                    
-                        goto element;
+                    if(etime != 0){
+                        jud[x - 1].push_back({btime, etime, phase});
+                        num_jud++;
                     }
-                    jud.push_back({btime, etime, phase * M_PI});
-                    num_jud++;
-                    y++;
+                    if(line.find("B") != string::npos || line.find("b") != string::npos ){
+                        x++;
+                        elej.emplace_back(line);
+                        jud.push_back(elej_unit);                    
+                    }
                 }
-            elej.emplace_back(num_jud);   //file yomiowatta atoni saigono elej wo sounyuu
-
-        }
-    }
+    
     cout << " Number of Elements : " << x << endl;
-    cout << " Total of Judgement : " << y << endl;
+    cout << " Total of Judgement : " << num_jud << endl;
     file.close();
     return 1;
 }
@@ -166,7 +163,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  MIN;
                 (element.back()).MIN = MIN;
             }
-            if(line.find("*MAX") == 0){
+            else if(line.find("*MAX") == 0){
                 double MAX;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -174,10 +171,10 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  MAX;
                 (element.back()).MAX = MAX;
             }
-            if(line.find("*FIX") == 0){
+            else if(line.find("*FIX") == 0){
                 (element.back()).FIX = 1;
             }
-            if(line.find("*SYN") == 0){
+            else if(line.find("*SYN") == 0){
                 double SYN;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -194,7 +191,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  LMIN;
                 range.LMIN = LMIN;
             }
-            if(line.find("*LMAX") == 0){
+            else if(line.find("*LMAX") == 0){
                 double LMAX;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -202,7 +199,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  LMAX;
                 range.LMAX = LMAX;
             }
-            if(line.find("*KMIN") == 0){
+            else if(line.find("*KMIN") == 0){
                 double KMIN;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -210,7 +207,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  KMIN;
                 range.KMIN = KMIN;
             }
-            if(line.find("*KMAX") == 0){
+            else if(line.find("*KMAX") == 0){
                 double KMAX;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -218,7 +215,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  KMAX;
                 range.KMAX = KMAX;
             }            
-            if(line.find("*BMIN") == 0){
+            else if(line.find("*BMIN") == 0){
                 double BMIN;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -226,7 +223,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  BMIN;
                 range.BMIN = BMIN;
             }
-            if(line.find("*BMAX") == 0){
+            else if(line.find("*BMAX") == 0){
                 double BMAX;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -234,7 +231,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  BMAX;
                 range.BMAX = BMAX;
             }
-            if(line.find("*BIMIN") == 0){
+            else if(line.find("*BIMIN") == 0){
                 double BIMIN;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -242,7 +239,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  BIMIN;
                 range.BIMIN = BIMIN;
             }        
-            if(line.find("*BIMAX") == 0){
+            else if(line.find("*BIMAX") == 0){
                 double BIMAX;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -250,7 +247,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  BIMAX;
                 range.BIMAX = BIMAX;
             }            
-            if(line.find("*PIMIN") == 0){
+            else if(line.find("*PIMIN") == 0){
                 double PIMIN;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -258,7 +255,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  PIMIN;
                 range.PIMIN = PIMIN;
             }        
-            if(line.find("*PIMAX") == 0){
+            else if(line.find("*PIMAX") == 0){
                 double PIMAX;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -266,7 +263,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  PIMAX;
                 range.PIMAX = PIMAX;
             }            
-            if(line.find("*RMIN") == 0){
+            else if(line.find("*RMIN") == 0){
                 double RMIN;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -274,7 +271,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  RMIN;
                 range.RMIN = RMIN;
             }
-            if(line.find("*RMAX") == 0){
+            else if(line.find("*RMAX") == 0){
                 double RMAX;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -282,7 +279,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  RMAX;
                 range.RMAX = RMAX;
             }
-            if(line.find("*VMIN") == 0){
+            else if(line.find("*VMIN") == 0){
                 double VMIN;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -290,7 +287,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  VMIN;
                 range.VMIN = VMIN;
             }
-            if(line.find("*VMAX") == 0){
+            else if(line.find("*VMAX") == 0){
                 double VMAX;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -298,7 +295,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  VMAX;
                 range.VMAX = VMAX;
             }
-            if(line.find("*IMIN") == 0){
+            else if(line.find("*IMIN") == 0){
                 double IMIN;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
@@ -306,7 +303,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 liness >> ignore >> ignore >>  IMIN;
                 range.IMIN = IMIN;
             }
-            if(line.find("*IMAX") == 0){
+            else if(line.find("*IMAX") == 0){
                 double IMAX;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
