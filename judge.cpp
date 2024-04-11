@@ -76,7 +76,6 @@ int judge_operation (vector<string> &elej, vector<vector<judge>> &jud, int mode)
 
     /* Josimの結果を配列に格納 */
     vector<vector<double>> data = readJOSIMData();
-
     //rowsにCSVファイルを格納した配列の要素数を格納（CSVファイルの行数 - 1）
     //time_scaleに出力データの時間間隔を格納
     double time_scale = data[1][0] - data[0][0];
@@ -88,6 +87,10 @@ int judge_operation (vector<string> &elej, vector<vector<judge>> &jud, int mode)
             bline = (jud[x - 1][num].btime - data[0][0] )/ time_scale;  //該当範囲の開始行
             eline = (jud[x - 1][num].etime - data[0][0] )/ time_scale;  //該当範囲の終了行
             judgephase = jud[x - 1][num].phase * M_PI;
+            if(eline > data.size()){
+                cerr << " ERROR (TIME) : Check if the time in Judgement File is more than its simulation time in Circuit File" << endl;
+                return 0;
+            }
             ok_flg = 0;
             if(data[bline][x] < judgephase){
                 for(int line = bline; line < eline; line++){
