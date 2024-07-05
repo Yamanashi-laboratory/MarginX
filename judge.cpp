@@ -72,6 +72,7 @@ int judge_operation (vector<string> &elej, vector<vector<judge>> &jud, int mode)
     int x;
     int bline, eline;
     int ok_flg;
+    int anti_flg;
     double judgephase;
 
     /* Josimの結果を配列に格納 */
@@ -82,20 +83,23 @@ int judge_operation (vector<string> &elej, vector<vector<judge>> &jud, int mode)
 
 
     /* 正常動作判定*/
-    for(x = 1; x < data[0].size() - 1 ; x++){
+    for(x = 1; x < data[0].size()  ; x++){
         for(int num = 0; num < jud[x - 1].size(); num++){  // x番目の素子のnum回目のジャッジ
             bline = (jud[x - 1][num].btime - data[0][0] )/ time_scale;  //該当範囲の開始行
             eline = (jud[x - 1][num].etime - data[0][0] )/ time_scale;  //該当範囲の終了行
             judgephase = jud[x - 1][num].phase * M_PI;
+
             if(eline > data.size()){
-                cerr << " ERROR (TIME) : Check if the time in Judgement File is more than its simulation time in Circuit File" << endl;
-                return 0;
+                cerr << " ERROR (TIME) : Please check if the time in Judgement File is more than its simulation time in Circuit File" << endl;
+                exit(1);
             }
-            ok_flg = 0;
+
+            ok_flg = 0;  //shokika 
             if(data[bline][x] < judgephase){
                 for(int line = bline; line < eline; line++){
                     if(data[line][x] > judgephase){
                         ok_flg = 1;
+                        break;
                     }
                 }
             }
@@ -103,17 +107,25 @@ int judge_operation (vector<string> &elej, vector<vector<judge>> &jud, int mode)
                 for(int line = bline; line < eline; line++){
                     if(data[line][x] < judgephase){
                         ok_flg = 1;
+                        break;
                     }
                 }
             }
 
+            if(jud[x - 1][num].anti == 1){  //anti == 1 no tokiha ok_flg wo hanten
+                ok_flg = 1 - ok_flg;
+            }
+
             if(ok_flg == 0){
                 if(mode == 1){
-                    cout << "  ------NOT PASSED------" << endl;
-                    cout << " A Violation was detected in : " << " " << elej[x - 1] << endl;
-                    cout << "                                " << jud[x - 1][num].btime << " " << jud[x - 1][num].etime << " "<<  jud[x - 1][num].phase << endl;
+                        cout << "  ------NOT PASSED------" << endl;
+                        cout << " A Violation was detected in : " << " " << elej[x - 1] << endl;
+                        cout << "                                " << jud[x - 1][num].btime << " " << jud[x - 1][num].etime << " "<<  jud[x - 1][num].phase << endl;
+                        return 0;
                 }
-                return 0;
+                else{
+                    return 0;
+                }
             }
 
         }   

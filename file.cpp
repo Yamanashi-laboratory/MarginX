@@ -29,7 +29,7 @@ int readJudgementFile(vector<string> &elej, vector<vector<judge>> &jud, string &
     int x = 0;
     int y = 0;
     int num_jud = 0;
-    int btime = 0, etime = 0;
+    int btime = 0, etime = 0, anti = 0;
     double phase = 0;
 
     /* ファイルのオープン */
@@ -44,16 +44,17 @@ int readJudgementFile(vector<string> &elej, vector<vector<judge>> &jud, string &
                     btime = 0;
                     etime = 0;
                     phase = 0;
+                    anti = 0;
                     dvwords << line;
-                    dvwords >> btime >> etime >> phase;
+                    dvwords >> btime >> etime >> phase >> anti;
                     if(etime != 0){
-                        jud[x - 1].push_back({btime, etime, phase});
+                        jud[x - 1].push_back({btime, etime, phase, anti});
                         num_jud++;
                     }
                     if(line.find("B") != string::npos || line.find("b") != string::npos ){
                         x++;
-                        elej.emplace_back(line);
-                        jud.push_back(elej_unit);                    
+                        elej.emplace_back(line);      //elej ni sosi no namae wo tuika
+                        jud.push_back(elej_unit);     //vector ni youso wo tuika               
                     }
                 }
     
@@ -105,7 +106,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
     int flg_shunt_B = 0;
     int flg_shunt_P = 0;
     int line_num = 0;
-    int i, i1, i2, i3;
+    int i = 0, i1 = 0, i2 = 0, i3 = 0;
     range range;
 
     string cirfilename = filename + ".cir";
@@ -119,7 +120,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
     }
 
     ifstream file(cirfilename);
-    string line, name, node1, node2, ignore;
+    string line, name, node1, node2, ignore, jjmod, shunt;
     double value;
     stringstream liness;
 
@@ -138,9 +139,13 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                         line.insert(i1 + 1, " ");
                     }
                     stringstream liness(line);
-                    liness >> ignore >> ignore >> ignore >> ignore >> ignore >> value;
+                    liness >> ignore >> ignore >> ignore >> ignore >> shunt >> value;
+                    element[element.size() - 1].other_num2 = value;
                     cou->IcRs = value;
-                    flg_shunt_B = 2;
+                    if(line.find("*Bc") != string::npos || line.find("*BC") != string::npos){
+                        element[element.size() - 1].other_num1 = 1;
+                    }
+                    flg_shunt_B = 0;
                 }
             }
             else if (flg_shunt_P == 1){
@@ -216,7 +221,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 range.KMAX = KMAX;
             }            
             else if(line.find("*BMIN") == 0){
-                double BMIN;
+                double BMIN = 0.1;
                 line.insert(line.find("=") ,"  ");
                 line.insert(line.find("=") + 1 ,"  ");
                 liness << line;
@@ -312,26 +317,31 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                 range.IMAX = IMAX;
             }
 
+
             switch (judge_element(line)) {
+
                 case 1:
-                    i1 = line.rfind("p");
-                    i2 = line.rfind("P");
+                    i1 = line.find("p");
+                    i2 = line.find("P");
+
                     if ( i1 != string::npos || i2 != string::npos){
                         i = max({i1,i2,i3});
                         line.insert(i," ");     
                     }
+
                     liness << line;
                     liness >> name >> node1 >> node2 >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({0, line_num, name, node1, node2, triple_digits(value), 0, 0, range.LMIN, range.LMAX, 0, 0});
+                    element.push_back({0, line_num, name, node1, node2, triple_digits(value), 0, 0, range.LMIN, range.LMAX, 0, 0, 0, 0, ""});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_L++;
+                                                        
                     break;
                 case 2:
                     liness << line;
                     liness >> name >> node1 >> node2 >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({1, line_num, name, node1, node2, triple_digits(value), 0, 0, range.KMIN, range.LMAX, 0, 0});
+                    element.push_back({1, line_num, name, node1, node2, triple_digits(value), 0, 0, range.KMIN, range.KMAX, 0, 0, 0, 0, ""});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_K++;
                     break;
@@ -340,11 +350,11 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     if (i1 != string::npos){
                         line.insert(i1 + 1, " ");
                     }
-                    liness << line; 
-                    liness >> name >> node1 >> node2 >> ignore >> ignore >> value;
+                    liness << line;                    //jjmod    area=
+                    liness >> name >> node1 >> node2 >> jjmod >> ignore >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({2, line_num, name, node1, node2, triple_digits(value), 0, 0, range.BMIN, range.BMAX, 0, 0});
-                    flg_shunt_B += 1;
+                    element.push_back({2, line_num, name, node1, node2, triple_digits(value), 0, 0, range.BMIN, range.BMAX, 0, 0, 0, 0, jjmod});
+                    flg_shunt_B = 1;
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_B++;
                     break;
@@ -354,9 +364,9 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                         line.insert(i1 + 1, " ");
                     }
                     liness << line;
-                    liness >> name >> node1 >> node2 >> ignore >> ignore >> value;
+                    liness >> name >> node1 >> node2 >> jjmod >> ignore >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({3, line_num, name, node1, node2, triple_digits(value), 0, 0, range.BIMIN, range.BIMAX, 0, 0});
+                    element.push_back({3, line_num, name, node1, node2, triple_digits(value), 0, 0, range.BIMIN, range.BIMAX, 0, 0, 0, 0, jjmod});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_BI++;
                     break;
@@ -368,7 +378,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line;
                     liness >> name >> node1 >> node2 >> ignore >> ignore >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({4, line_num, name, node1, node2, triple_digits(value), 0, 0, range.PIMIN, range.PIMAX, 0, 0});
+                    element.push_back({4, line_num, name, node1, node2, triple_digits(value), 0, 0, range.PIMIN, range.PIMAX, 0, 0, 0, 0, ""});
                     flg_shunt_P = 1;
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_PI++;
@@ -383,7 +393,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line;
                     liness >> name >> node1 >> node2 >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({5, line_num, name, node1, node2, triple_digits(value), 0, 0, range.RMIN, range.RMAX, 0, 0});
+                    element.push_back({5, line_num, name, node1, node2, triple_digits(value), 0, 0, range.RMIN, range.RMAX, 0, 0, 0, 0, ""});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_R++;
                     break;
@@ -397,7 +407,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line;
                     liness >> name >> node1 >> node2 >> ignore >> ignore  >> ignore >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({6, line_num, name, node1, node2, triple_digits(value), 0, 0, range.IMIN, range.IMAX, 0, 0});
+                    element.push_back({6, line_num, name, node1, node2, triple_digits(value), 0, 0, range.IMIN, range.IMAX, 0, 0, 0, 0, ""});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_V++;
                     break;
@@ -411,7 +421,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     liness << line;
                     liness >> name >> node1 >> node2 >> ignore >> ignore  >> ignore >> value;
                     transform(name.begin(), name.end(), name.begin(), ::toupper); 
-                    element.push_back({7, line_num, name, node1, node2, triple_digits(value), 0, 0, range.VMIN, range.VMAX, 0, 0});
+                    element.push_back({7, line_num, name, node1, node2, triple_digits(value), 0, 0, range.VMIN, range.VMAX, 0, 0, 0, 0, ""});
                     cou->line_num_arr.emplace_back(line_num);
                     cou->count_I++;
                     break;
@@ -420,6 +430,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     break;
 
             }
+
         if(line.find(".FILE") == 0 || line.find(".file") == 0 || line.find(".File") == 0){// .if there is ".FILE" line, store the line number.
             cou->fileoutline = line_num;
         }
@@ -488,6 +499,11 @@ void file_out(board* top, int sum, string &filename, vector<ele_unit> &element) 
 
     fpcsv.close();
     fpout.close();
+}
+
+void yield_out(board* top, int sum, string &filename, vector<ele_unit> &element){
+
+    
 }
 
 void synchro(vector<ele_unit> &element, int ele_num, double syn_value){

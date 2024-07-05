@@ -19,6 +19,9 @@ struct ele_unit{
     double MAX;
     int FIX;  //1なら値をばらつかせない
     int SYN;
+    int other_num1;   //Bc => 1,  IcRs =>0
+    double other_num2;   //shunt no keisanyou IcRs and Bc
+    std::string other_str;
 };
 
 struct range{
@@ -26,7 +29,7 @@ struct range{
     double LMAX = 1000;
     double KMIN = -1;
     double KMAX = 1;
-    double BMIN = 0;
+    double BMIN = 0.1;
     double BMAX = 3;
     double BIMIN = 0;
     double BIMAX = 3;
@@ -47,17 +50,18 @@ struct opt_num{
     double cri_bias_best = 0;
     //std::vector<double> sum_value;
     double sum_value[SMALL_SUM] = {};
+    double param[50000][3] = {};
 };
 
 struct gauss{
-    double global_L;
-    double global_K;
-    double global_B;
-    double global_BI;
-    double global_PI;
-    double global_R;
-    double global_V;
-    double global_I;
+    double global_L = 1;
+    double global_K = 1;
+    double global_B = 1;
+    double global_BI = 1;
+    double global_PI = 1;
+    double global_R = 1;
+    double global_V = 1;
+    double global_I = 1;
 };
 
 struct ele_cou{
@@ -86,6 +90,7 @@ struct judge{
     int btime;
     int etime;
     double phase;
+    int anti;
 };
 
 struct board{

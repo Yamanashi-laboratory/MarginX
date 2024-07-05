@@ -146,6 +146,7 @@ int main(int argc, const char *argv[]) {
     cout << " ------PASS------" << endl << endl;
     /*サーキットファイルの読み取り*/
     cout << " Checking CircuitFile..." << endl;
+
     /*ele_cou構造体のメモリを確保*/
     try{
         cou = new ele_cou;
@@ -154,9 +155,12 @@ int main(int argc, const char *argv[]) {
         cerr << "can't allocate memory. '*cou' is NULL. " << endl;
         return 0;
     }
+
     make_data_cir(data_cir, filename, element, cou);
     cout << " Sum of Target      : " << element.size()  << endl;
     cout << " Target File Name   : " << filename  << endl;
+
+
 
 
     cout << " ------PASS------" << endl << endl;
@@ -286,9 +290,7 @@ int main(int argc, const char *argv[]) {
     cout << " RUN TIME : " << setw(2) << hour << ":"  << setw(2) << min << ":"  << setw(2) << sec << endl << endl;
     cout.fill(' ');
 
-    //char *delete_MARGIN = "rm -rf MRAGIN*";
-    //char *delete_OPTIMIZE = "rm -rf OPTIMIZE*";
-    //char *delete_CIRCUIT = "rm -rf CIRCUIT*";
+
 
     system("rm -rf MRAGIN*");
     system("rm -rf OPTIMIZE*");

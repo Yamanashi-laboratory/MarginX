@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <regex>
 #include <algorithm>
+#include <cmath>
 #include "file.hpp"
 
 using namespace std;
@@ -20,6 +21,9 @@ int make_cir(double new_value, int ele_num, vector<ele_unit> &element, vector<st
     ofstream fpin(ciroutname.str());
     string shunt;
     int y = 0;
+    double Rs = 1;
+    double resistor;
+    string shunt_order;
     if(!fpin.is_open()){
         cerr << "file not error3!"  << endl;
         return 0;
@@ -35,14 +39,23 @@ int make_cir(double new_value, int ele_num, vector<ele_unit> &element, vector<st
                     fpin <<  element[y].element << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << new_value  << endl;                     
                     break;
                 case 2:
+                    if(element[y].other_num1 == 1){
+                        resistor = sqrt(element[y].other_num2 * 1.055 / (2 * 1.602 * element[y].value / 10 * 0.218 * element[y].value) );
+                        Rs = resistor * 200 / (200 - resistor);
+                        shunt_order = "*Bc=";
+                    }
+                    else{
+                        Rs = element[y].other_num2 / element[y].value;
+                        shunt_order = "*SHUNT=";
+                    }
                     shunt = element[y].element;
                     shunt.replace(0,1,"RS");
-                    fpin <<  element[y].element << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << "  " << "jjmod area=" << left << setw(10) <<  setprecision(3) << new_value  << endl;
-                    fpin <<  shunt << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << cou->IcRs / new_value  << "ohm" << endl;
+                    fpin <<  element[y].element << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << "  " << element[y].other_str<< " area=" << left << setw(10) <<  setprecision(3) << new_value  << endl;
+                    fpin <<  shunt << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << Rs  << "ohm" << "  " << shunt_order << element[y].other_num2 << endl;
                     x++;
                     break;
                 case 3:
-                    fpin <<  element[y].element << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << "  " << "jjmod area=" << left << setw(10) <<  setprecision(3) << new_value  << endl;
+                    fpin <<  element[y].element << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << "  " << element[y].other_str << " area=" << left << setw(10) <<  setprecision(3) << new_value  << endl;
                     break;
                 case 4:
                     shunt = element[y].element;
@@ -74,14 +87,23 @@ int make_cir(double new_value, int ele_num, vector<ele_unit> &element, vector<st
                     fpin <<  element[y].element << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << element[y].value  << endl;                     
                     break;
                 case 2:
+                    if(element[y].other_num1 == 1){
+                        resistor = sqrt(element[y].other_num2 * 1.055 / (2 * 1.602 * element[y].value / 10 * 0.218 * element[y].value) );
+                        Rs = resistor * 200 / (200 - resistor);
+                        shunt_order = "*Bc=";
+                    }
+                    else{
+                        Rs = element[y].other_num2 / element[y].value;
+                        shunt_order = "*SHUNT=";
+                    }               
                     shunt = element[y].element;
                     shunt.replace(0,1,"RS");
-                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << "jjmod area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
-                    fpin <<  shunt << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << cou->IcRs / element[y].value  << "ohm" << " *SHUNT=" << cou->IcRs << endl;
+                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << element[y].other_str << " area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
+                    fpin <<  shunt << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << Rs  << "ohm" << "  " << shunt_order << element[y].other_num2 << endl;
                     x++;
                     break;
                 case 3:
-                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << "jjmod area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
+                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << element[y].other_str << " area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
                     break;
                 case 4:
                     shunt = element[y].element;
@@ -126,6 +148,9 @@ int make_cir_opt(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *c
     ofstream fpin(ciroutname.str());
     string shunt;
     int y = 0;
+    double Rs = 1;
+    double resistor = 1;
+    string shunt_order;
     if(!fpin.is_open()){
         cerr << "file not error3!"  << endl;
         return 0;
@@ -140,14 +165,23 @@ int make_cir_opt(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *c
                     fpin <<  element[y].element << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << element[y].value  << endl;                     
                     break;
                 case 2:
+                    if(element[y].other_num1 == 1){
+                        resistor = sqrt(element[y].other_num2 * 1.055 / (2 * 1.602 * element[y].value / 10 * 0.218 * element[y].value) );
+                        Rs = resistor * 200 / (200 - resistor);
+                        shunt_order = "*Bc=";
+                    }
+                    else{
+                        Rs = element[y].other_num2 / element[y].value;
+                        shunt_order = "*SHUNT=";
+                    }
                     shunt = element[y].element;
                     shunt.replace(0,1,"RS");
-                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << "jjmod area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
-                    fpin <<  shunt << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << cou->IcRs / element[y].value  << "ohm" << " *SHUNT=" << cou->IcRs << endl;
+                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << element[y].other_str << " area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
+                    fpin <<  shunt << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << Rs  << "ohm" << "  " << shunt_order << element[y].other_num2 << endl;
                     x++;
                     break;
                 case 3:
-                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << "jjmod area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
+                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << element[y].other_str << " area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
                     break;
                 case 4:
                     shunt = element[y].element;
@@ -198,6 +232,9 @@ int make_cir_last(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *
     ofstream fpin(ciroutname.str());
     string shunt;
     int y = 0;
+    double Rs = 1;
+    double resistor = 1;
+    string shunt_order;
     if(!fpin.is_open()){
         cerr << "file not error3!"  << endl;
         return 0;
@@ -213,14 +250,23 @@ int make_cir_last(vector<ele_unit> &element, vector<string> &data_cir, ele_cou *
                     fpin <<  element[y].element << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << element[y].value  << endl;                     
                     break;
                 case 2:
+                    if(element[y].other_num1 == 1){
+                        resistor = sqrt(element[y].other_num2 * 1.055 / (2 * 1.602 * element[y].value / 10 * 0.218 * element[y].value) );
+                        Rs = resistor * 200 / (200 - resistor);
+                        shunt_order = "*Bc=";
+                    }
+                    else{
+                        Rs = element[y].other_num2 / element[y].value;
+                        shunt_order = "*SHUNT=";
+                    }
                     shunt = element[y].element;
                     shunt.replace(0,1,"RS");
-                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << "jjmod area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
-                    fpin <<  shunt << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << cou->IcRs / element[y].value  << "ohm" << " *SHUNT=" << cou->IcRs << endl;
+                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << element[y].other_str << " area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
+                    fpin <<  shunt << fixed  << right << setw(6) << element[y].node1 << setw(6) << element[y].node2 << setw(20) <<  setprecision(3) << Rs  << "ohm" << "  " << shunt_order << element[y].other_num2 << endl;
                     x++;
                     break;
                 case 3:
-                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << "jjmod area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
+                    fpin <<  element[y].element << fixed  << right << setw(7) << element[y].node1 << setw(6) << element[y].node2 << "  " << element[y].other_str << " area=" << left << setw(10) <<  setprecision(3) << element[y].value  << endl;
                     break;
                 case 4:
                     shunt = element[y].element;

@@ -298,6 +298,8 @@ int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<string> &el
     string unit;
     stringstream commandname, delete_cir, delete_out, out_det, out_fig, out_csv;
     vector<ele_unit> copy = element;
+
+    //elementの中身は初期値で固定→代わりにcopyを生成し、この値を変えてマージン測定を行う
     commandname << "josim MARGIN" << getpid() << ".cir > /dev/null"; 
     delete_cir << "rm -f MARGIN" << getpid() << ".cir";
     delete_out << "rm -f CIRCUIT" << getpid() << ".CSV";
@@ -353,14 +355,19 @@ int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<string> &el
         HIGH = element[ele_num].value;
         while(check < 4){
             HIGH = HIGH + pow(10 , order_num - check);
-            synchro(copy, ele_num, HIGH);
+            if(element[ele_num].ide_num == 1 && HIGH > 1){
+                HIGH = HIGH - pow(10 , order_num - check);
+                //synchro(copy, ele_num, HIGH);
+                check += 1;
+            }
+            //synchro(copy, ele_num, HIGH);
             make_cir(HIGH, ele_num, copy, data_cir, cou);
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
             else if(judge_operation(elej, jud, 0) == 0){
                 HIGH = HIGH - pow(10 , order_num - check);
-                synchro(copy, ele_num, HIGH);
+                //synchro(copy, ele_num, HIGH);
                 check += 1;
             }
             else if(HIGH > value_h){
@@ -378,10 +385,10 @@ int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<string> &el
 
         while(check < 4){
             LOW = LOW - pow(10 , order_num - check);
-            synchro(copy, ele_num, LOW);
-            if(LOW < 0.0001){
+            //synchro(copy, ele_num, LOW);
+            if(LOW < 0.001){
                 LOW = LOW + pow(10 , order_num - check);
-                synchro(copy, ele_num, LOW);
+                //synchro(copy, ele_num, LOW);
                 check += 1;
             }
             make_cir(LOW, ele_num, copy, data_cir, cou);
@@ -390,7 +397,7 @@ int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<string> &el
             }
             if(judge_operation(elej, jud, 0) == 0){
                 LOW = LOW + pow(10 , order_num - check);
-                synchro(copy, ele_num, LOW);
+                //synchro(copy, ele_num, LOW);
                 check += 1;
             }
         }
@@ -403,20 +410,20 @@ int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<string> &el
         HIGH = element[ele_num].value;
         while(check < 4){
             HIGH = HIGH + pow(10 , order_num - check);
-            synchro(element, ele_num, HIGH);
+            //synchro(copy, ele_num, HIGH);
             if(HIGH > 0){
                 HIGH = HIGH - pow(10 , order_num - check);
-                synchro(copy, ele_num, HIGH);
+                //synchro(copy, ele_num, HIGH);
                 check += 1;
             }
 
-            make_cir(HIGH, ele_num, element, data_cir, cou);
+            make_cir(HIGH, ele_num, copy, data_cir, cou);
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
             if(judge_operation(elej, jud, 0) == 0){
                 HIGH = HIGH - pow(10 , order_num - check);
-                synchro(copy, ele_num, HIGH);
+                //synchro(copy, ele_num, HIGH);
                 check += 1;
             }
         }
@@ -427,14 +434,19 @@ int margin_ele(int n, int ele_num, vector<ele_unit> &element, vector<string> &el
         value_l = element[ele_num].value * MARGIN_UPPER;
         while(check < 4){
             LOW = LOW - pow(10 , order_num - check);
-            synchro(element, ele_num, LOW);
-            make_cir(LOW, ele_num, element, data_cir, cou);
+            if(element[ele_num].ide_num == 1 && LOW < -1){
+                LOW = LOW + pow(10 , order_num - check);
+                //synchro(copy, ele_num, LOW);
+                check += 1;
+            }
+            //synchro(copy, ele_num, LOW);
+            make_cir(LOW, ele_num, copy, data_cir, cou);
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
             else if(judge_operation(elej, jud, 0) == 0){
                 LOW = LOW + pow(10 , order_num - check);
-                synchro(element, ele_num, LOW);
+                //synchro(copy, ele_num, LOW);
                 check += 1;
             }
             else if(LOW < value_l){
@@ -514,7 +526,7 @@ int find_critical(vector<ele_unit> &element){
 
 int find_critical_bias(vector<ele_unit> &element){
     double critical = 100;
-    int cri_num;
+    int cri_num = 0;
     for(int j = 0; j < element.size(); j++){
         if(element[j].ide_num == 6 || element[j].ide_num == 7){
             if(-element[j].margin_L < critical){
