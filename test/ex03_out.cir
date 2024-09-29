@@ -43,30 +43,30 @@ RS12              25        26   1.73ohm *SHUNT=3.73
 B0                27        28  jjmod area=2.16
 RS0               27        28   1.73ohm *SHUNT=3.73
 b10     29    30  jjmod area=1.750     
-RS10    29    30               2.131ohm *SHUNT=3.730
+RS10    29    30               2.131ohm  *SHUNT=3.730
 b11     31    32  jjmod area=2.030     
-RS11    31    32               1.837ohm *SHUNT=3.730
+RS11    31    32               1.837ohm  *SHUNT=3.730
 b5     33    34  jjmod area=2.720     
-RS5    33    34               1.371ohm *SHUNT=3.730
+RS5    33    34               1.371ohm  *SHUNT=3.730
 b7     35    36  jjmod area=2.030     
-RS7    35    36               1.837ohm *SHUNT=3.730
+RS7    35    36               1.837ohm  *SHUNT=3.730
 b8     36    37  jjmod area=1.320     
-RS8    36    37               2.826ohm *SHUNT=3.730
+RS8    36    37               2.826ohm  *SHUNT=3.730
 b4     38    33  jjmod area=2.250     
-RS4    38    33               1.658ohm *SHUNT=3.730
+RS4    38    33               1.658ohm  *SHUNT=3.730
 b9     39    40  jjmod area=1.000     
-RS9    39    40               3.730ohm *SHUNT=3.730
+RS9    39    40               3.730ohm  *SHUNT=3.730
 B24               41        42  jjmod area=2.16
 RS24              41        42   1.73ohm *SHUNT=3.73
 b3     43    44  jjmod area=2.180     
-RS3    43    44               1.711ohm *SHUNT=3.730
+RS3    43    44               1.711ohm  *SHUNT=3.730
 b6     45    46  jjmod area=2.170     
-RS6    45    46               1.719ohm *SHUNT=3.730
+RS6    45    46               1.719ohm  *SHUNT=3.730
 b1     47    48  jjmod area=2.100     
-RS1    47    48               1.776ohm *SHUNT=3.730
+RS1    47    48               1.776ohm  *SHUNT=3.730
 
 b2     47    49  jjmod area=2.000     
-RS2    47    49               1.865ohm *SHUNT=3.730
+RS2    47    49               1.865ohm  *SHUNT=3.730
 ***mid = 1.641
 
 L64                2         0   0.205pH fcheck
@@ -173,10 +173,10 @@ V2                53         0  PWL(0ps 0mV 500ps 0mV 502ps 1.034mV 504ps 0mV 60
 
 vb    98     0   PWL(0ps 0mV    20ps                  2.500mV)
 *FIX
-.tran 0.1ps 1.2ns 0.4ns 0.2ps
+.tran 1ps 1.2ns 0.4ns 0.2ps
  
 
-.FILE ./test/ex03_out.CSV
+.FILE ex03_out.CSV
 
 .print phase B11
 .print phase B7

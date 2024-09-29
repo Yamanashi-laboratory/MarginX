@@ -1,6 +1,31 @@
-MarginX: MarginX.cpp makecir.cpp judge.cpp margin.cpp file.cpp optimize.cpp
-	g++ -o MarginX MarginX.cpp makecir.cpp judge.cpp margin.cpp file.cpp optimize.cpp -std=c++17 -lstdc++fs
-setup: setup.cpp
-	g++ -o setup setup.cpp -std=c++17 -lstdc++fs
-mew: mew.cpp
-	g++ -o mew mew.cpp -std=c++17 -lstdc++fs
+# コンパイラとフラグ
+CXX = g++
+CXXFLAGS = -Wall -Iinclude -std=c++17 
+
+# フォルダ構成
+SRC_DIR = src
+BUILD_DIR = build
+INCLUDE_DIR = include
+
+# サブディレクトリを含むソースファイルとオブジェクトファイル
+SRC_FILES = $(wildcard $(SRC_DIR)/*/*.cpp)
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRC_FILES))
+
+# 実行ファイルの名前
+TARGET = MarginX
+
+# デフォルトのターゲット
+all: $(TARGET)
+
+# 実行ファイルの作成
+$(TARGET): $(OBJ_FILES)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ_FILES)
+
+# 各オブジェクトファイルのビルド
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(dir $@)  # オブジェクトファイル用のディレクトリを作成
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# クリーンアップ
+clean:
+	rm -rf $(BUILD_DIR) $(TARGET)
