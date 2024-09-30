@@ -1,0 +1,24 @@
+  LLFB : 64.300 pH    Lower: 25.130   Upper: 102.480   Median: 63.805  -60.92  % ~ 59.38  %
+    K0 :  0.037       Lower: 0.007    Upper: 0.058    Median: 0.033   -82.41  % ~ 58.08  %
+    K1 : -0.092       Lower: -0.058   Upper: -0.131   Median: -0.094  -37.50  % ~ 42.92  %
+    K2 :  0.037       Lower: 0.009    Upper: 0.060    Median: 0.035   -77.00  % ~ 63.49  %
+    J1 :  1.900       Lower: 1.096    Upper: 3.005    Median: 2.050   -42.32  % ~ 58.16  %
+    J2 :  1.900       Lower: 0.001    Upper: 2.768    Median: 1.384   -99.95  % ~ 45.68  %
+    J3 :  1.900       Lower: 0.923    Upper: 3.005    Median: 1.964   -51.42  % ~ 58.16  %
+    J4 :  1.690       Lower: 1.296    Upper: 2.158    Median: 1.727   -23.31  % ~ 27.69  %
+    J5 :  1.690       Lower: 1.315    Upper: 2.177    Median: 1.746   -22.19  % ~ 28.82  %
+    J6 :  2.130       Lower: 1.353    Upper: 2.855    Median: 2.104   -36.48  % ~ 34.04  %
+    J7 :  2.130       Lower: 1.436    Upper: 2.857    Median: 2.146   -32.58  % ~ 34.13  %
+    J8 :  1.390       Lower: 0.625    Upper: 2.157    Median: 1.391   -55.04  % ~ 55.18  %
+    J9 :  1.390       Lower: 0.501    Upper: 2.059    Median: 1.280   -63.96  % ~ 48.13  %
+   J10 :  0.880       Lower: 0.154    Upper: 1.224    Median: 0.689   -82.56  % ~ 39.15  %
+   J11 :  0.880       Lower: 0.151    Upper: 1.256    Median: 0.703   -82.90  % ~ 42.78  %
+   J12 :  1.000       Lower: 0.001    Upper: 1.487    Median: 0.744   -99.90  % ~ 48.70  %
+   J13 :  1.000       Lower: 0.001    Upper: 1.467    Median: 0.734   -99.90  % ~ 46.70  %
+   J14 :  1.900       Lower: 0.898    Upper: 2.800    Median: 1.849   -52.74  % ~ 47.37  %
+   J15 :  1.900       Lower: 0.867    Upper: 2.799    Median: 1.833   -54.37  % ~ 47.32  %
+    R1 :  8.340 ohm   Lower: 5.979    Upper: 16.680   Median: 11.329  -28.31  % ~ 100.00 %
+    R2 :  8.340 ohm   Lower: 4.353    Upper: 13.930   Median: 9.141   -47.81  % ~ 67.03  %
+    R3 :  8.340 ohm   Lower: 5.655    Upper: 16.680   Median: 11.168  -32.19  % ~ 100.00 %
+    VB :  2.500 mV    Lower: 1.714    Upper: 3.407    Median: 2.561   -31.44  % ~ 36.28  %
+ IBLFB :  0.900 mA    Lower: 0.563    Upper: 1.136    Median: 0.849   -37.50  % ~ 26.28  %
