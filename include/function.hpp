@@ -137,10 +137,14 @@ void Margin_jsim(std::vector<ele_unit> &element,std::vector<std::vector<judge>> 
 int margin_ele_jsim(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
 void Margin_jsim_seq(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
 
-//find_critical
+//critical_find
 int find_critical(std::vector<ele_unit> &element);//クリティカルな素子を探索して、それが格納されているelement内の要素番号返す
 int find_critical_bias(std::vector<ele_unit> &element);//バイアス電圧・電流内のクリティカルな素子を探索して、それが格納されているelement内の要素番号返す
 int find_critical_CMM(std::vector<ele_unit> &element);//クリティカルな素子を探索して、それが格納されているelement内の要素番号返す
+
+//critical_calc
+double calc_critical(std::vector<ele_unit> &element);//クリティカルな素子を探索して、それが格納されているelement内の要素番号返す
+double calc_critical_bias(std::vector<ele_unit> &element);//バイアス電圧・電流内のクリティカルな素子を探索して、それが格納されているelement内の要素番号返す
 
 //judgement
 std::vector<std::vector<double>> readJOSIMData();
