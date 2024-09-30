@@ -106,7 +106,8 @@ void opt_ele_yield_jsim(vector<ele_unit> &element, vector<string> &data_cir, vec
             if(copy[j].FIX == 1){
                 copy[j].value = element[j].value;
             }
-    */
+    */            
+
             synchro_opt(copy, j);
         }
         //cout << copy[j].element << " : " << copy[j].value << endl;
@@ -116,8 +117,8 @@ void opt_ele_yield_jsim(vector<ele_unit> &element, vector<string> &data_cir, vec
         cout << "error:1" << endl;
     }
 
+    judge = judge_operation_jsim( jud, 0);
 
-    judge = judge_operation( jud, 0);
     if(judge == 1){ //正常動作したら
         opt->success += 1;
         for(int i = 0; i < copy.size(); i++){

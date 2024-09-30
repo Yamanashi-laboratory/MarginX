@@ -36,6 +36,16 @@ vector<vector<double>> readJOSIMData() {
         cerr << "No output of JoSIM."  << endl;
     }
 
+    fp_margin.seekg(0, ios::end);
+    if (fp_margin.tellg() == 0) {
+        cerr << "ERROR : Output File(.csv) is empty. JoSIM execution may have some errors." << endl;
+        fp_margin.close();
+        exit(1);
+    }
+    fp_margin.seekg(0, ios::beg);
+
+
+
     // シーク位置を先頭の次の行に戻す(０行目がラベルであるため)
     getline(fp_margin, line);
 

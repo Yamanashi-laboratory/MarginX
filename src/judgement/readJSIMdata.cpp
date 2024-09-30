@@ -34,6 +34,13 @@ vector<vector<double>> readJSIMData() {
         cerr << "No output of JoSIM." << endl;
     }
 
+    fp_margin.seekg(0, ios::end);
+    if (fp_margin.tellg() == 0) {
+        cerr << "ERROR : Output File(.txt) is empty. JSIM execution may have some errors." << endl;
+        fp_margin.close();
+        exit(1);
+    }
+    fp_margin.seekg(0, ios::beg);
 
     /* 配列に格納 */
     while (getline(fp_margin, line)) {  // 行を上から順に選択

@@ -170,7 +170,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
             count = static_cast<int>(progress);
         }
         //cout << "\x1B[1K";
-        cout << " Optimizing...   "   <<  right << setw(5) <<static_cast<int>(static_cast<double>(now - start)) << " seconds left"
+        cout << " Optimizing...   "   <<  right << setw(5) <<static_cast<int>(static_cast<double>(now - start)) << " seconds elapsed"
                                                     << "   ( success : " << opt->success << " )" << ", ND = " << local_nd << ", not_upd = " << not_upd << ", average =  "<<  reduce(begin(yield_his), end(yield_his)) / yield_his.size() << endl;
         cout << "\x1B[1B";    //カーソルを１行下に移動させる
         cout << "\x1B[1A";    //カーソルを１行上に移動させる
