@@ -13,7 +13,7 @@
 #define MARGIN_UPPER 2          /* マージン測定の上限が100％ */
 #define MARGIN_FIG "#"
 
-#define PATH "/home/matsuoka/MarginX/python_source/"
+#define PATH "/programs/matsuoka/MarginX/python_source/"
 
 //optimize.hpp
 #define MULTI_NUM 100
