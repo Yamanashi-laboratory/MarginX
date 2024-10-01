@@ -108,7 +108,7 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
     opt->suc_max = 0; 
     cout << " This is the progress midway   (the " << GetOrdinalNumber(static_cast<int>(Margin_num)) 
                  << " check)                                                                                             " << endl;
-    Margin_jsim_seq(element,  jud, data_cir, arg_arr, 2);
+    Margin_jsim(element,  jud, data_cir, arg_arr, 2);
     bias_margin =  min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
     cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * bias_margin;
     Margin_num++;
@@ -200,7 +200,7 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
 
         if(reduce(begin(yield_his), end(yield_his)) / yield_his.size() > suc_th){  //直近 5 サイクルの歩留まり(success) の平均が 60 を超えたら、標準偏差を +0.01
             local_nd += 0.01;
-            Margin_jsim_seq(element,  jud, data_cir, arg_arr, 2);
+            Margin_jsim(element,  jud, data_cir, arg_arr, 2);
             not_upd = 0;
             yield_his.assign(yield_his.size(), 0);
 
@@ -259,7 +259,7 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
 
     //critical_margin_method(element,  jud, data_cir, arg_arr);
 
-    Margin_jsim_seq(element,  jud, data_cir, arg_arr, 0);
+    Margin_jsim(element,  jud, data_cir, arg_arr, 0);
 
     make_cir_last(element, data_cir, arg_arr);
 

@@ -75,7 +75,7 @@ int margin_ele_jsim(int ele_num, vector<ele_unit> &element, vector<vector<judge>
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
-            if(judge_operation( jud, 0) == 1){
+            if(judge_operation_jsim( jud, 0) == 1){
                 HIGH += value_ini / pow(2, index + 1);
             }
             else{
@@ -87,7 +87,7 @@ int margin_ele_jsim(int ele_num, vector<ele_unit> &element, vector<vector<judge>
         if(system((commandname.str()).c_str()) == -1){
             cout << "error:1" << endl;
         }
-        if(judge_operation( jud, 0) == 0){
+        if(judge_operation_jsim( jud, 0) == 0){
             HIGH -= value_ini / pow(2, index);
         }         
 
@@ -102,7 +102,7 @@ int margin_ele_jsim(int ele_num, vector<ele_unit> &element, vector<vector<judge>
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
-            if(judge_operation( jud, 0) == 1){
+            if(judge_operation_jsim( jud, 0) == 1){
                 LOW -= value_ini / pow(2, index + 1);
             }
             else{
@@ -114,7 +114,7 @@ int margin_ele_jsim(int ele_num, vector<ele_unit> &element, vector<vector<judge>
         if(system((commandname.str()).c_str()) == -1){
             cout << "error:1" << endl;
         }
-        if(judge_operation( jud, 0) == 0){
+        if(judge_operation_jsim( jud, 0) == 0){
             LOW += value_ini / pow(2, index);
         }        
 
