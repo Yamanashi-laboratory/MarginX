@@ -51,47 +51,11 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
     yield_his.resize(5,0);
     vector<double> global_rand;
     global_rand.resize(8, 0);
+    vector<double> power;
     //cout << yield_log[0] << endl;
 
-    cout << " Select the Kind of Score" << endl;
-    cout << " 1: Only Critical Margin " << endl;
-    cout << " 2: Only Bias Margin" << endl;
-    cout << " 3: The Sum of Critical Margin and Bias Margin" << endl;
-    cout << " 4: The Sum of Critical Margin and Bias Margin * 2 " << endl;
-    cout << " 5: Others ( input yourself )" << endl << endl;
-    cout << "  Selected Score : ";
-    cin >> mode;
 
-    switch(mode){
-        case 1:
-            CM_power = 1;
-            BM_power = 0;
-            break;
-        case 2:
-            CM_power = 0;
-            BM_power = 1;
-            break;
-        case 3:
-            CM_power = 1;
-            BM_power = 1;
-            break;
-        case 4:
-            CM_power = 1;
-            BM_power = 2;
-            break;
-        case 5:
-            cout << " Select Critical Margin Power" << endl;
-            cout << " Critical Margin Power : ";
-            cin >> CM_power;
-            cout << " Select Bias Margin Power" << endl;
-            cout << " Bias Margin Power : ";
-            cin >> BM_power;
-            break;
-        default:
-            cout << " Please Select a Correct Number" << endl;
-            return;
-            break;
-    }
+    power = select_score();   //スコアを選択 → power配列に格納
 
     start = time(NULL);
 
@@ -117,12 +81,11 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
                  << " check)                                                                                             " << endl;
     Margin_low(element,  jud, data_cir, arg_arr, 2);
     make_cir_last(element, data_cir, arg_arr);            
-    bias_margin =  min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
-    cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * bias_margin;
+    cri_bias_sum = calc_score(element, power);
     Margin_num++;
 
     //local_nd の初期値は最適化前のクリティカルマージンの値の半分(%)
-    local_nd = round(min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) / 2) / 100;
+    local_nd = round(calc_critical(element) / 2) / 100;
     //local_nd = 0.1;
 
     for (int m = 0; m < MONTE_CARLO; m++){
@@ -222,7 +185,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
             not_upd = 0;
             yield_his.assign(yield_his.size(), 0);
 
-            cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
+            cri_bias_sum = calc_score(element, power);
             if( cri_bias_sum > opt->cri_bias_best ){   // マージンの評価値 cri_bias_sum が最大だったらそれを現時点の最良の回路として置き換える
                     for(int j = 0; j < element.size(); j++){
                         opt->best_value[j] = element[j].value;    // best_value配列に現時点の最良の回路のパラメータを格納
@@ -254,8 +217,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
     //END:
     Margin_low(element,  jud, data_cir, arg_arr, 2);
     //cri_bias_sum = min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
-    cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
-    // cri_bias_sum = その回路のマージンの評価 (クリティカルマージン + 2 * バイアスマージン)
+    cri_bias_sum = calc_score(element, power);
     //cout << "cri_bias_sum : " << cri_bias_sum << endl; 
     if( cri_bias_sum > opt->cri_bias_best ){   // マージンの評価値 cri_bias_sum が最大だったらそれを現時点の最良の回路として置き換える
         for(int j = 0; j < element.size(); j++){

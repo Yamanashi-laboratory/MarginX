@@ -76,6 +76,8 @@
         "variant": "cpp",
         "queue": "cpp",
         "format": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "__tree": "cpp",
+        "stack": "cpp"
     }
 }

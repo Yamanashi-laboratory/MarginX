@@ -61,20 +61,20 @@ R1                 6         5   8.32ohm
 .ends
 
 *** top cell: ndrotest
-l1    53    54               2.074pH
-l2    45    36               2.840pH
-l3    55    46               2.355pH
-l4    46    47               2.712pH
-l5    56    48               2.255pH
-l6    48    49               3.734pH
-l7    40    38               3.481pH
-l8    41    40               3.206pH
-l9    39    34               0.471pH
-l10    34    36               0.397pH
-l11    32    30               5.145pH
-l12    30    22               1.707pH
-l13    36    32               0.924pH
-l14    42    38               0.803pH
+l1    53    54               2.592pH
+l2    45    36               2.955pH
+l3    55    46               2.581pH
+l4    46    47               2.776pH
+l5    56    48               2.369pH
+l6    48    49               3.990pH
+l7    40    38               3.167pH
+l8    41    40               3.554pH
+l9    39    34               0.516pH
+l10    34    36               0.435pH
+l11    32    30               5.735pH
+l12    30    22               2.010pH
+l13    36    32               0.868pH
+l14    42    38               0.836pH
 
 LP11              31         0   0.133pH fcheck
 LPR5              33        34   0.070pH fcheck
@@ -99,33 +99,33 @@ r2     4    58               8.340ohm
 r3     4    59               8.340ohm
 *FIX
 
-r4     4    37              24.313ohm
-r5    33     4              22.475ohm
+r4     4    37              29.943ohm
+r5    33     4              23.062ohm
 
 b1    54    50  jjmod area=2.100     
 RS1    54    50               5.381ohm  *SHUNT=11.300
 *FIX
-b2    54    45  jjmod area=1.535     
-RS2    54    45               7.360ohm  *SHUNT=11.300
+b2    54    45  jjmod area=1.458     
+RS2    54    45               7.750ohm  *SHUNT=11.300
 b3    46    51  jjmod area=2.180     
 RS3    46    51               5.183ohm  *SHUNT=11.300
 *FIX
-b4    47    41  jjmod area=2.565     
-RS4    47    41               4.406ohm  *SHUNT=11.300
-b5    41    43  jjmod area=2.825     
-RS5    41    43               3.999ohm  *SHUNT=11.300
+b4    47    41  jjmod area=2.488     
+RS4    47    41               4.541ohm  *SHUNT=11.300
+b5    41    43  jjmod area=2.729     
+RS5    41    43               4.140ohm  *SHUNT=11.300
 b6    48    52  jjmod area=2.170     
 RS6    48    52               5.207ohm  *SHUNT=11.300
 *FIX
-b7    49    42  jjmod area=2.251     
-RS7    49    42               5.021ohm  *SHUNT=11.300
-b8    42    44  jjmod area=1.471     
-RS8    42    44               7.682ohm  *SHUNT=11.300
+b7    49    42  jjmod area=2.145     
+RS7    49    42               5.269ohm  *SHUNT=11.300
+b8    42    44  jjmod area=1.265     
+RS8    42    44               8.932ohm  *SHUNT=11.300
 b9    40    39  jjmod area=1.000     
 RS9    40    39              11.300ohm  *SHUNT=11.300
 *FIX
-b10    32    35  jjmod area=1.523     
-RS10    32    35               7.420ohm  *SHUNT=11.300
+b10    32    35  jjmod area=1.557     
+RS10    32    35               7.260ohm  *SHUNT=11.300
 b11    30    31  jjmod area=2.030     
 RS11    30    31               5.567ohm  *SHUNT=11.300
 *FIX
@@ -152,7 +152,7 @@ vb     4     0   PWL(0ps 0mV    50ps                  2.500mV)
 
 
 .tran 0.1ps 750ps 0ps 0.2ps:
-.FILE CIRCUIT108552.CSV
+.FILE CIRCUIT3186296.CSV
 
 
 .print phase B2
