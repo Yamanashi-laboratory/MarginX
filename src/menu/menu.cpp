@@ -28,7 +28,7 @@ int menu(){
     cout << " 4. Optimization with Monte Carlo Method (MCM)" << endl;
     cout << " 5. Optimization with MCM and CMM" << endl;
     cout << " 6. Endless Optimization with MCM" << endl;
-    cout << " 7. Optimization with MCM (yield)" << endl;
+    cout << " 7. New Optimization with MCM (yield)" << endl;
     cout << " 8. Calculate Margin (low quality)" << endl;
     cout << " 9. Sequential Optimization with MCM (yield)" << endl;
     cout << " 10. Optimization with MCM (yield) using jsim" << endl;
