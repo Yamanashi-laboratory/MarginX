@@ -75,7 +75,7 @@ kY                 LY         L2 -0.073
 *FIX
 
 
-l2 22 21 4.851pH 
+l2 22 21 4.851PH 
 l3 23 22 3.851PH 
 l4 19 16 0.659PH 
 l5 16 18 0.870PH 
@@ -158,7 +158,7 @@ XI58             SINK         34         51
 *** NETLIST FILE ***
 
 .TRAN  0.1PS 1NS 0NS 1PS
-.file a.csv
+.FILE a.csv
 .PRINT PHASE B1.XI19
 .PRINT PHASE B2.XI19
 .PRINT PHASE B5.XI19

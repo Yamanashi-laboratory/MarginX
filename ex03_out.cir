@@ -1,7 +1,7 @@
 **** **** **** **** **** **** **** **** **** **** **** 
 *JSIM control file for CADENCE by kameda@cq.jp.nec.com
 **** **** **** **** **** **** **** **** **** **** ****
-
+*BMIN = 1
 *JSIM model
 .model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.218pF, R0=200ohm, Rn=17ohm, Icrit=0.1mA)
 
@@ -14,7 +14,7 @@
 **** **** **** **** **** **** **** ****
 
 *** top cell: NDRO
-B25                1         2  jjmod area=2.16
+B25                    1         2  jjmod area=2.16
 RS25               1         2   1.73ohm *SHUNT=3.73
 B22                3         4  jjmod area=2.16
 RS22               3         4   1.73ohm *SHUNT=3.73
@@ -42,31 +42,10 @@ B12               25        26  jjmod area=2.16
 RS12              25        26   1.73ohm *SHUNT=3.73
 B0                27        28  jjmod area=2.16
 RS0               27        28   1.73ohm *SHUNT=3.73
-b10               29        30  jjmod area=1.75    
-RS10              29        30   2.13ohm *SHUNT=3.73
-b11               31        32  jjmod area=2.03    
-RS11              31        32   1.84ohm *SHUNT=3.73
-b5                33        34  jjmod area=2.72    
-RS5               33        34   1.37ohm *SHUNT=3.73
-b7                35        36  jjmod area=2.03    
-RS7               35        36   1.84ohm *SHUNT=3.73
-b8                36        37  jjmod area=1.32    
-RS8               36        37   2.83ohm *SHUNT=3.73
-b4                38        33  jjmod area=2.25    
-RS4               38        33   1.66ohm *SHUNT=3.73
-b9                39        40  jjmod area=1.00    
-RS9               39        40   3.73ohm *SHUNT=3.73
 B24               41        42  jjmod area=2.16
 RS24              41        42   1.73ohm *SHUNT=3.73
-b3                43        44  jjmod area=2.18    
-RS3               43        44   1.71ohm *SHUNT=3.73
-b6                45        46  jjmod area=2.17    
-RS6               45        46   1.72ohm *SHUNT=3.73
-b1                47        48  jjmod area=2.10    
-RS1               47        48   1.78ohm *SHUNT=3.73
 
-b2                47        49  jjmod area=2       
-RS2               47        49   2.30ohm *SHUNT=3.73
+
 ***mid = 1.641
 
 L64                2         0   0.205pH 
@@ -121,19 +100,19 @@ L15               75        25   2.379pH
 L0                76        75   0.270pH 
 LPIN              50        75   0.359pH 
 L60               41        66   1.890pH 
-l11               29        31   5.486pH     
+l11    29    31               6.568pH
 LP10              30         0   0.112pH 
 LP11              32         0   0.120pH 
 L12               31        54   2.096pH 
-l2                49        77   3.047pH     
+l2    49    77               2.820pH
 LP8               37         0   0.255pH 
-l14               36        78   0.902pH     
-l8                33        39   2.990pH     
+l14    36    78               1.384pH
+l8    33    39               3.125pH
 LP5               34         0   0.268pH 
-l13               77        29   0.928pH     
-l9                40        79   0.458pH     
-l10               79        77   0.458pH     
-l7                78        39   3.643pH     
+l13    77    29               1.102pH
+l9    40    79               0.593pH
+l10    79    77               0.566pH
+l7    78    39               5.235pH
 LPR5              80        79   0.205pH 
 LPR4              81        78   0.328pH 
 L58               16         0   0.205pH 
@@ -147,10 +126,36 @@ LPCLK             60        86   0.203pH
 LPR1              87        86   0.239pH 
 L1                86        47   2.137pH 
 LP6               46         0   0.112pH 
-l6                45        35   4.069pH     
-l4                43        38   3.019pH   
+l6    45    35               4.684pH
 LP3               44         0   0.156pH 
 LP1               48         0   0.177pH 
+
+b3    43    44  jjmod area=2.553     
+RS3    43    44               1.461ohm  *SHUNT=3.730
+l4    43    38               2.971pH
+
+b6    45    46  jjmod area=2.580     
+RS6    45    46               1.446ohm  *SHUNT=3.730
+b1    47    48  jjmod area=2.493     
+RS1    47    48               1.496ohm  *SHUNT=3.730
+b2    47    49  jjmod area=1.835     
+RS2    47    49               2.033ohm  *SHUNT=3.730
+b10    29    30  jjmod area=1.808     
+RS10    29    30               2.063ohm  *SHUNT=3.730
+b11    31    32  jjmod area=1.959     
+RS11    31    32               1.904ohm  *SHUNT=3.730
+b5    33    34  jjmod area=2.508     
+RS5    33    34               1.487ohm  *SHUNT=3.730
+b7    35    36  jjmod area=1.939     
+RS7    35    36               1.924ohm  *SHUNT=3.730
+b8    36    37  jjmod area=1.566     
+RS8    36    37               2.381ohm  *SHUNT=3.730
+b4    38    33  jjmod area=2.332     
+RS4    38    33               1.600ohm  *SHUNT=3.730
+b9    39    40  jjmod area=1.164     
+RS9    39    40               3.205ohm  *SHUNT=3.730
+
+
 R16               59         0   10.00ohm
 R12               98        56   8.34ohm
 R11               98        58  16.65ohm
@@ -160,10 +165,10 @@ R8                98        68   8.34ohm
 R7                98        70  16.65ohm
 R6                98        74  16.65ohm
 R0                98        76   8.34ohm
-r5                80        98  22.98ohm  
-r4                98        81  24.00ohm  
+r5    80    98              24.628ohm
+r4    98    81              30.490ohm
 R2                98        84   8.34ohm
-R3                98        82   8.34ohm
+R3                98        82   8.34ohm 
 R1                98        87   8.34ohm
 
 
@@ -171,11 +176,11 @@ V0                51         0  PWL(0ps 0mV 550ps 0mV 552ps 1.034mV 554ps 0mV 65
 V1                52         0  PWL(0ps 0mV 750ps 0mV 752ps 1.034mV 754ps 0mV 850ps 0mV 852ps 1.034mV 854ps 0mV)
 V2                53         0  PWL(0ps 0mV 500ps 0mV 502ps 1.034mV 504ps 0mV 600ps 0mV 602ps 1.034mV 604ps 0mV 700ps 0mV 702ps 1.034mV 704ps 0mV 800ps 0mV 802ps 1.034mV 804ps 0mV 900ps 0mV 902ps 1.034mV 904ps 0mV 1000ps 0mV 1002ps 1.034mV 1004ps 0mV 1100ps 0mV 1102ps 1.034mV 1104ps 0mV)
 
-vb                98         0  PWL(0ps 0mV 50ps 2.5mV)  
+vb    98     0   PWL(0ps 0mV    50ps                  2.500mV)
 *FIX
 .tran 1ps 1.2ns 0.4ns 0.2ps
 
-.FILE MARGIN.CSV
+.FILE CIRCUIT1382682.CSV
 
 .print phase B11
 .print phase B7

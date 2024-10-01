@@ -1,0 +1,222 @@
+**** **** **** **** **** **** **** **** **** **** **** 
+*JSIM control file for CADENCE by kameda@cq.jp.nec.com
+**** **** **** **** **** **** **** **** **** **** ****
+*BMIN = 1
+*JSIM model
+**HSTP**
+.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.064pF, R0=100ohm, Rn=17ohm, Icrit=0.1mA)
+**OPEN**
+*.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.218pF, R0=200ohm, Rn=17ohm, Icrit=0.1mA)
+**Low Jc**
+*.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.05pF, R0=200ohm, Rn=170ohm, Icrit=10uA)
+
+*** NETLIST FILE ***
+**** **** **** **** **** **** **** ****+
+*** LIB : ADP_MATSUOKA_LIB
+*** CELL: NDROCEX_NEW_VER6TEST
+*** VIEW: SCHEMATIC
+*** MAY 22 05:01:58 2023
+**** **** **** **** **** **** **** ****
+
+*** IJTL
+.SUBCKT IJTL          1          2
+***       DIN      DOUT
+LP2                3         0   0.198PH FCHECK
+L2                 4         2   1.976PH FCHECK
+L1                 1         4   4.534PH FCHECK
+B1                 4         3  JJMOD AREA=2.170
+RS1                4         3   5.20OHM *SHUNT=11.30
+.ENDS
+
+*** JTL
+.SUBCKT JTL          1          2         5
+***       DIN      DOUT
+R1                 5         6   8.32OHM
+LP1                7         0   0.096PH FCHECK
+LP2                3         0   0.099PH FCHECK
+L1                 8         9   2.288PH FCHECK
+L3                 4         2   1.966PH FCHECK
+L2                 9         4   4.506PH FCHECK
+LPR1               6         8   0.177PH FCHECK
+LPIN               1         8   0.317PH FCHECK
+B1                 9         7  JJMOD AREA=2.160
+RS1                9         7   5.23OHM *SHUNT=11.30
+B2                 4         3  JJMOD area=2.160
+RS2                4         3   5.23OHM *SHUNT=11.30
+.ENDS
+
+*** SINK
+.SUBCKT SINK          1         5
+***       DIN
+R2                 4         0   4.08OHM
+R1                 5         6   8.32OHM
+LP1                7         0   0.130PH FCHECK
+L1                 8         9   2.272PH FCHECK
+L2                 9         4   4.766PH FCHECK
+LPR1               6         8   0.177PH FCHECK
+LPIN               1         8   0.317PH FCHECK
+B1                 9         7  jjmod area=2.170
+RS1                9         7   5.21OHM *SHUNT=11.30
+.ENDS
+
+*** TOP CELL: NDROCEX_NEW_VER6TEST
+l1    44    42               2.070pH
+l2    42    38               0.498pH
+l3    37    38               0.832pH
+*SYN=1
+l4    39    38               0.832pH
+*SYN=1
+
+l5    32    36               3.851pH
+*SYN=2
+l6    31    35               3.851pH
+*SYN=2
+
+l7    30    34               4.000pH
+*SYN=12
+
+l8    31    32               5.000pH
+
+l9    29    33               4.000pH
+*SYN=12
+
+l10    27    21               1.697pH
+*SYN=4
+l11    26    22               1.697pH
+*SYN=4
+
+l12    30    27               0.487pH
+*SYN=5
+l13    29    26               0.487pH
+*SYN=5
+
+l14    21    13               1.570pH
+*SYN=6
+l15    22    15               1.570pH
+*SYN=6
+
+LP9                0        19   0.184956PH FCHECK
+LP10               0        24   0.51675PH FCHECK
+LP11               0        25   0.268894PH FCHECK
+LP8                0        28   1.25056PH FCHECK
+LP5               40         0   1.70543PH FCHECK
+LP4               41         0   2.60469PH FCHECK
+LP1               43         0   0.289835PH FCHECK
+LPR1              45        44   0.179528PH FCHECK
+LPCLK             17        44   0.167969PH FCHECK
+
+lx    23     0               8.064pH
+ly    20     0               8.374pH
+lrst     3     0              10.025pH
+llfb     7     0              25.000pH
+
+
+r1    10    45               8.340ohm
+*FIX
+
+b1     42    43  jjmod area=1.925     
+RS1    42    43               5.870ohm  *SHUNT=11.300
+*MIN=1.8
+*MAX=2.2
+
+b2     37    30  jjmod area=2.302     
+RS2    37    30               4.909ohm  *SHUNT=11.300
+*SYN=7
+
+b3     39    29  jjmod area=2.302     
+RS3    39    29               4.909ohm  *SHUNT=11.300
+*SYN=7
+
+b4     36    41  jjmod area=1.790     
+RS4    36    41               6.313ohm  *SHUNT=11.300
+*SYN=8
+b5     35    40  jjmod area=1.790     
+RS5    35    40               6.313ohm  *SHUNT=11.300
+*SYN=8
+
+b6     32    34  jjmod area=1.035     
+RS6    32    34              10.918ohm  *SHUNT=11.300
+*MIN=1
+*SYN=9
+b7     31    33  jjmod area=1.035     
+RS7    31    33              10.918ohm  *SHUNT=11.300
+*MIN=1
+*SYN=9
+
+b8     27    28  jjmod area=1.101     
+RS8    27    28              10.262ohm  *SHUNT=11.300
+*MIN=1
+*SYN=10
+
+b9     26    19  jjmod area=1.101     
+RS9    26    19              10.262ohm  *SHUNT=11.300
+*MIN=1
+*SYN=10
+
+b10     21    24  jjmod area=2.073     
+RS10    21    24               5.451ohm  *SHUNT=11.300
+*MIN=1.8
+*MAX=2.2
+*SYN=11
+
+b11     22    25  jjmod area=2.073     
+RS11    22    25               5.451ohm  *SHUNT=11.300
+*MIN=1.8
+*MAX=2.2
+*SYN=11
+
+k0  LLFB    L7               0.100
+*FIX
+k1  LLFB    L8              -0.180
+*FIX
+k2  LLFB    L9               0.100
+*FIX
+
+kx    LX    L5              -0.081
+*FIX
+ky    LY    L5              -0.060
+*FIX
+krst  LRST    L6              -0.150
+*FIX
+
+
+XI13             SINK         14         10
+XI10             SINK         16         10
+XI33             IJTL         11         12
+XI2               JTL         13         14         10
+XI3               JTL         15         16         10
+XI1               JTL         12         17         10
+
+iblfb     0     7   PWL(0ps 0mV    20ps                  0.495mA)
+
+IINY               0        20  PWL(0PS 0MA 250PS 0MA 251PS 4.12MA 280PS 4.12MA 281PS 0MA 350PS 0MA 351PS 4.12MA 380PS 4.12MA 381PS 0MA)
+IINDATA            0        23  PWL(0PS 0MA 350PS 0MA 351PS 1.45MA 380PS 1.45MA 381PS 0MA)
+IINRST             0         3  PWL(0PS 0MA 650PS 0MA 651PS 2MA 680PS 2MA 681PS 0MA)
+
+VINCLK            11         0  PULSE(0MV 1.034MV 100PS 1PS 1PS 1PS 100PS)
+vb    10     0   PWL(0ps 0mV    20ps                  2.500mV)
+*FIX
+
+
+*** NETLIST FILE ***
+.TRAN 0.1ps 1000ps 0ps 1ps
+ 
+
+.FILE NDROCex_adp669_out.CSV
+
+*.print devv B1 *clk
+*.print devv B10 *DOUT
+*.print devv B11 *doutd
+
+*.print devi LX
+*.print devi LY
+*.print devi LRST
+
+.print phase B2
+.print phase B3
+.print phase B4
+.print phase B5
+.print phase B8
+.print phase B9
+
+.end

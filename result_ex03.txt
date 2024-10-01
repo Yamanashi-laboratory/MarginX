@@ -1,0 +1,24 @@
+   L11 :  6.568 pH    Lower: 1.696    Upper: 13.137   Median: 7.417   -74.17  % ~ 100.00 %
+    L2 :  2.820 pH    Lower: 0.001    Upper: 4.498    Median: 2.250   -99.95  % ~ 59.50  %
+   L14 :  1.384 pH    Lower: 0.002    Upper: 2.767    Median: 1.385   -99.88  % ~ 100.00 %
+    L8 :  3.125 pH    Lower: 0.954    Upper: 4.954    Median: 2.954   -69.48  % ~ 58.54  %
+   L13 :  1.102 pH    Lower: 0.002    Upper: 2.203    Median: 1.103   -99.85  % ~ 100.00 %
+    L9 :  0.593 pH    Lower: 0.001    Upper: 1.186    Median: 0.594   -99.82  % ~ 100.00 %
+   L10 :  0.566 pH    Lower: 0.001    Upper: 1.132    Median: 0.567   -99.82  % ~ 100.00 %
+    L7 :  5.235 pH    Lower: 1.872    Upper: 10.470   Median: 6.171   -64.24  % ~ 100.00 %
+    L6 :  4.684 pH    Lower: 0.002    Upper: 7.241    Median: 3.621   -99.96  % ~ 54.59  %
+    L4 :  2.971 pH    Lower: 0.247    Upper: 4.433    Median: 2.340   -91.68  % ~ 49.21  %
+    J3 :  2.553       Lower: 0.600    Upper: 3.270    Median: 1.935   -76.51  % ~ 28.09  %
+    J6 :  2.580       Lower: 0.001    Upper: 3.557    Median: 1.779   -99.95  % ~ 37.87  %
+    J1 :  2.493       Lower: 0.500    Upper: 3.971    Median: 2.235   -79.95  % ~ 59.29  %
+    J2 :  1.835       Lower: 1.315    Upper: 2.185    Median: 1.750   -28.34  % ~ 19.07  %
+   J10 :  1.808       Lower: 1.339    Upper: 2.323    Median: 1.831   -25.94  % ~ 28.48  %
+   J11 :  1.959       Lower: 0.820    Upper: 2.805    Median: 1.812   -58.15  % ~ 43.19  %
+    J5 :  2.508       Lower: 1.855    Upper: 3.243    Median: 2.549   -26.04  % ~ 29.31  %
+    J7 :  1.939       Lower: 1.212    Upper: 2.575    Median: 1.893   -37.49  % ~ 32.80  %
+    J8 :  1.566       Lower: 0.001    Upper: 2.195    Median: 1.098   -99.91  % ~ 40.16  %
+    J4 :  2.332       Lower: 1.532    Upper: 2.821    Median: 2.176   -34.31  % ~ 20.97  %
+    J9 :  1.164       Lower: 0.523    Upper: 1.599    Median: 1.061   -55.07  % ~ 37.37  %
+    R5 : 24.628 ohm   Lower: 16.978   Upper: 49.256   Median: 33.117  -31.06  % ~ 100.00 %
+    R4 : 30.490 ohm   Lower: 9.250    Upper: 60.980   Median: 35.115  -69.66  % ~ 100.00 %
+    VB :  2.500 mV    Lower: 1.746    Upper: 3.181    Median: 2.463   -30.16  % ~ 27.24  %
