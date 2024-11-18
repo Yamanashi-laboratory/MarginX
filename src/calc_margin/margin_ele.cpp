@@ -43,17 +43,17 @@ int margin_ele(int ele_num, vector<ele_unit> &element, vector<vector<judge>> &ju
             HIGH = HIGH + pow(10 , order_num - check);
             if(element[ele_num].ide_num == 1 && HIGH > 1){   // 結合係数 k ならば
                 HIGH = HIGH - pow(10 , order_num - check);
-                //synchro(copy, ele_num, HIGH);
+                ////synchro(copy, ele_num, HIGH);
                 check += 1;
             }
-            synchro(copy, ele_num, HIGH);
+            //synchro(copy, ele_num, HIGH);
             make_cir(HIGH, ele_num, copy, data_cir);
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
             else if(judge_operation( jud, 0) == 0){
                 HIGH = HIGH - pow(10 , order_num - check);
-                //synchro(copy, ele_num, HIGH);
+                ////synchro(copy, ele_num, HIGH);
                 check += 1;
             }
             else if(HIGH > value_h){
@@ -71,20 +71,20 @@ int margin_ele(int ele_num, vector<ele_unit> &element, vector<vector<judge>> &ju
 
         while(check < 4){
             LOW = LOW - pow(10 , order_num - check);
-            //synchro(copy, ele_num, LOW);
+            ////synchro(copy, ele_num, LOW);
             if(LOW < 0.001){
                 LOW = LOW + pow(10 , order_num - check);
-                //synchro(copy, ele_num, LOW);
+                ////synchro(copy, ele_num, LOW);
                 check += 1;
             }
-            synchro(copy, ele_num, LOW);
+            //synchro(copy, ele_num, LOW);
             make_cir(LOW, ele_num, copy, data_cir);
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
             if(judge_operation( jud, 0) == 0){
                 LOW = LOW + pow(10 , order_num - check);
-                //synchro(copy, ele_num, LOW);
+                ////synchro(copy, ele_num, LOW);
                 check += 1;
             }
         }
@@ -97,20 +97,20 @@ int margin_ele(int ele_num, vector<ele_unit> &element, vector<vector<judge>> &ju
         HIGH = element[ele_num].value;
         while(check < 4){
             HIGH = HIGH + pow(10 , order_num - check);
-            //synchro(copy, ele_num, HIGH);
+            ////synchro(copy, ele_num, HIGH);
             if(HIGH > 0){
                 HIGH = HIGH - pow(10 , order_num - check);
-                //synchro(copy, ele_num, HIGH);
+                ////synchro(copy, ele_num, HIGH);
                 check += 1;
             }
-            synchro(copy, ele_num, HIGH);
+            //synchro(copy, ele_num, HIGH);
             make_cir(HIGH, ele_num, copy, data_cir);
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
             if(judge_operation( jud, 0) == 0){
                 HIGH = HIGH - pow(10 , order_num - check);
-                //synchro(copy, ele_num, HIGH);
+                ////synchro(copy, ele_num, HIGH);
                 check += 1;
             }
         }
@@ -123,17 +123,17 @@ int margin_ele(int ele_num, vector<ele_unit> &element, vector<vector<judge>> &ju
             LOW = LOW - pow(10 , order_num - check);
             if(element[ele_num].ide_num == 1 && LOW < -1){
                 LOW = LOW + pow(10 , order_num - check);
-                //synchro(copy, ele_num, LOW);
+                ////synchro(copy, ele_num, LOW);
                 check += 1;
             }
-            synchro(copy, ele_num, LOW);
+            //synchro(copy, ele_num, LOW);
             make_cir(LOW, ele_num, copy, data_cir);
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
             else if(judge_operation( jud, 0) == 0){
                 LOW = LOW + pow(10 , order_num - check);
-                //synchro(copy, ele_num, LOW);
+                ////synchro(copy, ele_num, LOW);
                 check += 1;
             }
             else if(LOW < value_l){

@@ -60,6 +60,12 @@ void opt_ele_yield(vector<ele_unit> &element, vector<string> &data_cir, vector<v
                     local = abs(norm(mt));
                     global = global_rand[copy[j].ide_num];
                     copy[j].value = copy[j].value * local * global;
+                    if(copy[j].value > 1){
+                        copy[j].value = 1;
+                    }
+                    else if(copy[j].value < -1){
+                        copy[j].value = -1;  
+                    }
                     break;
                 case 2 :  
                     local = abs(norm(mt));

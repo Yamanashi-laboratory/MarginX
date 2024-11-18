@@ -22,7 +22,7 @@ int menu(){
 
     cout << " Please select an operation mode." << endl << endl;
     cout << " 0. Remove Intermediary File" << endl;
-    cout << " 1. Judge" << endl;
+    cout << " 1. Judge" << endl; 
     cout << " 2. Calculate Margin" << endl;
     cout << " 3. Optimization with Critical Margin Method (CMM)" << endl;
     cout << " 4. Optimization with Monte Carlo Method (MCM)" << endl;

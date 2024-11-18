@@ -7,7 +7,7 @@
 #define JOSIM_COMMAND "josim"   //JoSIMのコマンドを変更する位はここを書き換える
 
 //file.cpp
-#define SMALL_SUM 100           /* L_MAX + K_MAX + B_MAX + BI_MAX + PI_MAX + R_MAX + V_MAX + I_MAX */
+#define SMALL_SUM 200           /* L_MAX + K_MAX + B_MAX + BI_MAX + PI_MAX + R_MAX + V_MAX + I_MAX */
 
 //margin.cpp
 #define MARGIN_UPPER 2          /* マージン測定の上限が100％ */
