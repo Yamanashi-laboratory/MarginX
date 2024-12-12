@@ -1,31 +1,31 @@
-    L1 :  1.527 pH    Lower: 0.001    Upper: 3.054    Median: 1.528   -99.93  % ~ 100.00 %
-    L2 :  0.741 pH    Lower: 0.001    Upper: 1.481    Median: 0.741   -99.86  % ~ 100.00 %
-    L3 :  1.472 pH    Lower: 0.001    Upper: 2.945    Median: 1.473   -99.91  % ~ 100.00 %
-    L4 :  1.285 pH    Lower: 0.001    Upper: 2.571    Median: 1.286   -99.89  % ~ 100.00 %
-    L5 :  1.357 pH    Lower: 0.001    Upper: 2.715    Median: 1.358   -99.90  % ~ 100.00 %
-    L6 :  1.310 pH    Lower: 0.001    Upper: 2.621    Median: 1.311   -99.90  % ~ 100.00 %
-    L7 :  4.743 pH    Lower: 3.072    Upper: 9.487    Median: 6.280   -35.23  % ~ 100.00 %
-    L8 :  3.208 pH    Lower: 1.320    Upper: 5.851    Median: 3.585   -58.86  % ~ 82.39  %
-    L9 :  0.136 pH    Lower: 0.001    Upper: 0.272    Median: 0.137   -99.24  % ~ 100.00 %
-   L10 :  0.266 pH    Lower: 0.001    Upper: 0.533    Median: 0.267   -99.61  % ~ 100.00 %
-   L11 :  3.811 pH    Lower: 0.002    Upper: 7.621    Median: 3.812   -99.95  % ~ 100.00 %
-   L12 :  0.976 pH    Lower: 0.001    Upper: 1.952    Median: 0.977   -99.90  % ~ 100.00 %
-   L13 :  0.321 pH    Lower: 0.001    Upper: 0.642    Median: 0.321   -99.69  % ~ 100.00 %
-   L14 :  0.307 pH    Lower: 0.001    Upper: 0.614    Median: 0.307   -99.66  % ~ 100.00 %
-    J1 :  2.100       Lower: 1.314    Upper: 4.200    Median: 2.757   -37.43  % ~ 100.00 %
-    J2 :  1.227       Lower: 0.378    Upper: 1.674    Median: 1.026   -69.21  % ~ 36.44  %
-    J3 :  2.180       Lower: 1.378    Upper: 4.360    Median: 2.869   -36.79  % ~ 100.00 %
-    J4 :  1.675       Lower: 0.890    Upper: 3.351    Median: 2.120   -46.86  % ~ 100.00 %
-    J5 :  2.129       Lower: 1.710    Upper: 2.805    Median: 2.258   -19.68  % ~ 31.75  %
-    J6 :  2.170       Lower: 1.167    Upper: 4.340    Median: 2.753   -46.22  % ~ 100.00 %
-    J7 :  0.995       Lower: 0.341    Upper: 1.989    Median: 1.165   -65.76  % ~ 100.00 %
-    J8 :  0.371       Lower: 0.001    Upper: 0.742    Median: 0.371   -99.71  % ~ 100.00 %
-    J9 :  1.000       Lower: 0.441    Upper: 1.441    Median: 0.941   -55.90  % ~ 44.10  %
-   J10 :  0.927       Lower: 0.001    Upper: 1.767    Median: 0.884   -99.89  % ~ 90.67  %
-   J11 :  2.030       Lower: 1.468    Upper: 2.847    Median: 2.157   -27.68  % ~ 40.25  %
-    R2 :  8.340 ohm   Lower: 6.118    Upper: 16.680   Median: 11.399  -26.64  % ~ 100.00 %
-    R3 :  8.340 ohm   Lower: 5.953    Upper: 16.680   Median: 11.317  -28.62  % ~ 100.00 %
-    R4 : 22.321 ohm   Lower: 12.341   Upper: 36.481   Median: 24.411  -44.71  % ~ 63.44  %
-    R5 : 23.309 ohm   Lower: 16.859   Upper: 43.519   Median: 30.189  -27.67  % ~ 86.71  %
-    R1 :  8.340 ohm   Lower: 6.344    Upper: 16.680   Median: 11.512  -23.93  % ~ 100.00 %
-    VB :  2.500 mV    Lower: 2.072    Upper: 2.750    Median: 2.411   -17.12  % ~ 10.00  %
+    L1 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    L2 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    L3 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    L4 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    L5 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    L6 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    L7 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    L8 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    L9 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+   L10 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+   L11 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+   L12 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+   L13 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+   L14 :  0.000 pH    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    J1 :  0.000       Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    J2 :  0.000       Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    J3 :  0.000       Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    J4 :  0.000       Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    J5 :  0.000       Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    J6 :  0.000       Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    J7 :  0.000       Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    J8 :  0.000       Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    J9 :  0.000       Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+   J10 :  0.000       Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+   J11 :  0.000       Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    R2 :  0.000 ohm   Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    R3 :  0.000 ohm   Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    R4 :  0.000 ohm   Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    R5 :  0.000 ohm   Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    R1 :  0.000 ohm   Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
+    VB :  0.000 mV    Lower: 0.000    Upper: 0.000    Median: 0.000   0.00    % ~ 0.00   %
