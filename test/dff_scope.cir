@@ -1,0 +1,123 @@
+**** **** **** **** **** **** **** **** **** **** **** 
+*JSIM CONTROL FILE FOR CADENCE BY KAMEDA@CQ.JP.NEC.COM
+**** **** **** **** **** **** **** **** **** **** ****
+
+*JSIM MODEL
+.MODEL JJMOD JJ(RTYPE=1, VG=2.8MV, CAP=0.064PF, R0=100OHM, RN=16OHM, ICRIT=0.1MA)
+
+*** NETLIST FILE ***
+**** **** **** **** **** **** **** ****+
+*** LIB : ADP_KUNIHIRO_LIB
+*** CELL: TEST_DFF
+*** VIEW: SCHEMATIC
+*** FEB 10 21:27:58 2022
+**** **** **** **** **** **** **** ****
+
+*** IJTL
+.SUBCKT IJTL          1          2
+***       DIN      DOUT
+LP2                3         0   0.198PH FCHECK
+L2                 4         2   1.976PH FCHECK
+L1                 1         4   4.534PH FCHECK
+B1                 4         3  JJMOD AREA=2.170
+RS1                4         3   5.20OHM *SHUNT=11.30
+.ENDS
+
+*** JTL
+.SUBCKT JTL          1          2         5
+***       DIN      DOUT
+R1                 5         6   8.32OHM
+LP1                7         0   0.096PH FCHECK
+LP2                3         0   0.099PH FCHECK
+L1                 8         9   2.288PH FCHECK
+L3                 4         2   1.963PH FCHECK
+L2                 9         4   4.506PH FCHECK
+LPR1               6         8   0.177PH FCHECK
+LPIN               1         8   0.317PH FCHECK
+B1                 9         7  JJMOD AREA=2.160
+RS1                9         7   5.23OHM *SHUNT=11.30
+B2                 4         3  JJMOD AREA=2.160
+RS2                4         3   5.23OHM *SHUNT=11.30
+.ENDS
+
+*** OPT_DFF
+.SUBCKT OPT_DFF         10          1          2        29
+***       CLK       DIN      DOUT
+b6                18         7  JJMOD AREA=1.943
+RS6 18 7 5.816OHM
+b5                11         4  JJMOD AREA=1.849
+RS5 11 4 6.112OHM
+b4                19        20  JJMOD AREA=1.579
+RS4 19 20 7.158OHM
+b3                14        15  JJMOD AREA=2.930
+RS3 14 15 3.856OHM
+b2                12        13  JJMOD AREA=3.070
+RS2 12 13 3.681OHM
+b1                16        17  JJMOD AREA=1.588
+RS1 16 17 7.117OHM
+LPR3              22        21   0.159PH FCHECK
+LPR2              26        25   0.156PH FCHECK
+LPR1              23        24   0.104PH FCHECK
+LPCLK             10        21   0.361PH FCHECK
+LP6                7         0   0.127PH FCHECK
+LP5                4         0   0.096PH FCHECK
+LP4               20         0   0.276PH FCHECK
+LP3               15         0   0.104PH FCHECK
+LP2               13         0   0.094PH FCHECK
+LPIN               1        25   0.328PH FCHECK
+L9                16        19   0.042PH FCHECK
+l8 18 2 2.816PH FCHECK
+l7 25 12 2.604PH FCHECK
+l6 21 11 2.555PH FCHECK
+l5 12 14 4.460PH FCHECK
+l4 19 18 5.943PH FCHECK
+l3 24 16 5.547PH FCHECK
+l2 14 24 2.214PH FCHECK
+l1 11 17 3.626PH FCHECK
+r3 29 22 8.659OHM
+r2 29 26 10.302OHM
+r1 29 23 22.702OHM
+.ENDS
+
+*** SINK
+.SUBCKT SINK          1         5
+***       DIN
+R2                 4         0   4.08OHM
+R1                 5         6   8.32OHM
+LP1                7         0   0.130PH FCHECK
+L1                 8         9   2.272PH FCHECK
+L2                 9         4   4.766PH FCHECK
+LPR1               6         8   0.177PH FCHECK
+LPIN               1         8   0.317PH FCHECK
+B1                 9         7  JJMOD AREA=2.170
+RS1                9         7   5.21OHM *SHUNT=11.30
+.ENDS
+
+*** TOP CELL: TEST_DFF
+VINCLK            30         0  PWL(0PS 0MV 100PS 0MV 101PS 1.035MV 102PS 1.035MV 103PS 0MV 300PS 0MV 301PS 1.035MV 302PS 1.035MV 303PS 0MV 400PS 0MV 401PS 1.035MV 402PS 1.035MV 403PS 0MV 600PS 0MV 601PS 1.035MV 602PS 1.035MV 603PS 0MV)
+VINDIN               31         0  PWL(0PS 0MV 200PS 0MV 201PS 1.035MV 202PS 1.035MV 203PS 0MV 500PS 0MV 501PS 1.035MV 502PS 1.035MV 503PS 0MV)
+vB 32 0 PWL(0PS 0MV 20PS 2.500MV)
+*FIX
+XI1              IJTL         30         33
+XI3              IJTL         31         34
+XI2               JTL         33          9         32
+XI6               JTL         35         36         32
+XI4               JTL         34         37         32
+XI5           OPT_DFF          9         37         35         32
+XI7              SINK         36         32
+
+*** netlist file ***
+.tran 0.1ps 750ps 0ps 1ps
+.FILE MARGIN.CSV
+
+.print phase B1.XI5
+.print phase B3.XI5
+.print phase B4.XI5
+
+.print devv Vinclk
+.print devv Vindin
+.print devv B1.XI6
+
+*** jsim input file ***
+
+*** jsim input file ***

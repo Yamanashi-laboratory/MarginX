@@ -1,0 +1,191 @@
+**** **** **** **** **** **** **** **** **** **** **** 
+*JSIM control file for CADENCE by kameda@cq.jp.nec.com
+**** **** **** **** **** **** **** **** **** **** ****
+
+*JSIM model
+**HSTP**
+.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.064pF, R0=100ohm, Rn=17ohm, Icrit=0.1mA)
+**OPEN**
+*.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.218pF, R0=200ohm, Rn=17ohm, Icrit=0.1mA)
+**Low Jc**
+*.model jjmod jj(Rtype=1, Vg=2.8mV, Cap=0.05pF, R0=200ohm, Rn=170ohm, Icrit=10uA)
+
+
+*** netlist file ***
+**** **** **** **** **** **** **** ****+
+*** Lib : adp_matsuoka_lib
+*** Cell: NDROCex_new_ver6test
+*** View: schematic
+*** May 22 05:01:58 2023
+**** **** **** **** **** **** **** ****
+
+*** ijtl
+.subckt ijtl          1          2
+***       din      dout
+LP2                3         0   0.198pH fcheck
+L2                 4         2   1.976pH fcheck
+L1                 1         4   4.534pH fcheck
+B1                 4         3  jjmod area=2.17
+RS1                4         3   5.20ohm *SHUNT=11.30
+.ends
+
+*** jtl
+.subckt jtl          1          2         5
+***       din      dout
+R1                 5         6   8.32ohm
+LP1                7         0   0.096pH fcheck
+LP2                3         0   0.099pH fcheck
+L1                 8         9   2.288pH fcheck
+L3                 4         2   1.966pH fcheck
+L2                 9         4   4.506pH fcheck
+LPR1               6         8   0.177pH fcheck
+LPIN               1         8   0.317pH fcheck
+B1                 9         7  jjmod area=2.16
+RS1                9         7   5.23ohm *SHUNT=11.30
+B2                 4         3  jjmod area=2.16
+RS2                4         3   5.23ohm *SHUNT=11.30
+.ends
+
+*** sink
+.subckt sink          1         5
+***       din
+R2                 4         0   4.08ohm
+R1                 5         6   8.32ohm
+LP1                7         0   0.130pH fcheck
+L1                 8         9   2.272pH fcheck
+L2                 9         4   4.766pH fcheck
+LPR1               6         8   0.177pH fcheck
+LPIN               1         8   0.317pH fcheck
+B1                 9         7  jjmod area=2.17
+RS1                9         7   5.21ohm *SHUNT=11.30
+.ends
+
+*** top cell: NDROCex_new_ver6test
+l1    44    42               0.788pH
+l2    42    38               0.091pH
+l3    37    38               0.865pH
+l4    39    38               1.315pH
+l5    32    36               3.504pH
+l6    31    35               3.120pH
+l7    30    34               0.846pH
+l8    31    32               1.370pH
+l9    29    33               0.172pH
+l10    27    21               1.911pH
+l11    26    22               5.593pH
+l12    30    27               0.244pH
+l13    29    26               0.191pH
+l14    21    13               1.994pH
+l15    22    15               0.716pH
+
+LP1               43         0   0.250pH fcheck
+LP4               41         0   0.184pH fcheck
+LP5               40         0   0.302pH fcheck
+LP8                0        28   0.226pH fcheck
+LP9                0        19   0.226pH fcheck
+LP10               0        24   0.182pH fcheck
+LP11               0        25   0.173pH fcheck
+
+LPR1              45        44   4.384pH fcheck
+LPCLK             17        44   1.071pH fcheck
+
+Ly                20         0  10.312pH fcheck
+Lin               23         0  10.812pH fcheck
+Lex                7         0  31.806pH fcheck
+Lrst               3         0  12.500pH fcheck
+
+r1    10    45               8.320ohm
+*FIX
+
+b1     42    43  jjmod area=1.843     
+RS1    42    43               6.130ohm *SHUNT=11.300
+*MIN = 1.7
+b2     37    30  jjmod area=2.142     
+RS2    37    30               5.275ohm *SHUNT=11.300
+b3     39    29  jjmod area=1.929     
+RS3    39    29               5.858ohm *SHUNT=11.300
+b4     36    41  jjmod area=2.313     
+RS4    36    41               4.885ohm *SHUNT=11.300
+*MAX=2.5
+*SYN=1
+
+b5     35    40  jjmod area=2.313     
+RS5    35    40               4.885ohm *SHUNT=11.300
+*MAX=2.5
+*SYN=1
+
+b6     32    34  jjmod area=1.168     
+RS6    32    34               9.672ohm *SHUNT=11.300
+*MIN=1
+b7     31    33  jjmod area=1.271     
+RS7    31    33               8.887ohm *SHUNT=11.300
+*MIN=1
+
+b8     27    28  jjmod area=1.066     
+RS8    27    28              10.605ohm *SHUNT=11.300
+*MIN=1
+
+b9     26    19  jjmod area=1.237     
+RS9    26    19               9.136ohm *SHUNT=11.300
+*MIN=1
+
+b10     21    24  jjmod area=1.741     
+RS10    21    24               6.490ohm *SHUNT=11.300
+*MIN=1.7
+
+b11     22    25  jjmod area=1.700     
+RS11    22    25               6.647ohm *SHUNT=11.300
+*MIN=1.7
+
+
+
+k0   Lex    L7               0.185
+*FIX
+
+k1   Lex    L8              -0.235
+*FIX
+
+k2   Lex    L9               0.189
+*FIX
+
+
+kin   Lin    L5              -0.100
+*FIX
+
+krst  Lrst    L6              -0.150
+*FIX
+
+ky    Ly    L5              -0.100
+*FIX
+
+
+
+XI13             sink         14         10
+XI10             sink         16         10
+XI33             ijtl         11         12
+XI2               jtl         13         14         10
+XI3               jtl         15         16         10
+XI1               jtl         12         17         10
+
+vb    10     0   PWL(0ps 0mV    50ps                  2.500mV)
+*FIX
+
+iblfb     0     7   PWL(0ps 0mV    50ps                  0.510mA)
+*FIX
+
+Vinclk            11         0  PULSE(0MV 1.034MV 100PS 1PS 1PS 1PS 100PS)
+
+Iiny                 0        20  PWL(0PS 0MA 330PS 0MA 331PS 2MA 380PS 2MA 381PS 0MA)
+Iindata            0        23  PWL(0PS 0MA 330PS 0MA 331PS 2MA 380PS 2MA 381PS 0MA)
+Iinrst             0         3  PWL(0PS 0MA 530PS 0MA 531PS 2MA 580PS 2MA 581PS 0MA)
+
+.TRAN 0.1PS 1000PS 0PS:
+
+.FILE ex05_out.CSV
+
+.print phase B2
+.print phase B3
+.print phase B4
+.print phase B5
+.print phase B8
+.print phase B9
+.end
