@@ -69,6 +69,9 @@ int make_cir_last(vector<ele_unit> &element, vector<string> &data_cir, vector<st
                         Rs = Rcon * R0 / (R0 - Rcon);
                         shunt_order = "*Bc=";
                     }
+                    if(Rs < 0){
+                        Rs = 0;
+                    }
                     shunt = element[x].element;
                     shunt.replace(0,1,"RS"); 
                     liness.clear();
