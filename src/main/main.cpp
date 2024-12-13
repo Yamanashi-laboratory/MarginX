@@ -114,6 +114,10 @@ int main(int argc, const char *argv[]) {
         case 11:
             optimize_seq_jsim(element,data_cir,jud, arg_arr);
             break;
+        case 12:
+            search(element,data_cir,jud, arg_arr);
+            break;
+            
         default: //適切な値が入力されていなければエラーを吐き終了
             cout << " ERROR : Please input a correct number." << endl;
             return 0;

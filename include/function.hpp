@@ -193,5 +193,10 @@ void opt_ele_yield_jsim(std::vector<ele_unit> &element, std::vector<std::string>
 double rand_global(std::vector<ele_unit> &element);
 double rand_global_yield(double nd);
 
+//search
+double rand_global_search(double nd);
+void search_ele(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, opt_num *opt, double global, double local, std::vector<double> &global_rand);
+void search(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
+
 
 #endif

@@ -31,6 +31,7 @@ void optimize_monte_ul(vector<ele_unit> &element, vector<string> &data_cir, vect
     double BM_th = 0;
     double CM_power = 1;
     double BM_power = 1;
+    vector<double> power;
     time_t start, now;
     string sharp = "";
 
@@ -53,45 +54,10 @@ void optimize_monte_ul(vector<ele_unit> &element, vector<string> &data_cir, vect
         return;
     }
 
-    cout << " Select the Kind of Score" << endl;
-    cout << " 1: Only Critical Margin " << endl;
-    cout << " 2: Only Bias Margin" << endl;
-    cout << " 3: The Sum of Critical Margin and Bias Margin" << endl;
-    cout << " 4: The Sum of Critical Margin and Bias Margin * 2 " << endl;
-    cout << " 5: Others ( input yourself )" << endl << endl;
-    cout << "  Selected Score : ";
-    cin >> mode;
 
-    switch(mode){
-        case 1:
-            CM_power = 1;
-            BM_power = 0;
-            break;
-        case 2:
-            CM_power = 0;
-            BM_power = 1;
-            break;
-        case 3:
-            CM_power = 1;
-            BM_power = 1;
-            break;
-        case 4:
-            CM_power = 1;
-            BM_power = 2;
-            break;
-        case 5:
-            cout << " Select Critical Margin Power" << endl;
-            cout << " Critical Margin Power : ";
-            cin >> CM_power;
-            cout << " Select Bias Margin Power" << endl;
-            cout << " Bias Margin Power : ";
-            cin >> BM_power;
-            break;
-        default:
-            cout << " Please Select a Correct Number" << endl;
-            return;
-            break;
-    }
+
+    power = select_score();   //スコアを選択 → power配列に格納
+
 
     start = time(NULL);
     
@@ -118,12 +84,13 @@ void optimize_monte_ul(vector<ele_unit> &element, vector<string> &data_cir, vect
             cout << " This is the progress midway   ( the " << GetOrdinalNumber(static_cast<int>(m / 100 + 1)) 
                  << " check )                                                                                             " << endl;
             Margin(element,  jud, data_cir, arg_arr, 2);
+            make_cir_last(element, data_cir, arg_arr);            
             if( min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) > CM_th  &&  min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H}) > BM_th ){
                 make_cir_last(element, data_cir, arg_arr);            
                 cout << " Achieved the goal!!!" << endl;
                 break;
             }         
-            cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
+            cri_bias_sum = calc_score(element, power);
             if( cri_bias_sum > opt->cri_bias_best ){
                 for(int j = 0; j < element.size(); j++){
                     opt->best_value[j] = element[j].value;

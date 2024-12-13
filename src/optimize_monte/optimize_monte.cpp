@@ -33,6 +33,7 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, vector<
     int bias_margin = 0;
     double lambda;
     double global = 0;
+    vector<double> power;
     time_t start, now;
     string sharp = "";
     string yield = "yield.csv";
@@ -40,45 +41,8 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, vector<
     ofstream fp_yield(yield);
     ofstream fp_param(param);
 
-    cout << " Select the Kind of Score" << endl;
-    cout << " 1: Only Critical Margin " << endl;
-    cout << " 2: Only Bias Margin" << endl;
-    cout << " 3: The Sum of Critical Margin and Bias Margin" << endl;
-    cout << " 4: The Sum of Critical Margin and Bias Margin * 2 " << endl;
-    cout << " 5: Others ( input yourself )" << endl << endl;
-    cout << "  Selected Score : ";
-    cin >> mode;
 
-    switch(mode){
-        case 1:
-            CM_power = 1;
-            BM_power = 0;
-            break;
-        case 2:
-            CM_power = 0;
-            BM_power = 1;
-            break;
-        case 3:
-            CM_power = 1;
-            BM_power = 1;
-            break;
-        case 4:
-            CM_power = 1;
-            BM_power = 2;
-            break;
-        case 5:
-            cout << " Select Critical Margin Power" << endl;
-            cout << " Critical Margin Power : ";
-            cin >> CM_power;
-            cout << " Select Bias Margin Power" << endl;
-            cout << " Bias Margin Power : ";
-            cin >> BM_power;
-            break;
-        default:
-            cout << " Please Select a Correct Number" << endl;
-            return;
-            break;
-    }
+    power = select_score();   //スコアを選択 → power配列に格納
 
     start = time(NULL);
 
@@ -107,8 +71,7 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, vector<
             make_cir_last(element, data_cir, arg_arr);            
             //cri_bias_sum = min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
             
-            bias_margin =  min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
-            cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * bias_margin;
+            cri_bias_sum = calc_score(element, power);
             if( cri_bias_sum > opt->cri_bias_best ){
                 for(int j = 0; j < element.size(); j++){
                     opt->best_value[j] = element[j].value;
@@ -211,7 +174,7 @@ void optimize_monte(vector<ele_unit> &element, vector<string> &data_cir, vector<
 
     Margin(element,  jud, data_cir, arg_arr, 2);
     //cri_bias_sum = min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
-    cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
+    cri_bias_sum = calc_score(element, power);
     // cri_bias_sum = その回路のマージンの評価 (クリティカルマージン + 2 * バイアスマージン)
     //cout << "cri_bias_sum : " << cri_bias_sum << endl; 
     if( cri_bias_sum > opt->cri_bias_best ){   // マージンの評価値 cri_bias_sum が最大だったらそれを現時点の最良の回路として置き換える

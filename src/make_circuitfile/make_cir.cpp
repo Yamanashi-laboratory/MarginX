@@ -22,7 +22,8 @@ int make_cir(double new_value, int ele_num, vector<ele_unit> &element, vector<st
     string shunt;
     int y = 0;
     double Rs = 1;
-    double resistor;
+    long double Rcon = 1;
+    double R0 =  100, Cap = 0.064;    
     double value = 0;
     string shunt_order;
     vector<string> data_cir_copy = data_cir;
@@ -66,8 +67,8 @@ int make_cir(double new_value, int ele_num, vector<ele_unit> &element, vector<st
                         break;
                     }
                     else{                           //それ以外( shunt_det == 1)のときは、Bcの値でshunt抵抗の値を決定          
-                        resistor = sqrt(element[x].shunt_cal * 1.055 / (2 * 1.602 * element[x].value / 10 * 0.218 * element[x].value) );
-                        Rs = resistor * 200 / (200 - resistor);
+                        Rcon = sqrt(element[x].shunt_cal * 1.055 / (2 * 1.602 * element[x].value / 10 * Cap * element[x].value));
+                        Rs = Rcon * R0 / (R0 - Rcon);
                         shunt_order = "*Bc=";
                     }
                     shunt = element[x].element;

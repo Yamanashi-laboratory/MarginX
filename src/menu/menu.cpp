@@ -32,7 +32,8 @@ int menu(){
     cout << " 8. Calculate Margin (low quality)" << endl;
     cout << " 9. Sequential Optimization with MCM (yield)" << endl;
     cout << " 10. Optimization with MCM (yield) using jsim" << endl;
-    cout << " 11. Sequential Optimization with MCM (yield) using jsim" << endl << endl;
+    cout << " 11. Sequential Optimization with MCM (yield) using jsim" << endl;
+    cout << " 12. Search parameters" << endl << endl;
     cout << "  Selected Mode : ";
     cin >> menu;
     cout << endl;
