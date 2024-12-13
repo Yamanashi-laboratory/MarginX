@@ -69,15 +69,15 @@ int make_cir(double new_value, int ele_num, vector<ele_unit> &element, vector<st
                     else{                           //それ以外( shunt_det == 1)のときは、Bcの値でshunt抵抗の値を決定          
                         Rcon = sqrt(element[x].shunt_cal * 1.055 / (2 * 1.602 * element[x].value / 10 * Cap * element[x].value));
                         Rs = Rcon * R0 / (R0 - Rcon);
-                        if(Rs < 0){
-                            Rs = 0;
-                        }
                         shunt_order = "*Bc=";
                     }
                     shunt = element[x].element;
                     shunt.replace(0,1,"RS");
                     liness.clear();
                     liness.str("");
+                    if(Rs < 0){
+                        Rs = 0;
+                    }
                     liness <<  shunt << fixed  << right << setw(6) << element[x].node1 << setw(6) << element[x].node2 << setw(20) <<  setprecision(3) << Rs  << "ohm" << "  " << shunt_order << element[x].shunt_cal;
                     data_cir_copy[y + 1] = liness.str();
                     break;
