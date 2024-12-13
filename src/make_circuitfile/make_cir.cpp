@@ -69,6 +69,9 @@ int make_cir(double new_value, int ele_num, vector<ele_unit> &element, vector<st
                     else{                           //それ以外( shunt_det == 1)のときは、Bcの値でshunt抵抗の値を決定          
                         Rcon = sqrt(element[x].shunt_cal * 1.055 / (2 * 1.602 * element[x].value / 10 * Cap * element[x].value));
                         Rs = Rcon * R0 / (R0 - Rcon);
+                        if(Rs < 0){
+                            Rs = 0;
+                        }
                         shunt_order = "*Bc=";
                     }
                     shunt = element[x].element;
