@@ -77,6 +77,7 @@ int make_cir(double new_value, int ele_num, vector<ele_unit> &element, vector<st
                     liness.str("");
                     if(Rs < 0){
                         Rs = 0;
+                        
                     }
                     liness <<  shunt << fixed  << right << setw(6) << element[x].node1 << setw(6) << element[x].node2 << setw(20) <<  setprecision(3) << Rs  << "ohm" << "  " << shunt_order << element[x].shunt_cal;
                     data_cir_copy[y + 1] = liness.str();
