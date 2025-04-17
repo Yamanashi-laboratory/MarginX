@@ -1,4 +1,4 @@
-MarginX : Margin Calculator and Circuit Optimizer from Yamanashi Lab, YNU Created by Sho Matsuoka (in 2023) and Nakaishi Sotaro (in 2017) 
+MarginX : Margin Calculator and Circuit Optimizer from Yamanashi Lab, YNU Developed by Sho Matsuoka (in 2023) and Nakaishi Sotaro (in 2017) 
  --------------------------------------------------------------------------
 Please wait for documentation of MarginX.
 
