@@ -3,28 +3,38 @@ You must prepare 2 Files: Circuit File which is suitable for JoSIM and Judgement
 In Circuit File, you must output phase of Josephson Junction (JJ) => Example :) .print phase B1.XI10
 ,and the initial of the name of element which you want to check the margin or optimize. In Judgement File, you must write switching time of JJs like below. \begining time\ \end time\ \phase\
 If the phase of targeted JJ is passed between begining time and end time, it is regarded as correct operation.
-Phases of JJ are standardized with ÉŒ Example :)
+Phases of JJ are standardized with pi 
+Example :)
 B1
-100 200 1 300 400 3 400 500 5
+100 200 1 
+300 400 3 
+400 500 5
 B3
-200 300 -1 300 400 -3 900 1000 -5 ÅE
-ÅE
-ÅE
+200 300 -1 
+300 400 -3 
+900 1000 -5 ¬Å
+
+...
+
 Note that you must make Judgement file name the same as Circuit file name
-without extension. ; --------------------------------------------------------------------------
+without extension.
+
+--------------------------------------------------------------------------
 There are some commands below.
--d | You can see the details of results. you can also see them
+-d        | You can see the details of results. you can also see them
 (details) | in outputted text file.
-|
-|
--f | the output of a figure of Margins. You can also make
-(figure) | figures of Margins from CSV file normally outputted
-|
-|
--o | change outputted file name. You must write new outputted
-(output) | file name without extension to the right of -o |
-|
--j | Specify optional name of Judgement File. You must write
-(jud file) | optional judgement file name without extensionto the | right of -j |
-|
+          |
+          |
+-f        | the output of a figure of Margins. You can also make
+(figure)  | figures of Margins from CSV file normally outputted
+          |
+          |
+-o        | change outputted file name. You must write new outputted
+(output)  | file name without extension to the right of -o 
+          |
+          |
+-j        | Specify optional name of Judgement File. You must write
+(jud file)| optional judgement file name without extension to the right of -j 
+          |
+          |
 Example :) ./Marginx ex02 -j ex01 -o hoge -f
