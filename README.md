@@ -1,4 +1,7 @@
-MarginX : Margin Calculator and Circuit Optimizer from Yamanashi Lab, YNU Created by Sho Matsuoka (in 2023) and Nakaishi Sotaro (in 2017) MarginX help --------------------------------------------------------------------------
+MarginX : Margin Calculator and Circuit Optimizer from Yamanashi Lab, YNU Created by Sho Matsuoka (in 2023) and Nakaishi Sotaro (in 2017) 
+ --------------------------------------------------------------------------
+Please wait for documentation of MarginX.
+
 You must prepare 2 Files: Circuit File which is suitable for JoSIM and Judgement File which defines correct operations
 In Circuit File, you must output phase of Josephson Junction (JJ) => Example :) .print phase B1.XI10
 ,and the initial of the name of element which you want to check the margin or optimize. In Judgement File, you must write switching time of JJs like below. \begining time\ \end time\ \phase\
