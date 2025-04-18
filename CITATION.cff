@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Matsuoka
+    given-names: Sho
+title: "MarginX"
+repository-code: "https://github.com/Yamanashi-laboratory/MarginX"
+type: software
+url: "https://github.com/Yamanashi-laboratory/MarginX"
+date-released: "2025-04-18"
