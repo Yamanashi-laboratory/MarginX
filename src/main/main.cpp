@@ -106,17 +106,21 @@ int main(int argc, const char *argv[]) {
             Margin_low(element,  jud, data_cir, arg_arr, 0);
             break;
         case 9:
-            optimize_seq(element,data_cir,jud, arg_arr);
+            Margin_syn(element,  jud, data_cir, arg_arr, 0);
             break;
         case 10:
-            optimize_yield_up_jsim(element,data_cir,jud, arg_arr);
+            optimize_seq(element,data_cir,jud, arg_arr);
             break;
         case 11:
-            optimize_seq_jsim(element,data_cir,jud, arg_arr);
+            optimize_yield_up_jsim(element,data_cir,jud, arg_arr);
             break;
         case 12:
+            optimize_seq_jsim(element,data_cir,jud, arg_arr);
+            break;
+        case 13:
             search(element,data_cir,jud, arg_arr);
             break;
+
             
         default: //適切な値が入力されていなければエラーを吐き終了
             cout << " ERROR : Please input a correct number." << endl;
