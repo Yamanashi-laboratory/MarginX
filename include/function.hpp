@@ -126,7 +126,9 @@ void synchro_opt(std::vector<ele_unit> &element, int ele_num);
 
 //calc_margin
 void Margin(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
+void Margin_syn(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
 int margin_ele(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
+int margin_ele_syn(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
 
 //calc_margin_low
 void Margin_low(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);

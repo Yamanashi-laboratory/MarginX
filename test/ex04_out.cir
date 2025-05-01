@@ -65,26 +65,26 @@ RS1               16        36   5.31OHM *SHUNT=11.30
 .SUBCKT NDROEX_VER3          1          2          3          4          5          6          7          8        11
 ***       CLK      DOUT     RESET  RESETOUT       XIN      XOUT       YIN      YOUT
 
-krst  LRST    L3               0.000
+krst  LRST    L3               0.099
 *FIX
 
-kx    LX    L2               0.000
+kx    LX    L2              -0.050
 *FIX
 
-ky    LY    L2               0.000
+ky    LY    L2              -0.081
 *FIX
 
 
-l2    22    21               0.000pH
-l3    23    22               0.000pH
-l4    19    16               0.000pH
-l5    16    18               0.000pH
-l6     1    28               0.000pH
-l7    28    29               0.000pH
-l8    26    18               0.000pH
-l9    14    12               0.000pH
-l10    18    14               0.000pH
-l11    12     2               0.000pH
+l2    22    21               4.520pH
+l3    23    22               2.788pH
+l4    19    16               0.659pH
+l5    16    18               0.870pH
+l6     1    28               1.253pH
+l7    28    29               1.425pH
+l8    26    18               2.742pH
+l9    14    12               5.325pH
+l10    18    14               1.189pH
+l11    12     2               0.817pH
 
 LP1               25         0   0.681PH 
 LP2               24         0   0.695PH 
@@ -96,44 +96,44 @@ LPR1              20        21   0.312PH
 LPR2              15        16   0.200PH 
 LPR3              30        28   3.637PH 
 
-lrst     3     4               0.000pH
+lrst     3     4              14.630pH
 *MAX=15
 
-lx     5     6               0.000pH
-*MAX=15
-
-
-ly     7     8               0.000pH
+lx     5     6              16.680pH
 *MAX=15
 
 
-r1    11    20               0.000ohm
+ly     7     8              11.620pH
+*MAX=15
+
+
+r1    11    20              22.890ohm
 *FIX
-r2    15    11               0.000ohm
+r2    15    11              21.140ohm
 *FIX
-r3    11    30               0.000mohm
+r3    11    30               8.300ohm
 *FIX
 
-b1    21    25  JJMOD area=0.000     
-RS1    21    25                 infohm  *SHUNT=11.300
+b1    21    25  JJMOD area=2.430     
+RS1    21    25               4.650ohm  *SHUNT=11.300
 *MIN=1.7
 *MAX=2.5
 
-b2    23    24  JJMOD area=0.000     
-RS2    23    24                 infohm  *SHUNT=11.300
+b2    23    24  JJMOD area=2.780     
+RS2    23    24               4.065ohm  *SHUNT=11.300
 *MAX=2.5
-b3    22    19  JJMOD area=0.000     
-RS3    22    19                 infohm  *SHUNT=11.300
+b3    22    19  JJMOD area=1.080     
+RS3    22    19              10.463ohm  *SHUNT=11.300
 *MIN=1
-b4    29    27  JJMOD area=0.000     
-RS4    29    27                 infohm  *SHUNT=11.300
+b4    29    27  JJMOD area=2.160     
+RS4    29    27               5.231ohm  *SHUNT=11.300
 *MAX=2.5
-b5    29    26  JJMOD area=0.000     
-RS5    29    26                 infohm  *SHUNT=11.300
-b6    14    17  JJMOD area=0.000     
-RS6    14    17                 infohm  *SHUNT=11.300
-b7    12    13  JJMOD area=0.000     
-RS7    12    13                 infohm  *SHUNT=11.300
+b5    29    26  JJMOD area=1.750     
+RS5    29    26               6.457ohm  *SHUNT=11.300
+b6    14    17  JJMOD area=1.900     
+RS6    14    17               5.947ohm  *SHUNT=11.300
+b7    12    13  JJMOD area=2.160     
+RS7    12    13               5.231ohm  *SHUNT=11.300
 *MIN=1.7
 *MAX=2.5
 
@@ -146,7 +146,7 @@ IINRST             0        44  PWL(0PS 0MA 650PS 0MA 651PS 2MA 680PS 2MA 681PS 
 IINx               0        46  PWL(0PS 0MA 150PS 0MA 151PS 2MA 180PS 2MA 181PS 0MA 350PS 0MA 351PS 2MA 380PS 2MA 381PS 0MA 450PS 0MA 451PS 2MA 480PS 2MA 481PS 0MA)
 IINy               0        48  PWL(0PS 0MA 250PS 0MA 251PS 2MA 280PS 2MA 281PS 0MA 350PS 0MA 351PS 2MA 380PS 2MA 381PS 0MA 450PS 0MA 451PS 2MA 480PS 2MA 481PS 0MA)
 
-vb    51     0   PWL(0ps 0mV    50ps                  0.000mV)
+vb    51     0   PWL(0ps 0mV    50ps                  2.500mV)
 *FIX
 VINCLK            33         0  PULSE(0.0MV 1.034MV 100ps 1ps 1ps 1ps 100pS)
 
@@ -158,9 +158,10 @@ XI58             SINK         34         51
 *** NETLIST FILE ***
 
 .TRAN  0.1PS 1NS 0NS 1PS
-.FILE CIRCUIT62135.CSV
+.FILE CIRCUIT1110984.CSV
 .PRINT PHASE B1.XI19
 .PRINT PHASE B2.XI19
+.PRINT PHASE B3.XI19
 .PRINT PHASE B5.XI19
 .PRINT PHASE B6.XI19
 

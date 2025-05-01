@@ -13,27 +13,27 @@ unset xlabel
 set format x "" 
 set format y "%3.0f"
 
-set yrange[-0.733816:8.07197]
+set yrange[-0.752527:8.2778]
 set ytics 7
 set ylabel "Phase [rad]" offset -0.5,0 font "Arial,10"
 plot "a.csv" using ($1 * 1e12):($2* 1e0) smooth unique lw 2 lc rgb "royalblue" title "B1.XI19 - Phase"
 
-set yrange[-1.20294:8.79838]
+set yrange[-1.21515:8.07463]
 set ytics 7
 set ylabel "Phase [rad]" offset -0.5,0 font "Arial,10"
 plot "a.csv" using ($1 * 1e12):($3* 1e0) smooth unique lw 2 lc rgb "royalblue" title "B2.XI19 - Phase"
 
-set yrange[-21.8999:2.6057]
+set yrange[-21.1246:2.57329]
 set ytics 10
 set ylabel "Phase [rad]" offset -0.5,0 font "Arial,10"
 plot "a.csv" using ($1 * 1e12):($4* 1e0) smooth unique lw 2 lc rgb "royalblue" title "B3.XI19 - Phase"
 
-set yrange[-3.83756:41.8544]
+set yrange[-3.81822:41.9823]
 set ytics 30
 set ylabel "Phase [rad]" offset -0.5,0 font "Arial,10"
 plot "a.csv" using ($1 * 1e12):($5* 1e0) smooth unique lw 2 lc rgb "royalblue" title "B5.XI19 - Phase"
 
-set yrange[-2.05077:22.5584]
+set yrange[-2.05012:22.5514]
 set ytics 20
 set ylabel "Phase [rad]" offset -0.5,0 font "Arial,10"
 plot "a.csv" using ($1 * 1e12):($6* 1e0) smooth unique lw 2 lc rgb "royalblue" title "B6.XI19 - Phase"
@@ -43,13 +43,13 @@ set ytics 1
 set ylabel "Voltage [mV]" offset -0.5,0 font "Arial,10"
 plot "a.csv" using ($1 * 1e12):($7* 1e3) smooth unique lw 2 lc rgb "royalblue" title "Vinclk - Voltage"
 
-set yrange[-197.412:990.113]
-set ytics 900
+set yrange[-157.554:964.441]
+set ytics 800
 set ylabel "Voltage [uV]" offset -0.5,0 font "Arial,10"
 plot "a.csv" using ($1 * 1e12):($8* 1e6) smooth unique lw 2 lc rgb "royalblue" title "B4.XI19 - Voltage"
 
-set yrange[-286.664:700.972]
-set ytics 600
+set yrange[-343.48:493.799]
+set ytics 400
 set ylabel "Voltage [uV]" offset -0.5,0 font "Arial,10"
 plot "a.csv" using ($1 * 1e12):($9* 1e6) smooth unique lw 2 lc rgb "royalblue" title "B6.XI19 - Voltage"
 

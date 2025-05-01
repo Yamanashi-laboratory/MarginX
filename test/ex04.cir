@@ -65,25 +65,25 @@ RS1               16        36   5.31OHM *SHUNT=11.30
 .SUBCKT NDROEX_VER3          1          2          3          4          5          6          7          8        11
 ***       CLK      DOUT     RESET  RESETOUT       XIN      XOUT       YIN      YOUT
 
-kRST             LRST         L3 0.150
+kRST             LRST         L3 0.099
 *FIX
 
-kX                 LX         L2 -0.0714
+kX                 LX         L2 -0.05
 *FIX
 
-kY                 LY         L2 -0.073
+kY                 LY         L2 -0.0805
 *FIX
 
 
-l2 22 21 4.851pH 
-l3 23 22 3.851PH 
+l2 22 21 4.52pH 
+l3 23 22 2.788PH 
 l4 19 16 0.659PH 
 l5 16 18 0.870PH 
-l6 1 28 2.303PH 
-l7 28 29 1.378PH 
-l8 26 18 2.154PH 
-l9 14 12 5.157PH 
-l10 18 14 2.363PH 
+l6 1 28 1.253PH 
+l7 28 29 1.425PH 
+l8 26 18 2.742PH 
+l9 14 12 5.325PH 
+l10 18 14 1.189PH 
 l11 12 2 0.817PH 
 
 LP1               25         0   0.681PH 
@@ -96,43 +96,43 @@ LPR1              20        21   0.312PH
 LPR2              15        16   0.200PH 
 LPR3              30        28   3.637PH 
 
-lRST 3 4 14.685PH 
+lRST 3 4 14.63PH 
 *MAX=15
 
-lX 5 6 10.5PH 
-*MAX=15
-
-
-lY 7 8 10.312PH 
+lX 5 6 16.68PH 
 *MAX=15
 
 
-r1 11 20 22.153OHM
+lY 7 8 11.62PH 
+*MAX=15
+
+
+r1 11 20 22.89OHM
 *FIX
-r2 15 11 19.085OHM
+r2 15 11 21.14OHM
 *FIX
-r3 11 30 8.32HM
+r3 11 30 8.3OHM
 *FIX
 
-b1                21        25  JJMOD AREA=2.126
+b1                21        25  JJMOD AREA=2.43
 RS1 21 25 5.315OHM *SHUNT=11.30
 *MIN=1.7
 *MAX=2.5
 
-b2                23        24  JJMOD AREA=2.693
+b2                23        24  JJMOD AREA=2.78
 RS2 23 24 4.196OHM *SHUNT=11.30
 *MAX=2.5
-b3                22        19  JJMOD AREA=1.000
+b3                22        19  JJMOD AREA=1.08
 RS3 22 19 11.300OHM *SHUNT=11.30
 *MIN=1
-b4                29        27  JJMOD AREA=2.5
+b4                29        27  JJMOD AREA=2.16
 RS4 29 27 3.593OHM *SHUNT=11.30
 *MAX=2.5
-b5                29        26  JJMOD AREA=1.738
+b5                29        26  JJMOD AREA=1.75
 RS5 29 26 6.775OHM *SHUNT=11.30
 b6                14        17  JJMOD AREA=1.900
 RS6 14 17 5.947OHM *SHUNT=11.30
-b7                12        13  JJMOD AREA=2.048
+b7                12        13  JJMOD AREA=2.16
 RS7 12 13 5.516OHM *SHUNT=11.30
 *MIN=1.7
 *MAX=2.5
@@ -165,11 +165,11 @@ XI58             SINK         34         51
 .PRINT PHASE B5.XI19
 .PRINT PHASE B6.XI19
 
-.print devv Vinclk
-.print devv B4.XI19
-.print devv B6.XI19
-.print devi IINx
-.print devi IINy
-.print devi IINRST
+*.print devv Vinclk
+*.print devv B4.XI19
+*.print devv B6.XI19
+*.print devi IINx
+*.print devi IINy
+*.print devi IINRST
 
 .end
