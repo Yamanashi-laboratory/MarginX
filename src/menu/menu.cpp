@@ -30,10 +30,11 @@ int menu(){
     cout << " 6. Endless Optimization with MCM" << endl;
     cout << " 7. New Optimization with MCM (yield)" << endl;
     cout << " 8. Calculate Margin (low quality)" << endl;
-    cout << " 9. Sequential Optimization with MCM (yield)" << endl;
-    cout << " 10. Optimization with MCM (yield) using jsim" << endl;
-    cout << " 11. Sequential Optimization with MCM (yield) using jsim" << endl;
-    cout << " 12. Search parameters" << endl << endl;
+    cout << " 9. Calculate Margin (synchro)" << endl;
+    cout << " 10. Sequential Optimization with MCM (yield)" << endl;
+    cout << " 11. Optimization with MCM (yield) using jsim" << endl;
+    cout << " 12. Sequential Optimization with MCM (yield) using jsim" << endl;
+    cout << " 13. Search parameters" << endl << endl;
     cout << "  Selected Mode : ";
     cin >> menu;
     cout << endl;
