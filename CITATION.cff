@@ -3,8 +3,13 @@ message: "If you use this software, please cite it as below."
 authors:
   - family-names: Matsuoka
     given-names: Sho
-title: "MarginX"
+  - family-names: Yoshikawa
+    given-names: Nobuyuki
+  - family-names: Yamanashi
+    given-names: Yuki
+title: "MarginX: Simple and Fast Circuit Parameter Optimization Tool for Superconductor Circuits"
 repository-code: "https://github.com/Yamanashi-laboratory/MarginX"
 type: software
 url: "https://github.com/Yamanashi-laboratory/MarginX"
+doi: 10.1587/10.1587/transele.2024ECP5100
 date-released: "2025-04-18"
