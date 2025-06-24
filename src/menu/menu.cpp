@@ -21,21 +21,25 @@ int menu(){
     int menu;
 
     cout << " Please select an operation mode." << endl << endl;
-    cout << " 0. Remove Intermediary File" << endl;
-    cout << " 1. Judge" << endl; 
-    cout << " 2. Calculate Margin" << endl;
-    cout << " 3. Optimization with Critical Margin Method (CMM)" << endl;
-    cout << " 4. Optimization with Monte Carlo Method (MCM)" << endl;
-    cout << " 5. Optimization with MCM and CMM" << endl;
-    cout << " 6. Endless Optimization with MCM" << endl;
-    cout << " 7. New Optimization with MCM (yield)" << endl;
-    cout << " 8. Calculate Margin (low quality)" << endl;
-    cout << " 9. Calculate Margin (synchro)" << endl;
-    cout << " 10. Sequential Optimization with MCM (yield)" << endl;
-    cout << " 11. Optimization with MCM (yield) using jsim" << endl;
-    cout << " 12. Sequential Optimization with MCM (yield) using jsim" << endl;
-    cout << " 13. Search parameters" << endl << endl;
-    cout << "  Selected Mode : ";
+
+    cout << " 0.  Remove Intermediary File" << endl;
+    cout << " 1.  Judge operation" << endl;
+    cout << " 2.  Calculate Margin (acurate)" << endl;
+    cout << " 8.  Calculate Margin (binary search)" << endl;
+    cout << " 9.  Calculate Margin (binary search with synchro)" << endl;
+    cout << " 3.  Optimization with Critical Margin Method" << endl;
+    //cout << " 4.  Optimization with Monte Carlo Method (MCM)" << endl;
+    //cout << " 5.  Optimization with MCM and CMM" << endl;
+    //cout << " 6.  Endless Optimization with MCM" << endl;
+    cout << " 7.  Optimization with Center of Gravity Method (CGM)" << endl;
+
+    cout << " 10. Sequential Optimization with CGM" << endl;
+
+    cout << " 13. JSIM modes" << endl;
+
+    //cout << " 13. Search parameters" << endl << endl;
+    cout << "  Selected: ";
+
     cin >> menu;
     cout << endl;
 
