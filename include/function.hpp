@@ -5,7 +5,7 @@
 #include <vector>
 
 #define JOSIM_COMMAND "josim"   //JoSIMのコマンドを変更する位はここを書き換える
-
+#define JSIM_COMMAND  "jsim"   //JoSIMのコマンドを変更する位はここを書き換える
 //file.cpp
 #define SMALL_SUM 100           /* L_MAX + K_MAX + B_MAX + BI_MAX + PI_MAX + R_MAX + V_MAX + I_MAX */
 

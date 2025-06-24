@@ -32,7 +32,7 @@ int margin_ele_jsim(int ele_num, vector<ele_unit> &element, vector<vector<judge>
     string name = element[ele_num].element;
 
     //elementの中身は初期値で固定→代わりにcopyを生成し、この値を変えてマージン測定を行う
-    commandname << "jsim" << " MARGIN" << getpid() << ".cir > /dev/null"; 
+    commandname << JSIM_COMMAND << " MARGIN" << getpid() << ".cir > /dev/null"; 
     delete_cir << "rm -f MARGIN" << getpid() << ".cir";
     delete_out << "rm -f CIRCUIT" << getpid() << ".CSV";
 
