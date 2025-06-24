@@ -31,7 +31,7 @@ vector<vector<double>> readJSIMData() {
     ifstream fp_margin(outfile.str());
     
     if (!fp_margin.is_open()) {
-        cerr << "No output of JoSIM." << endl;
+        cerr << "No output of JSIM." << endl;
     }
 
     fp_margin.seekg(0, ios::end);

@@ -107,6 +107,7 @@ void make_data_cir(std::vector<std::string>& data_cir, std::string &filename, st
 int judge_element(std::string &line);
 range find_range(range range, std::string line); //各パラメータの上限・下限をチェック
 std::string sub_unit(std::string &main);
+void convert_jsim(std::vector<std::string> &data_cir, std::string &filename);
 
 //miscellaneous
 void delete_file();

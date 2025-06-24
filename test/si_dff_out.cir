@@ -118,8 +118,8 @@ XI7              sink         36         32
 
 *** netlist file ***
 .TRAN 1ps 750ps 0ps
-.FILE CIRCUIT63413.CSV
-.print phase B1.XI1
-.print phase B1.XI3
-.print phase B1.XI7
+.FILE CIRCUIT20535.CSV
+.print phase XI1_B1
+.print phase XI3_B1
+.print phase XI7_B1
 .end

@@ -125,13 +125,14 @@ int main(int argc, const char *argv[]) {
     }
 
     if(menu_num == 8){
+        convert_jsim(data_cir, filename);
         int menu_num_jsim = menu_jsim();
         switch(menu_num_jsim){
             case 1:
-                commandname << JOSIM_COMMAND << " OPTIMIZE" << getpid() << ".cir > /dev/null"; 
+                commandname << JSIM_COMMAND << " OPTIMIZE" << getpid() << ".cir > /dev/null"; 
                 make_cir_opt(element, data_cir);
                 if(system((commandname.str()).c_str()) == -1){
-                    cout << "ERROR : can't execute JoSIM." << endl;
+                    cout << "ERROR : can't execute JSIM." << endl;
                 }
                 judge_operation_jsim(jud, 1);
                 make_cir_last(element, data_cir, arg_arr);

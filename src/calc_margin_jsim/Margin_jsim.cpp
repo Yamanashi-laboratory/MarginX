@@ -52,7 +52,7 @@ void Margin_jsim(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<s
                             cerr << "childL can't load memory" << endl;
                             exit(EXIT_FAILURE);
                         }
-                        margin_ele_low(i,element,  jud, shmaddr, data_cir);
+                        margin_ele_jsim(i,element,  jud, shmaddr, data_cir);
                         if (shmdt(shmaddr) == -1) {
                             exit(EXIT_FAILURE);
                         }
