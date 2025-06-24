@@ -101,7 +101,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
         //マルチプロセス開始
         vector<int> pid;        
         for (int i = 0; i < MULTI_NUM; i++) { // MULTI_NUM = 1回のモンテカルロで生成するマルチプロセス数
-                pid.emplace_back(fork());
+                pid.emplace_back(fork()); 
                 if(pid[i] == 0){       
                     opt_num  *shmaddr;
                     if ((shmaddr = (opt_num*)shmat(shmid, NULL, 0)) == (void *)-1) {

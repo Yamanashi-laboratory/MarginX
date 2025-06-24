@@ -21,6 +21,7 @@ int menu(){
     int menu;
 
     cout << " Please select an operation mode." << endl << endl;
+
     cout << " 0.  Remove Intermediary File" << endl;
     cout << " 1.  Judge operation" << endl;
     cout << " 2.  Calculate Margin (acurate)" << endl;
@@ -38,6 +39,7 @@ int menu(){
 
     //cout << " 13. Search parameters" << endl << endl;
     cout << "  Selected: ";
+
     cin >> menu;
     cout << endl;
 

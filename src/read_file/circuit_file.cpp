@@ -254,17 +254,22 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
 
     file.close();
 
-    int sort = 0;
+
+
     vector<ele_unit> element_order;  //整列されたelement配列
-    vector<int> line_num_order;
+
     for(int ide_num = 0; ide_num <= 7; ide_num++){   //elementを整列
-        for (int i = sort; i < element.size(); i++){
+        for (int i = 0; i < element.size(); i++){
             if(element[i].ide_num == ide_num){
-                swap(element[sort], element[i]);
-                sort++;
+                element_order.push_back(element[i]);
             }
         }
     }
+
+    element = element_order;
+
+
+
 
     /*
     vector<ele_unit> element_order;  //整列されたelement配列
@@ -284,7 +289,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
     cou->line_num_arr = line_num_order;
 
     for(int i = 0; i < element.size(); i++){
-            cout << element[i].element << " " << element[i].ide_num << " " << cou->line_num_arr[i] << endl ;
+            cout << element[i].element  << "   " <<element[i].value << endl ;
         }    */
     }
 

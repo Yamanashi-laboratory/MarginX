@@ -67,7 +67,6 @@ int main(int argc, const char *argv[]) {
     cout << " ------PASS------" << endl << endl;
 
 
-
     //モードを選択し、分岐
     int menu_num = menu();
     time(&start);    //時間を取得(コマンドメニュー入力後)
