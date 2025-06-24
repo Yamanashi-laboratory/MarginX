@@ -46,21 +46,21 @@ RS2                4         3   5.23ohm *SHUNT=11.30
 *** opt_dff
 .subckt opt_dff         10          1          2        29
 ***       clk       din      dout
-b6    18     7  jjmod area=2.160     
-RS6    18     7               5.231ohm  *SHUNT=11.300
-*FIX
-b5    11     4  jjmod area=2.160     
-RS5    11     4               5.231ohm  *SHUNT=11.300
-*FIX
-b4    19    20  jjmod area=1.152     
-RS4    19    20               9.809ohm  *SHUNT=11.300
-b3    14    15  jjmod area=1.500     
-RS3    14    15               7.533ohm  *SHUNT=11.300
+b1    16    17  jjmod area=2.000     
+RS1    16    17               5.650ohm  *SHUNT=11.300
 b2    12    13  jjmod area=2.160     
 RS2    12    13               5.231ohm  *SHUNT=11.300
 *FIX
-b1    16    17  jjmod area=1.103     
-RS1    16    17              10.245ohm  *SHUNT=11.300
+b3    14    15  jjmod area=1.500     
+RS3    14    15               7.533ohm  *SHUNT=11.300
+b4    19    20  jjmod area=1.690     
+RS4    19    20               6.686ohm  *SHUNT=11.300
+b5    11     4  jjmod area=2.160     
+RS5    11     4               5.231ohm  *SHUNT=11.300
+*FIX
+b6    18     7  jjmod area=2.160     
+RS6    18     7               5.231ohm  *SHUNT=11.300
+*FIX
 
 LPR3              22        21   0.159pH fcheck
 LPR2              26        25   0.156pH fcheck
@@ -72,20 +72,21 @@ LP4               20         0   0.276pH fcheck
 LP3               15         0   0.104pH fcheck
 LP2               13         0   0.094pH fcheck
 LPIN               1        25   0.328pH fcheck
-L9                16        19   0.042pH fcheck
-l8    18     2               2.405pH
-l7    25    12               2.756pH
-l6    21    11               2.535pH
-l5    12    14               4.508pH
-l4    19    18               4.641pH
-l3    24    16               9.456pH
-l2    14    24               1.508pH
 l1    11    17               3.302pH
-r3    29    22               8.320ohm
-*FIX
+l2    14    24               1.508pH
+l3    24    16               4.000pH
+l4    19    18               4.641pH
+l5    12    14               4.508pH
+l6    21    11               2.535pH
+l7    25    12               2.756pH
+l8    18     2               2.405pH
+L9                16        19   0.042pH fcheck
+
+r1    29    23              11.440ohm
 r2    29    26               8.320ohm
 *FIX
-r1    29    23              20.315ohm
+r3    29    22               8.320ohm
+*FIX
 .ends
 
 *** sink
@@ -116,8 +117,8 @@ XI5           opt_dff          9         37         35         32
 XI7              sink         36         32
 
 *** netlist file ***
-.TRAN 0.1ps 750ps 0ps 1ps
-.FILE CIRCUIT723659.CSV
+.TRAN 1ps 750ps 0ps
+.FILE CIRCUIT63413.CSV
 .print phase B1.XI1
 .print phase B1.XI3
 .print phase B1.XI7

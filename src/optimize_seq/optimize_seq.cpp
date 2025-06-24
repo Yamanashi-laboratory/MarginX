@@ -35,7 +35,7 @@ void optimize_seq(vector<ele_unit> &element, vector<string> &data_cir, vector<ve
     int count = 0;
     int bias_margin = 0;
     double yield_ave = 0;
-    double local_nd = 0.1;
+    double local_nd = 0;
     double lambda, global = 0;;
     int not_upd = 0;
     int suc_th = 60;
@@ -51,7 +51,7 @@ void optimize_seq(vector<ele_unit> &element, vector<string> &data_cir, vector<ve
     //cout << yield_log[0] << endl;
     vector<int> yield_his;
     yield_his.resize(5,0);
-    vector<double> global_rand;
+    vector<double> global_rand;  //素子の種類ごとにグローバルな乱数を格納
     global_rand.resize(8, 0);
 
     cout << " Select the Kind of Score" << endl;
@@ -112,20 +112,15 @@ void optimize_seq(vector<ele_unit> &element, vector<string> &data_cir, vector<ve
     bias_margin =  min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
     cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * bias_margin;
     Margin_num++;
-
+    //ローカルな乱数をクリティカルマージンから決定
     local_nd = round(min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) / 2) / 100;
     
     for (int m = 0; m < MONTE_CARLO; m++){
-        //最初
+        //グローバルな乱数を設定
         for (int r = 0; r < global_rand.size(); r++){
             global_rand[r] = rand_global_yield(local_nd);
         }
-
-
         //double global = rand_global_yield(local_nd);  //グローバルな乱数計算
-
-
-
         for (int i = 0; i < MULTI_NUM; i++) { // MULTI_NUM = 1回のモンテカルロで生成するマルチプロセス数
             opt_ele_yield(element,data_cir,jud, opt, global, local_nd, global_rand);
         }
@@ -137,9 +132,11 @@ void optimize_seq(vector<ele_unit> &element, vector<string> &data_cir, vector<ve
             sharp += "O";
             count = static_cast<int>(progress);
         }
+        yield_his[m % yield_his.size()] = opt->success;
+
         //cout << "\x1B[1K";
         cout << " Optimizing...   "   <<  right << setw(5) <<static_cast<int>(static_cast<double>(now - start)) << " seconds left"
-                                                    << "   ( success : " << opt->success << " )" << ", ND = " << local_nd << ", not_upd = " << not_upd << ", average =  "<<  reduce(begin(yield_his), end(yield_his)) / yield_his.size() << endl;
+                                                    << "  (Yield: " << (double)opt->success / MULTI_NUM * 100 << "%" << ", Average yield: "<<  reduce(begin(yield_his), end(yield_his)) / yield_his.size() << "% , Normal Distribution: " << local_nd * 100 << "%)" << endl;
         cout << "\x1B[1B";    //カーソルを１行下に移動させる
         cout << "\x1B[1A";    //カーソルを１行上に移動させる
         //cout << "\r";
@@ -156,12 +153,8 @@ void optimize_seq(vector<ele_unit> &element, vector<string> &data_cir, vector<ve
        }///////////////////////
 
 */
-
-         
-                 
-        fp_yield << m + 1 << ", " << opt->success << ", " << element[1].value << endl;
-        yield_log.push_back(opt->success);
-        yield_his[m % yield_his.size()] = opt->success;
+        
+        fp_yield << m + 1 << ", " << opt->success << ", " << element[1].value << endl;    //歩留まり出力(開発用)
 
         not_upd++;   //歩留まりが向上しなかったら、not_upd を+1する
         bunbo = MULTI_NUM - opt->success;

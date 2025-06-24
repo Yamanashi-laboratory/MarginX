@@ -80,52 +80,89 @@ int main(int argc, const char *argv[]) {
             if(system((commandname.str()).c_str()) == -1){
                 cout << "ERROR : can't execute JoSIM." << endl;
             }
-            judge_operation( jud, 1);
+            judge_operation(jud, 1);
             make_cir_last(element, data_cir, arg_arr);
             break;
         case 2:
-            Margin(element,  jud, data_cir, arg_arr, 0);
+            Margin(element, jud, data_cir, arg_arr, 0);
             break;
         case 3:
-            critical_margin_method(element,  jud, data_cir, arg_arr);
+            Margin_low(element, jud, data_cir, arg_arr, 0);
+            break;      
+        case 4:
+            Margin_syn(element, jud, data_cir, arg_arr, 0);
+            break;  
+        case 5:
+            critical_margin_method(element, jud, data_cir, arg_arr);
             make_cir_last(element, data_cir, arg_arr);
             break;
-        case 4:
-            optimize_monte(element,data_cir,jud, arg_arr);
-            break;
-        case 5:
-            optimize(element,data_cir,jud, arg_arr);
-            break;
         case 6:
-            optimize_monte_ul(element,data_cir,jud, arg_arr);
-            break;
-        case 7:
             optimize_yield_up(element,data_cir,jud, arg_arr);
             break;
-        case 8:
-            Margin_low(element,  jud, data_cir, arg_arr, 0);
-            break;
-        case 9:
-            Margin_syn(element,  jud, data_cir, arg_arr, 0);
-            break;
-        case 10:
+        case 7:
             optimize_seq(element,data_cir,jud, arg_arr);
             break;
+        case 8:
+            break;
+/*
+        case 9:
+            optimize_monte(element,data_cir,jud, arg_arr);
+            break;
+        case 10:
+            opimize(element,data_cir,jud, arg_arr);
+            break;
         case 11:
-            optimize_yield_up_jsim(element,data_cir,jud, arg_arr);
+            optimize_monte_ul(element,data_cir,jud, arg_arr);
             break;
-        case 12:
-            optimize_seq_jsim(element,data_cir,jud, arg_arr);
-            break;
-        case 13:
+        case 14:
             search(element,data_cir,jud, arg_arr);
             break;
 
-            
+*/            
         default: //適切な値が入力されていなければエラーを吐き終了
             cout << " ERROR : Please input a correct number." << endl;
             return 0;
     }
+
+    if(menu_num == 8){
+        int menu_num_jsim = menu_jsim();
+        switch(menu_num_jsim){
+            case 1:
+                commandname << JOSIM_COMMAND << " OPTIMIZE" << getpid() << ".cir > /dev/null"; 
+                make_cir_opt(element, data_cir);
+                if(system((commandname.str()).c_str()) == -1){
+                    cout << "ERROR : can't execute JoSIM." << endl;
+                }
+                judge_operation_jsim(jud, 1);
+                make_cir_last(element, data_cir, arg_arr);
+            break;
+            case 2:
+                Margin_jsim(element, jud, data_cir, arg_arr, 0);
+                break;
+            case 3:
+                Margin_low(element, jud, data_cir, arg_arr, 0);   ///////
+                break;      
+            case 4:
+                Margin_syn(element, jud, data_cir, arg_arr, 0);//////////
+                break;  
+            case 5:
+                critical_margin_method(element, jud, data_cir, arg_arr);////////
+                make_cir_last(element, data_cir, arg_arr);
+                break;
+            case 6:
+                optimize_yield_up_jsim(element,data_cir,jud, arg_arr);
+                break;
+            case 7:
+                optimize_seq_jsim(element,data_cir,jud, arg_arr);
+                break;
+            default: //適切な値が入力されていなければエラーを吐き終了
+                cout << " ERROR : Please input a correct number." << endl;
+                return 0;            
+                break;
+        }
+    }
+
+    
 
     end_time(start,end);  //終了時間を表示
 

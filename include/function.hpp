@@ -99,6 +99,7 @@ void end_time(time_t start, time_t end);
 
 //menu
 int menu();
+int menu_jsim();
 
 //read_file
 int readJudgementFile(std::vector<std::vector<judge>> &jud, std::string &judgefilename, std::vector<std::string> arg_arr);

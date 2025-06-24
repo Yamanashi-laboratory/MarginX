@@ -93,9 +93,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
             global_rand[r] = rand_global_yield(local_nd);
         }
         //cout << endl;
-
         //double global = rand_global_yield(local_nd);  //グローバルな乱数計算 
-
         //cout << " global_rand = " << global << endl;
 
         //マルチプロセス開始
@@ -105,7 +103,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
                 if(pid[i] == 0){       
                     opt_num  *shmaddr;
                     if ((shmaddr = (opt_num*)shmat(shmid, NULL, 0)) == (void *)-1) {
-                        cout << "childL can't load memory" << endl;  
+                        cout << "child can't load memory" << endl;
                         exit(EXIT_FAILURE);
                     }
                     opt_ele_yield(element,data_cir,jud,shmaddr, global, local_nd, global_rand);
@@ -132,9 +130,13 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
             sharp += "O";
             count = static_cast<int>(progress);
         }
+
+        yield_his[m % yield_his.size()] = opt->success;
+
         //cout << "\x1B[1K";
-        cout << " Optimizing...   "   <<  right << setw(5) <<static_cast<int>(static_cast<double>(now - start)) << " seconds elapsed"
-                                                    << "   ( success : " << opt->success << " )" << ", ND = " << local_nd << ", not_upd = " << not_upd << ", average =  "<<  reduce(begin(yield_his), end(yield_his)) / yield_his.size() << endl;
+        cout << " Optimizing...   "   <<  right << setw(5) <<static_cast<int>(static_cast<double>(now - start)) << " sec. elapsed"
+                                                    << "  (Yield: " <<  (double)opt->success / MULTI_NUM * 100 << "%" << ", Average yield: "<<  reduce(begin(yield_his), end(yield_his)) / yield_his.size() << "% , Normal Distribution: " << local_nd * 100 << "%)" << endl;
+                                                    //<< "   (Yield : " << opt->success / MULTI_NUM * 100 << "%)" << ", Normal Distribution = " << local_nd << ", not_upd = " << not_upd << ", Average of last 5 yield=  "<<  reduce(begin(yield_his), end(yield_his)) / yield_his.size() << endl;
         cout << "\x1B[1B";    //カーソルを１行下に移動させる
         cout << "\x1B[1A";    //カーソルを１行上に移動させる
 
@@ -142,7 +144,6 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
         fp_yield << m + 1 << ", " << opt->success << ", " << local_nd << ", " << element[13].value << endl;
         //yield_log.push_back(opt->success);
 
-        yield_his[m % yield_his.size()] = opt->success;
         not_upd++;   //歩留まりが向上しなかったら、opt_num を+1する
         bunbo = MULTI_NUM - opt->success;
         if(opt->success == 100){
