@@ -52,7 +52,6 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
     vector<double> global_rand;
     global_rand.resize(8, 0);
     vector<double> power;
-    //cout << yield_log[0] << endl;
 
 
     power = select_score();   //スコアを選択 → power配列に格納

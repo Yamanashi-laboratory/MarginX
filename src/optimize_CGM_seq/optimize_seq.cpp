@@ -55,15 +55,6 @@ void optimize_seq(vector<ele_unit> &element, vector<string> &data_cir, vector<ve
     global_rand.resize(8, 0);
     vector<double> power;
 
-    cout << " Select the Kind of Score" << endl;
-    cout << " 1: Only Critical Margin " << endl;
-    cout << " 2: Only Bias Margin" << endl;
-    cout << " 3: The Sum of Critical Margin and Bias Margin" << endl;
-    cout << " 4: The Sum of Critical Margin and Bias Margin * 2 " << endl;
-    cout << " 5: Others ( input yourself )" << endl << endl;
-    cout << "  Selected Score : ";
-    cin >> mode;
-
     power = select_score();   //スコアを選択 → power配列に格納
 
     start = time(NULL);
