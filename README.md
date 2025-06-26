@@ -1,3 +1,16 @@
+
+## Build with CMake
+
+You can compile the project using CMake.
+
+```
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+
+
 MarginX : Margin Calculator and Circuit Optimizer from Yamanashi Lab, YNU Developed by Sho Matsuoka (in 2023) and Nakaishi Sotaro (in 2017) 
  --------------------------------------------------------------------------
 Please wait for documentation of MarginX.

@@ -12,10 +12,10 @@
 
 using namespace std;
 
-void setup_josim_command(vector<string> arg_arr){
+void setup_jsim_command(vector<string> arg_arr){
     int cou = 0;
     int lineNumberToReplace = 0;
-    string josim_commnad = "";
+    string jsim_commnad = "";
 
     // 実行ファイルのパスを取得
     filesystem::path executablePath = filesystem::absolute(filesystem::path(arg_arr[0]));
@@ -49,23 +49,23 @@ void setup_josim_command(vector<string> arg_arr){
 
     vector<string> lines;
     string line;
-    string replacementText = "#define JOSIM_COMMAND \"";
+    string replacementText = "#define JSIM_COMMAND \"";
 
 
     while (getline(fmargin, line)) {
         lines.push_back(line);
-        if(line.find("#define JOSIM_COMMAND") != string::npos){
+        if(line.find("#define JSIM_COMMAND") != string::npos){
             lineNumberToReplace = cou;
         }
         cou++;
     }
     fmargin.close();
 
-    cout << " PLease input command to execute JoSIM in your environemnt : " ;
-    cin >> josim_commnad; 
+    cout << " PLease input command to execute JSIM in your environemnt : " ;
+    cin >> jsim_commnad; 
     cout << endl;
 
-    replacementText = replacementText + josim_commnad + "\"";
+    replacementText = replacementText + jsim_commnad + "\"";
 
     // ファイルの10行目を変換する（0ベースのインデックスなので9行目）
     lines[lineNumberToReplace] = replacementText;

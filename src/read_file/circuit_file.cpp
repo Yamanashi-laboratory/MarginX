@@ -258,7 +258,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
     vector<ele_unit> element_order;  //整列されたelement配列
 
     for(int ide_num = 0; ide_num <= 7; ide_num++){   //elementを整列
-        for (int i = 0; i < element.size(); i++){
+        for (size_t i = 0; i < element.size(); i++){
             if(element[i].ide_num == ide_num){
                 element_order.push_back(element[i]);
             }

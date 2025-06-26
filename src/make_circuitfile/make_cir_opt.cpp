@@ -33,7 +33,7 @@ int make_cir_opt(vector<ele_unit> &element, vector<string> &data_cir){
         cerr << "file not error3!"  << endl;
         return 0;
     }        
-    for (int x = 0; x < element.size(); x++) {
+    for (size_t x = 0; x < element.size(); x++) {
         liness.clear();
         liness.str("");
         y = element[x].line_num;
@@ -97,7 +97,7 @@ int make_cir_opt(vector<ele_unit> &element, vector<string> &data_cir){
         }
         transform(element[x].element.begin(), element[x].element.end(), element[x].element.begin(), ::toupper); 
     }
-    for (int x = 0; x < data_cir_copy.size(); x++) {     //内容を書き換えたdata_cir_copy(バッファ)を全て書く
+    for (size_t x = 0; x < data_cir_copy.size(); x++) {     //内容を書き換えたdata_cir_copy(バッファ)を全て書く
         if(data_cir_copy[x].find(".file") != string::npos || data_cir_copy[x].find(".FILE") != string::npos || data_cir_copy[x].find(".File") != string::npos){
             fpin << ".FILE CIRCUIT" <<  getpid() << ".CSV" << endl;
         }

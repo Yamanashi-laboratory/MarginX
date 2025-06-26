@@ -22,16 +22,13 @@ using namespace std;
 
 double calc_critical(vector<ele_unit> &element){
     double critical = 100;
-    int cri_num;
     for(size_t j = 0; j < element.size(); j++){
         if(element[j].ide_num != 6 && element[j].ide_num != 7){
             if(-element[j].margin_L < critical){
                 critical = -element[j].margin_L;
-                cri_num = j;
             }
             if(element[j].margin_H < critical){
                 critical = element[j].margin_H;
-                cri_num = j;
             }
         }
     }

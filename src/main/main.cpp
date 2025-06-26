@@ -25,7 +25,7 @@ int main(int argc, const char *argv[]) {
     vector<string> elej;                 //各判定素子の名前
     vector<string> data_cir;          //サーキットファイルを格納
     time_t start, end;                //開始時間と終了時間
-    struct tm *tps, *tpe;             //開始時間と終了時間
+    struct tm *tps;             //開始時間と終了時間
     char date[100];                   //日付・日時を格納する文字列配列
     vector<ele_unit> element;         //測定素子の情報を格納する構造体を格納する配列
     stringstream commandname;          //JoSIM実行用のストリングストリーム
@@ -104,21 +104,7 @@ int main(int argc, const char *argv[]) {
             break;
         case 8:
             break;
-/*
-        case 9:
-            optimize_monte(element,data_cir,jud, arg_arr);
-            break;
-        case 10:
-            opimize(element,data_cir,jud, arg_arr);
-            break;
-        case 11:
-            optimize_monte_ul(element,data_cir,jud, arg_arr);
-            break;
-        case 14:
-            search(element,data_cir,jud, arg_arr);
-            break;
-
-*/            
+         
         default: //適切な値が入力されていなければエラーを吐き終了
             cout << " ERROR : Please input a correct number." << endl;
             return 0;
@@ -164,7 +150,7 @@ int main(int argc, const char *argv[]) {
     }
 
     
-
+    end = time(nullptr);
     end_time(start,end);  //終了時間を表示
 
     delete_file();  //中間ファイルをすべて削除

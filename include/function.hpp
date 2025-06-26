@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#define JOSIM_COMMAND "josim"   //JoSIMのコマンドを変更する位はここを書き換える
+#define JOSIM_COMMAND "josim"
 #define JSIM_COMMAND  "jsim"   //JoSIMのコマンドを変更する位はここを書き換える
 //file.cpp
 #define SMALL_SUM 200           /* L_MAX + K_MAX + B_MAX + BI_MAX + PI_MAX + R_MAX + V_MAX + I_MAX */
@@ -12,8 +12,6 @@
 //margin.cpp
 #define MARGIN_UPPER 2          /* マージン測定の上限が100％ */
 #define MARGIN_FIG "#"
-
-#define PATH "/programs/matsuoka/MarginX/python_source/"
 
 //optimize.hpp
 #define MULTI_NUM 100
@@ -92,7 +90,8 @@ void display_help ();
 //setup
 void setup_python_path(std::vector<std::string> arg_arr);
 void setup(std::vector<std::string> &arg_arr);
-void setup_josim_command();
+void setup_josim_command(std::vector<std::string> arg_arr);
+void setup_jsim_command(std::vector<std::string> arg_arr);
 
 //time
 void end_time(time_t start, time_t end);
@@ -121,6 +120,7 @@ int search_command(std::vector<std::string> arg_arr, const std::string command);
 void detail_out(std::vector<ele_unit> &element);
 void fig_out(std::vector<ele_unit> &element);
 void file_out(std::string &filename, std::vector<ele_unit> &element);
+int margin_py();
 
 //synchro
 void synchro(std::vector<ele_unit> &element, int ele_num, double syn_value);

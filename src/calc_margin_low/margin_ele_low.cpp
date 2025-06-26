@@ -21,10 +21,9 @@ using namespace std;
 
 int margin_ele_low(int ele_num, vector<ele_unit> &element, vector<vector<judge>> &jud, board *top, vector<string> &data_cir){
     //int check = 0;
-    int outline_num = ele_num;
     int index = 0;
     int index_ite = 10; 
-    double value_ini,  HIGH, LOW, percent_HIGH, percent_LOW, median;
+    double value_ini,  HIGH, LOW, percent_HIGH, percent_LOW;
     //double value_h, value_l;
     string unit;
     stringstream commandname, delete_cir, delete_out, out_det, out_fig, out_csv;
@@ -127,7 +126,6 @@ int margin_ele_low(int ele_num, vector<ele_unit> &element, vector<vector<judge>>
         percent_HIGH = ( (HIGH - element[ele_num].value) / element[ele_num].value) * 100;
         percent_LOW = -( (element[ele_num].value - LOW) / element[ele_num].value) * 100;
     }
-    median = (HIGH + LOW)/2;
 
 
 

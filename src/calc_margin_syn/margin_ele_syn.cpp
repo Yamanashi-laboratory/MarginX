@@ -23,8 +23,7 @@ using namespace std;
 int margin_ele_syn(int ele_num, vector<ele_unit> &element, vector<vector<judge>> &jud, board *top, vector<string> &data_cir){
     int check = 0;
     int order_num = get_digit(element[ele_num].value);
-    int outline_num = ele_num;
-    double value_h, value_l, HIGH, LOW, percent_HIGH, percent_LOW, median;
+    double value_h, value_l, HIGH, LOW, percent_HIGH, percent_LOW;
     string unit;
     stringstream commandname, delete_cir, delete_out, out_det, out_fig, out_csv;
     vector<ele_unit> copy = element;
