@@ -71,7 +71,7 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
     local_nd = round(min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) / 2) / 100;
     for (int m = 0; m < MONTE_CARLO; m++){
         //最初
-        for (int r = 0; r < global_rand.size(); r++){
+        for (size_t r = 0; r < global_rand.size(); r++){
             global_rand[r] = rand_global_yield(local_nd);
         }
 
@@ -125,7 +125,7 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
 
         if( opt->success != 0 ){    // 開発者確認用
             lambda = (MULTI_NUM - opt->success) / MULTI_NUM;
-            for(int i = 0; i < element.size(); i++){
+            for(size_t i = 0; i < element.size(); i++){
 
                 element[i].value = opt->sum_value[i] / opt->success + lambda * (element[i].value - opt->sum_value_f[i] / bunbo);   // 新たなパラメータに置き換える
                 //element[i].value = opt->sum_value[i] / opt->success;
@@ -144,7 +144,7 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
                 not_upd = 0;
                 opt->suc_max = opt->success;
 
-                for(int i = 0; i < element.size(); i++){
+                for(size_t i = 0; i < element.size(); i++){
                     //element[i].value = opt->sum_value[i] / opt->success;
                     //element[i].value = opt->sum_value[i] / opt->success + lambda * (element[i].value - opt->sum_value_f[i] / bunbo);   // 新たなパラメータに置き換える
                     //opt->best_value[i] =element[i].value;
@@ -153,7 +153,7 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
         }
 
 
-        if(reduce(begin(yield_his), end(yield_his)) / yield_his.size() > suc_th){  //直近 5 サイクルの歩留まり(success) の平均が 60 を超えたら、標準偏差を +0.01
+        if(reduce(begin(yield_his), end(yield_his)) / (int)yield_his.size() > suc_th){  //直近 5 サイクルの歩留まり(success) の平均が 60 を超えたら、標準偏差を +0.01
             local_nd += 0.01;
             Margin_jsim(element,  jud, data_cir, arg_arr, 2);
             not_upd = 0;
@@ -161,7 +161,7 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
 
             cri_bias_sum = calc_score(element, power);
             if( cri_bias_sum > opt->cri_bias_best ){   // マージンの評価値 cri_bias_sum が最大だったらそれを現時点の最良の回路として置き換える
-                    for(int j = 0; j < element.size(); j++){
+                    for(size_t j = 0; j < element.size(); j++){
                         opt->best_value[j] = element[j].value;    // best_value配列に現時点の最良の回路のパラメータを格納
                     }
                     opt->best_value[element.size()] = Margin_num;  //best_value配列の最後の要素の次の要素に何番目の回路かを格納
@@ -182,17 +182,11 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
 
 
         opt->success = 0;
-        for(int i = 0; i < element.size(); i++){
+        for(size_t i = 0; i < element.size(); i++){
             opt->sum_value[i] = 0;
             opt->sum_value_f[i] = 0;
         }
-
-
     }
-
-
-
-
 
 
     //cri_bias_sum = min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
@@ -200,7 +194,7 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
     // cri_bias_sum = その回路のマージンの評価 (クリティカルマージン + 2 * バイアスマージン)
     //cout << "cri_bias_sum : " << cri_bias_sum << endl; 
     if( cri_bias_sum > opt->cri_bias_best ){   // マージンの評価値 cri_bias_sum が最大だったらそれを現時点の最良の回路として置き換える
-        for(int j = 0; j < element.size(); j++){ 
+        for(size_t j = 0; j < element.size(); j++){ 
             opt->best_value[j] = element[j].value;    // best_value配列に現時点の最良の回路のパラメータを格納
         }
         opt->best_value[element.size()] = Margin_num;  //best_value配列の最後の要素の次の要素に何番目の回路かを格納
@@ -208,7 +202,7 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
     }
 
     cout <<  " This is the " << GetOrdinalNumber(static_cast<int>(opt->best_value[element.size()])) << " value." << endl;
-    for(int i = 0; i < element.size(); i++){
+    for(size_t i = 0; i < element.size(); i++){
         element[i].value = opt->best_value[i];  //最終的な最良の回路のパラメータをelement配列に格納
     }
 

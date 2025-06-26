@@ -19,10 +19,9 @@ using namespace std;
 void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> &element){
     
     int flg_shunt_B = 0;
-    int flg_shunt_P = 0;
     int line_num = 0;
     int i = 0;
-    int i1 = 0, i2 = 0, i3 = 0;
+    size_t i1 = 0, i2 = 0;
     int file_check = -1;
     range range;
 
@@ -115,7 +114,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     i1 = main.find("h");    //単位の切り離し(H)
                     i2 = main.find("H");
                     if ( i1 != string::npos || i2 != string::npos){
-                        i = max({i1,i2});
+                        i = max({(int)i1,(int)i2});
                         main.insert(i," ");     
                     }
                     
@@ -161,7 +160,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     i1 = main.find("f");
                     i2 = main.find("F");
                     if ( i1 != string::npos || i2 != string::npos){
-                        i = max({i1,i2});
+                        i = max({(int)i1,(int)i2});
                         main.insert(i," ");     
                     }
 
@@ -177,7 +176,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     i1 = line.rfind("ohm");    //Rの場合は、"ohm" がsub_unitのミリ(m)に引っかかるので、先に"ohm"を排除
                     i2 = line.rfind("OHM");
                     if ( i1 != string::npos || i2 != string::npos){
-                        i = max({i1,i2});
+                        i = max({(int)i1,(int)i2});
                         line.insert(i," ");     
                     }
 
@@ -198,7 +197,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     i1 = main.rfind("v");
                     i2 = main.rfind("V");
                     if ( i1 != string::npos || i2 != string::npos){
-                        i = max({i1,i2});
+                        i = max({(int)i1,(int)i2});
                         main.insert(i," ");     
                     }
 
@@ -219,7 +218,7 @@ void make_data_cir(vector<string> &data_cir, string &filename, vector<ele_unit> 
                     i1 = main.rfind("a");
                     i2 = main.rfind("A");
                     if ( i1 != string::npos || i2 != string::npos){
-                        i = max({i1,i2});
+                        i = max({(int)i1,(int)i2});
                         main.insert(i," ");     
                     }
 

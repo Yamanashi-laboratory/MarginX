@@ -49,7 +49,7 @@ void convert_jsim(vector<string> &data_cir, string &filename){
     }
     file.close();
 
-    for (int x = 0; x < data_cir_copy.size(); x++) {     //内容を書き換えたdata_cir_copy(バッファ)を全て書く
+    for (size_t x = 0; x < data_cir_copy.size(); x++) {     //内容を書き換えたdata_cir_copy(バッファ)を全て書く
         data_cir[x] = data_cir_copy[x];
     }
 /*

@@ -177,17 +177,19 @@ int make_cir_last(std::vector<ele_unit> &element, std::vector<std::string>& data
 void critical_margin_method(std::vector<ele_unit> &element, std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr);
 void critical_margin_method_jsim(std::vector<ele_unit> &element, std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr);
 
-//optimize_com
-void optimize(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
-
+/*
 //optimize_monte
 void optimize_monte(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
 void optimize_monte_ul(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
 
-//optimize_yield
+//optimize_con
 void optimize_yield(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
-void optimize_yield_up(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
 void optimize_yield_up_down(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
+void optimize(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
+*/
+
+//optimize_yield
+void optimize_yield_up(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
 void optimize_yield_up_jsim(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
 
 //optimize_seq

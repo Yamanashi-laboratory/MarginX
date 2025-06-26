@@ -170,7 +170,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
         }
 
         //cout << reduce(begin(yield_his), end(yield_his)) / yield_his.size() << endl;
-        if(reduce(begin(yield_his), end(yield_his)) / yield_his.size() >= suc_th){  //直近 5 サイクルの歩留まり(success) の平均が 60 を超えたら、標準偏差を +0.01
+        if(reduce(begin(yield_his), end(yield_his)) / (int)yield_his.size() >= suc_th){  //直近 5 サイクルの歩留まり(success) の平均が 60 を超えたら、標準偏差を +0.01
             local_nd += 0.01;
             Margin_low(element,  jud, data_cir, arg_arr, 2);
             not_upd = 0;

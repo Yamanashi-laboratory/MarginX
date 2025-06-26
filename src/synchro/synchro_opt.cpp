@@ -16,8 +16,6 @@
 using namespace std;
 
 
-
-
 void synchro_opt(vector<ele_unit> &element, int ele_num){
     if(element[ele_num].SYN != 0){
         double value = element[ele_num].value;

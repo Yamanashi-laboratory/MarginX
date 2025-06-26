@@ -25,7 +25,7 @@ void fig_out(vector<ele_unit> &element){
     string name;
     cout << "\n" << "                  -50%                                                 50%\n";
     cout << "                    +---------------------------------------------------+\n";
-    for(  int i = 0 ; i < element.size() ; i++ ){
+    for(size_t i = 0 ; i < element.size() ; i++ ){
         hush_num = {abs(element[i].margin_L), element[i].margin_H};
         hush = {"",""};
         for( int j = 0 ; j < 2 ; j++ ){
