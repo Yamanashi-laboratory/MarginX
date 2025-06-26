@@ -19,7 +19,7 @@
 
 using namespace std;
 
-int margin_ele_jsim(int ele_num, vector<ele_unit> &element, vector<vector<judge>> &jud, board *top, vector<string> &data_cir){
+int margin_ele_low_jsim(int ele_num, vector<ele_unit> &element, vector<vector<judge>> &jud, board *top, vector<string> &data_cir){
     //int check = 0;
     int outline_num = ele_num;
     int index = 0;

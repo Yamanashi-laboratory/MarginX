@@ -134,10 +134,12 @@ RS9    26    19              11.300ohm *SHUNT=11.300
 b10     21    24  jjmod area=1.800     
 RS10    21    24               6.647ohm *SHUNT=11.300
 *MIN=1.8
+*SYN=1
 
 b11     22    25  jjmod area=1.800     
 RS11    22    25               6.647ohm *SHUNT=11.300
 *MIN=1.8
+*SYN=1
 
 K0  LLFB    L7               0.123
 K1  LLFB    L8              -0.235

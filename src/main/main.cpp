@@ -141,13 +141,13 @@ int main(int argc, const char *argv[]) {
                 Margin_jsim(element, jud, data_cir, arg_arr, 0);
                 break;
             case 3:
-                Margin_low(element, jud, data_cir, arg_arr, 0);   ///////
+                Margin_low_jsim(element, jud, data_cir, arg_arr, 0);   
                 break;      
             case 4:
-                Margin_syn(element, jud, data_cir, arg_arr, 0);//////////
+                Margin_syn_jsim(element, jud, data_cir, arg_arr, 0);
                 break;  
             case 5:
-                critical_margin_method(element, jud, data_cir, arg_arr);////////
+                critical_margin_method_jsim(element, jud, data_cir, arg_arr);////////
                 make_cir_last(element, data_cir, arg_arr);
                 break;
             case 6:

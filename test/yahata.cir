@@ -120,8 +120,10 @@ r4                26        49   9.60ohm
 
 b1                42        43  jjmod area=2.13 
 RS1               42        43   5.30ohm *SHUNT=11.30
+*SYN=2
 b2                32        38  jjmod area=2.13 
 RS2               32        38   5.30ohm *SHUNT=11.30
+*SYN=2
 b3                34        35  jjmod area=2.13 
 RS3               34        35   5.30ohm *SHUNT=11.30
 b4                30        41  jjmod area=2.13 
@@ -130,8 +132,10 @@ b5                29        33  jjmod area=2.13
 RS5               29        33   5.30ohm *SHUNT=11.30
 b6                31        27  jjmod area=1.80 
 RS6               31        27   6.29ohm *SHUNT=11.30
+*SYN=1
 b7                28        27  jjmod area=1.80 
 RS7               28        27   6.29ohm *SHUNT=11.30
+*SYN=1
 b8                19        16  jjmod area=1 
 RS8               19        16  11.30ohm *SHUNT=11.30
 b9                25        22  jjmod area=2.07 

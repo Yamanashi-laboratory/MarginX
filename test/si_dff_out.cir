@@ -46,8 +46,8 @@ RS2                4         3   5.23ohm *SHUNT=11.30
 *** opt_dff
 .subckt opt_dff         10          1          2        29
 ***       clk       din      dout
-b1    16    17  jjmod area=2.000     
-RS1    16    17               5.650ohm  *SHUNT=11.300
+b1    16    17  jjmod area=1.103     
+RS1    16    17              10.245ohm  *SHUNT=11.300
 b2    12    13  jjmod area=2.160     
 RS2    12    13               5.231ohm  *SHUNT=11.300
 *FIX
@@ -74,7 +74,7 @@ LP2               13         0   0.094pH fcheck
 LPIN               1        25   0.328pH fcheck
 l1    11    17               3.302pH
 l2    14    24               1.508pH
-l3    24    16               4.000pH
+l3    24    16               5.962pH
 l4    19    18               4.641pH
 l5    12    14               4.508pH
 l6    21    11               2.535pH
@@ -82,7 +82,7 @@ l7    25    12               2.756pH
 l8    18     2               2.405pH
 L9                16        19   0.042pH fcheck
 
-r1    29    23              11.440ohm
+r1    29    23              15.555ohm
 r2    29    26               8.320ohm
 *FIX
 r3    29    22               8.320ohm
@@ -118,7 +118,7 @@ XI7              sink         36         32
 
 *** netlist file ***
 .TRAN 1ps 750ps 0ps
-.FILE CIRCUIT20535.CSV
+.FILE CIRCUIT61257.CSV
 .print phase XI1_B1
 .print phase XI3_B1
 .print phase XI7_B1

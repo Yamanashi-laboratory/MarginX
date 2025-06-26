@@ -31,7 +31,6 @@ void Margin_syn(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<st
     int shmid;
     board *top;
     vector<int> pid;
-    stringstream out_det, out_fig, out_csv;
 
     /*共有メモリを確保し、IDをshmidに格納*/    //共有メモリはプロセス間で通信を行う（board構造体を用いた結果の挿入）ため必要である
     if ((shmid = shmget(IPC_PRIVATE, sizeof(board), 0666)) == -1) {

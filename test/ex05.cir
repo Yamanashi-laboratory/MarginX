@@ -71,9 +71,15 @@ l7                30        34   5.06pH fcheck
 l8                31        32   4.65pH fcheck
 l9                29        33   2.49pH fcheck
 l10               27        21   4.333pH fcheck
+*SYN=2
 l11               26        22   4.333pH fcheck
+*SYN=2
+
 l12               30        27   0.39pH fcheck
+*SYN=1
 l13               29        26   0.39pH fcheck
+*SYN=1
+
 l14               21        13   1.41pH fcheck
 l15               22        15   1.59pH fcheck
 

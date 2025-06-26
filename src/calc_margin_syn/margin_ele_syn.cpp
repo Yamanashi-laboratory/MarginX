@@ -51,7 +51,7 @@ int margin_ele_syn(int ele_num, vector<ele_unit> &element, vector<vector<judge>>
             if(system((commandname.str()).c_str()) == -1){
                 cout << "error:1" << endl;
             }
-            else if(judge_operation( jud, 0) == 0){
+            else if(judge_operation(jud, 0) == 0){
                 HIGH = HIGH - pow(10 , order_num - check);
                 synchro(copy, ele_num, HIGH);
                 check += 1;

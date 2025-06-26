@@ -53,6 +53,7 @@ void optimize_seq(vector<ele_unit> &element, vector<string> &data_cir, vector<ve
     yield_his.resize(5,0);
     vector<double> global_rand;  //素子の種類ごとにグローバルな乱数を格納
     global_rand.resize(8, 0);
+    vector<double> power;
 
     cout << " Select the Kind of Score" << endl;
     cout << " 1: Only Critical Margin " << endl;
@@ -63,39 +64,9 @@ void optimize_seq(vector<ele_unit> &element, vector<string> &data_cir, vector<ve
     cout << "  Selected Score : ";
     cin >> mode;
 
-    switch(mode){
-        case 1:
-            CM_power = 1;
-            BM_power = 0;
-            break;
-        case 2:
-            CM_power = 0;
-            BM_power = 1;
-            break;
-        case 3:
-            CM_power = 1;
-            BM_power = 1;
-            break;
-        case 4:
-            CM_power = 1;
-            BM_power = 2;
-            break;
-        case 5:
-            cout << " Select Critical Margin Power" << endl;
-            cout << " Critical Margin Power : ";
-            cin >> CM_power;
-            cout << " Select Bias Margin Power" << endl;
-            cout << " Bias Margin Power : ";
-            cin >> BM_power;
-            break;
-        default:
-            cout << " Please Select a Correct Number" << endl;
-            return;
-            break;
-    }
+    power = select_score();   //スコアを選択 → power配列に格納
 
     start = time(NULL);
-
     
     opt_num *opt = new opt_num;
     int shmid;
@@ -110,7 +81,7 @@ void optimize_seq(vector<ele_unit> &element, vector<string> &data_cir, vector<ve
                  << " check)                                                                                             " << endl;
     Margin_low(element,  jud, data_cir, arg_arr, 2);
     bias_margin =  min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
-    cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * bias_margin;
+    cri_bias_sum = calc_score(element, power);
     Margin_num++;
     //ローカルな乱数をクリティカルマージンから決定
     local_nd = round(min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) / 2) / 100;
@@ -198,7 +169,7 @@ void optimize_seq(vector<ele_unit> &element, vector<string> &data_cir, vector<ve
             not_upd = 0;
             yield_his.assign(yield_his.size(), 0);
 
-            cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
+            cri_bias_sum = calc_score(element, power);
             if( cri_bias_sum > opt->cri_bias_best ){   // マージンの評価値 cri_bias_sum が最大だったらそれを現時点の最良の回路として置き換える
                     for(int j = 0; j < element.size(); j++){
                         opt->best_value[j] = element[j].value;    // best_value配列に現時点の最良の回路のパラメータを格納
@@ -235,7 +206,7 @@ void optimize_seq(vector<ele_unit> &element, vector<string> &data_cir, vector<ve
 
 
     //cri_bias_sum = min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
-    cri_bias_sum = CM_power * min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) + BM_power * min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
+    cri_bias_sum = calc_score(element, power);
     // cri_bias_sum = その回路のマージンの評価 (クリティカルマージン + 2 * バイアスマージン)
     //cout << "cri_bias_sum : " << cri_bias_sum << endl; 
     if( cri_bias_sum > opt->cri_bias_best ){   // マージンの評価値 cri_bias_sum が最大だったらそれを現時点の最良の回路として置き換える

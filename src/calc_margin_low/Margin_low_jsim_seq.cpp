@@ -13,13 +13,14 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+
 #include <mutex>
 #include "function.hpp"
 #include <iomanip> 
 
 using namespace std;
 
-void Margin_jsim(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<string> &data_cir, vector<string> &arg_arr, int menu){
+void Margin_low_jsim_seq(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<string> &data_cir, vector<string> &arg_arr, int menu){
     if(menu == 0 || menu == 2){
         cout << " Calculating Margins...                                                                                                             " << endl << endl;
     }
@@ -32,53 +33,20 @@ void Margin_jsim(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<s
     board *top;
     vector<int> pid;
     
-    /*共有メモリを確保し、IDをshmidに格納*/    //共有メモリはプロセス間で通信を行う（board構造体を用いた結果の挿入）ため必要である
-    if ((shmid = shmget(IPC_PRIVATE, sizeof(board), 0666)) == -1) {
-        cout << "can't make shared memory" << endl;
-        exit(EXIT_FAILURE);
-    }
 
-    
-    /*結果を格納する top に共有メモリをアタッチ*/
-    top = (board *)shmat(shmid, NULL, 0);
-    //top->cri_m = 100;
 
-    for(int i = 0; i < element.size(); i++){
-            board  *shmaddr;
-                //マルチプロセスL
-                    pid.emplace_back(fork());
-                    if(pid[i] == 0){
-                        if ((shmaddr = (board*)shmat(shmid, NULL, 0)) == (void *)-1) {
-                            cerr << "childL can't load memory" << endl;
-                            exit(EXIT_FAILURE);
-                        }
-                        margin_ele_jsim(i,element,  jud, shmaddr, data_cir);
-                        if (shmdt(shmaddr) == -1) {
-                            exit(EXIT_FAILURE);
-                        }
-                        exit(0);
-                    }
-                    else if(pid[i] < 0){
-                        cerr << "cann't make child process" << endl;
-                        exit(0);
-                    }
-    
-    }
-
-    /*親プロセス待機 及び インジケータの実装*/
     cout << " [                                                  ]    0 % ";
-
-    for (int i = 0; i < sum; i++) {
+    for(int i = 0; i < element.size(); i++){
+        margin_ele_low_jsim(i,element,  jud, top, data_cir);
         string str = "";
         for (int j = 0; j < static_cast<int>((i / static_cast<double>(sum) * 100) / 2); j++) {
             str += "#";
         }
         cout << "\r [" << setw(50) << left << str << "]  " << setw(3) << right << static_cast<int>(i / static_cast<double>(sum) * 100) << " % ";
         cout.flush();
-        this_thread::sleep_for(chrono::microseconds(50));
-        wait(NULL);
-
     }
+
+    /*親プロセス待機 及び インジケータの実装*/
 
     cout << "\r" << " [##################################################]  100 % ";
 
@@ -93,7 +61,7 @@ void Margin_jsim(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<s
             file_out(arg_arr[1], element);  
             break;
         case 1:
-            goto free; 
+            return; 
             break;
         case 2:
             fig_out(element);
@@ -102,7 +70,7 @@ void Margin_jsim(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<s
                     detail_out(element);      
                 }
             }
-            goto free;
+            return;
             break;
         default:
             break;
@@ -129,12 +97,7 @@ void Margin_jsim(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<s
         }
     }
 
-    free:
     /*確保していた共有メモリを解放*/
-    if (shmctl(shmid, IPC_RMID, NULL) == -1) {
-        cout << "can't delete shared memory";
-        exit(EXIT_FAILURE);
-    }
 
 }
 

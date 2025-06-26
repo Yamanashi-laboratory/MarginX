@@ -158,12 +158,12 @@ XI58             SINK         34         51
 *** NETLIST FILE ***
 
 .TRAN  0.1PS 1NS 0NS 1PS
-.FILE CIRCUIT1110984.CSV
-.PRINT PHASE B1.XI19
-.PRINT PHASE B2.XI19
-.PRINT PHASE B3.XI19
-.PRINT PHASE B5.XI19
-.PRINT PHASE B6.XI19
+.FILE CIRCUIT65949.CSV
+.print phase XI19_B1
+.print phase XI19_B2
+.print phase XI19_B3
+.print phase XI19_B5
+.print phase XI19_B6
 
 *.print devv Vinclk
 *.print devv B4.XI19

@@ -128,18 +128,23 @@ void synchro_opt(std::vector<ele_unit> &element, int ele_num);
 
 //calc_margin
 void Margin(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
-void Margin_syn(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
 int margin_ele(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
-int margin_ele_syn(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
+void Margin_jsim(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
+int margin_ele_jsim(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
+
 
 //calc_margin_low
 void Margin_low(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
 int margin_ele_low(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
+void Margin_low_jsim(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
+int margin_ele_low_jsim(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
+void Margin_low_jsim_seq(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
 
-//calc_margin_jsim
-void Margin_jsim(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
-int margin_ele_jsim(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
-void Margin_jsim_seq(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
+//calc_margin_syn
+void Margin_syn(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
+int margin_ele_syn(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
+void Margin_syn_jsim(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
+int margin_ele_syn_jsim(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
 
 //critical_find
 int find_critical(std::vector<ele_unit> &element);//クリティカルな素子を探索して、それが格納されているelement内の要素番号返す
@@ -170,6 +175,7 @@ int make_cir_last(std::vector<ele_unit> &element, std::vector<std::string>& data
 
 //critical_margin_method
 void critical_margin_method(std::vector<ele_unit> &element, std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr);
+void critical_margin_method_jsim(std::vector<ele_unit> &element, std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr);
 
 //optimize_com
 void optimize(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
