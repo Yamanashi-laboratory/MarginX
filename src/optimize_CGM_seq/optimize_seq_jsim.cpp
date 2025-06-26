@@ -29,12 +29,7 @@ using namespace std;
 
 void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<judge>> &jud, vector<string> &arg_arr){
 
-    int mode = 0;
-    double CM_power = 1;
-    double BM_power = 1;
     int count = 0;
-    int bias_margin = 0;
-    double yield_ave = 0;
     double local_nd = 0.1;
     double lambda, global = 0;;
     int not_upd = 0;
@@ -60,7 +55,6 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
     start = time(NULL);
 
     opt_num *opt = new opt_num;
-    int shmid;
     double cri_bias_sum = 0;
     int Margin_num = 1;
     vector<ele_unit> element_ini = element;
@@ -71,7 +65,6 @@ void optimize_seq_jsim(vector<ele_unit> &element, vector<string> &data_cir, vect
     cout << " This is the progress midway   (the " << GetOrdinalNumber(static_cast<int>(Margin_num)) 
                  << " check)                                                                                             " << endl;
     Margin_jsim(element,  jud, data_cir, arg_arr, 2);
-    bias_margin =  min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
     cri_bias_sum = calc_score(element, power);
     Margin_num++;
 

@@ -26,27 +26,18 @@ using namespace std;
 
 void optimize_yield_up_jsim(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<judge>> &jud, vector<string> &arg_arr){
 
-    int mode = 0;
-    double CM_power = 1;
-    double BM_power = 1;
     int count = 0;
-    int bias_margin = 0;
-    double yield_ave = 0;
     double local_nd = 0.05;
     double lambda, global = 0;
     int not_upd = 0;
     int bunbo = 100;
     int suc_th = 60;
-    int p_key = 0, m_key = 0, pm_key = 0;
     time_t start, now;
     string sharp = "";
     string yield = "yield.csv";
     string param = "param.csv";
     ofstream fp_yield(yield);
     ofstream fp_param(param);
-    //vector<int> yield_log;
-    //yield_log.push_back(50);
-    double therm = 1;
     vector<int> yield_his;
     yield_his.resize(5,0);
     vector<double> global_rand;
@@ -79,7 +70,6 @@ void optimize_yield_up_jsim(vector<ele_unit> &element, vector<string> &data_cir,
                  << " check)                                                                                             " << endl;
     Margin_jsim(element,  jud, data_cir, arg_arr, 2);
     make_cir_last(element, data_cir, arg_arr);            
-    bias_margin =  min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
     cri_bias_sum = calc_score(element, power);
     Margin_num++;
 

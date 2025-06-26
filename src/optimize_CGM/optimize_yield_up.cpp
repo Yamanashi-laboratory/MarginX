@@ -26,27 +26,18 @@ using namespace std;
 
 void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<judge>> &jud, vector<string> &arg_arr){
 
-    int mode = 0;
-    double CM_power = 1;
-    double BM_power = 1;
     int count = 0;
-    int bias_margin = 0;
-    double yield_ave = 0;
     double local_nd = 0.05;
     double lambda, global = 0;
     int not_upd = 0;
     int bunbo = 100;
     int suc_th = 60;
-    int p_key = 0, m_key = 0, pm_key = 0;
     time_t start, now;
     string sharp = "";
     string yield = "yield.csv";
     string param = "param.csv";
     ofstream fp_yield(yield);
     ofstream fp_param(param);
-    //vector<int> yield_log;
-    //yield_log.push_back(50);
-    double therm = 1;
     vector<int> yield_his;
     yield_his.resize(5,0);
     vector<double> global_rand;
@@ -88,7 +79,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
     //local_nd = 0.1;
 
     for (int m = 0; m < MONTE_CARLO; m++){
-        for (int r = 0; r < global_rand.size(); r++){
+        for (size_t r = 0; r < global_rand.size(); r++){
             global_rand[r] = rand_global_yield(local_nd);
         }
         //cout << endl;
@@ -151,7 +142,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
 
         if( opt->success != 0 ){    // 開発者確認用
             lambda = (MULTI_NUM - opt->success) / MULTI_NUM;
-            for(int i = 0; i < element.size(); i++){
+            for(size_t i = 0; i < element.size(); i++){
 
                 element[i].value = opt->sum_value[i] / opt->success + lambda * (element[i].value - opt->sum_value_f[i] / bunbo);   // 新たなパラメータに置き換える
                 //element[i].value = opt->sum_value[i] / opt->success;
@@ -170,7 +161,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
                 //not_upd = 0;
                 opt->suc_max = opt->success;
 
-                for(int i = 0; i < element.size(); i++){
+                for(size_t i = 0; i < element.size(); i++){
                     //element[i].value = opt->sum_value[i] / opt->success;
                     //element[i].value = opt->sum_value[i] / opt->success + lambda * (element[i].value - opt->sum_value_f[i] / bunbo);   // 新たなパラメータに置き換える
                     //opt->best_value[i] =element[i].value;
@@ -187,7 +178,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
 
             cri_bias_sum = calc_score(element, power);
             if( cri_bias_sum > opt->cri_bias_best ){   // マージンの評価値 cri_bias_sum が最大だったらそれを現時点の最良の回路として置き換える
-                    for(int j = 0; j < element.size(); j++){
+                    for(size_t j = 0; j < element.size(); j++){
                         opt->best_value[j] = element[j].value;    // best_value配列に現時点の最良の回路のパラメータを格納
                     }
                     opt->best_value[element.size()] = Margin_num;  //best_value配列の最後の要素の次の要素に何番目の回路かを格納
@@ -205,7 +196,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
         
         //全て初期化
         opt->success = 0;
-        for(int i = 0; i < element.size(); i++){
+        for(size_t i = 0; i < element.size(); i++){
             opt->sum_value[i] = 0;
             opt->sum_value_f[i] = 0;
         }
@@ -220,7 +211,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
     cri_bias_sum = calc_score(element, power);
     //cout << "cri_bias_sum : " << cri_bias_sum << endl; 
     if( cri_bias_sum > opt->cri_bias_best ){   // マージンの評価値 cri_bias_sum が最大だったらそれを現時点の最良の回路として置き換える
-        for(int j = 0; j < element.size(); j++){
+        for(size_t j = 0; j < element.size(); j++){
             opt->best_value[j] = element[j].value;    // best_value配列に現時点の最良の回路のパラメータを格納
         }
         opt->best_value[element.size()] = Margin_num;  //best_value配列の最後の要素の次の要素に何番目の回路かを格納
@@ -228,7 +219,7 @@ void optimize_yield_up(vector<ele_unit> &element, vector<string> &data_cir, vect
     }
 
     cout <<  " This is the " << GetOrdinalNumber(static_cast<int>(opt->best_value[element.size()])) << " value." << endl;
-    for(int i = 0; i < element.size(); i++){
+    for(size_t i = 0; i < element.size(); i++){
         element[i].value = opt->best_value[i];  //最終的な最良の回路のパラメータをelement配列に格納
     }
 
