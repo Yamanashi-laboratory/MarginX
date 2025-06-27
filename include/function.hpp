@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-#define JOSIM_COMMAND "josim"
-#define JSIM_COMMAND "jsim"
+#define JOSIM_COMMAND "josim"   //JoSIMを叩くコマンド名
+#define JSIM_COMMAND "jsim"　　　//JSIMを叩くコマンド名
 
 //file.cpp
 #define SMALL_SUM 200           /* L_MAX + K_MAX + B_MAX + BI_MAX + PI_MAX + R_MAX + V_MAX + I_MAX */
