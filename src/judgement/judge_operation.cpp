@@ -16,10 +16,9 @@ using namespace std;
 
 /*正常動作の判定条件*/
 int judge_operation (vector<vector<judge>> &jud, int mode){
-    int x;
+    size_t x;
     int bline, eline;
     int ok_flg;
-    int anti_flg;
     double judgephase;
 
     /* Josimの結果を配列に格納 */
@@ -32,12 +31,12 @@ int judge_operation (vector<vector<judge>> &jud, int mode){
 
     /* 正常動作判定*/
     for(x = 1; x < data[0].size()  ; x++){
-        for(int num = 0; num < jud[x - 1].size(); num++){  // x番目の素子のnum回目のジャッジ
+        for(size_t num = 0; num < jud[x - 1].size(); num++){  // x番目の素子のnum回目のジャッジ
             bline = (jud[x - 1][num].btime - data[0][0] )/ time_scale;  //該当範囲の開始行
             eline = (jud[x - 1][num].etime - data[0][0] )/ time_scale;  //該当範囲の終了行
             judgephase = jud[x - 1][num].phase * M_PI;
 
-            if(eline > data.size()){
+            if(eline > (int)data.size()){
                 cerr << " ERROR (TIME) : Please check if the time in Judgement File is more than its simulation time in Circuit File" << endl;
                 exit(1);
             }

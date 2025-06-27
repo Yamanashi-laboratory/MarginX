@@ -29,7 +29,7 @@ void Margin(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<string
     }
     int sum = element.size();
     int shmid;
-    board *top;
+    board *top = nullptr;
     vector<int> pid;
     stringstream out_det, out_fig, out_csv;
 
@@ -44,7 +44,7 @@ void Margin(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<string
     top = (board *)shmat(shmid, NULL, 0);
     //top->cri_m = 100;
 
-    for(int i = 0; i < element.size(); i++){
+    for(size_t i = 0; i < element.size(); i++){
             board  *shmaddr;
                 //マルチプロセスL
                     pid.emplace_back(fork());
@@ -121,13 +121,15 @@ void Margin(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<string
         }
         if (cmd == "-f"){     // -f があった場合、 matplotlib を用いたグラフを出力
             cout << " Please wait for outputting the graph..." << endl;
+            margin_py();
+            /*
             string path = PATH;              //23行目の #define PATH "展開したフォルダの絶対パス" を参照してgnuplot.pyまでの絶対パス文字列を作成
-            //cout << path << endl;
             string margin = "python " + path + "margin.py";     
+
             int result_py = system(margin.c_str());
             if (result_py != 0) {
                 cerr << "ERROR : executing Python script." << endl;
-            }
+            }*/
         }
     }
 

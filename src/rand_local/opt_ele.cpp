@@ -61,7 +61,7 @@ void opt_ele(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<
     double judge = 0;
 
 
-    for(int j = 0; j < copy.size(); j++){
+    for(size_t j = 0; j < copy.size(); j++){
         if(copy[j].FIX != 1){
             switch(copy[j].ide_num){
                 case 0 :  
@@ -119,12 +119,12 @@ void opt_ele(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<
     }    judge = judge_operation( jud, 0);
     if(judge == 1){ //正常動作したら
         opt->success += 1;
-        for(int i = 0; i < copy.size(); i++){
+        for(size_t i = 0; i < copy.size(); i++){
             opt->sum_value[i] += copy[i].value;
         }
     }
     else if(judge == 0){
-        for(int i = 0; i < copy.size(); i++){
+        for(size_t i = 0; i < copy.size(); i++){
             opt->sum_value_f[i] += copy[i].value;
         }
     }

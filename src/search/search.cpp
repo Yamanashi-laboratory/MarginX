@@ -26,18 +26,9 @@ using namespace std;
 
 void search(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<judge>> &jud, vector<string> &arg_arr){
 
-    int mode = 0;
-    double CM_power = 1;
-    double BM_power = 1;
     int count = 0;
-    int bias_margin = 0;
-    double yield_ave = 0;
     double local_nd = 0.05;
-    double lambda, global = 0;
-    int not_upd = 0;
-    int bunbo = 100;
-    int suc_th = 60;
-    int p_key = 0, m_key = 0, pm_key = 0;
+    double global = 0;
     time_t start, now;
     string sharp = "";
     string yield = "yield.csv";
@@ -46,7 +37,6 @@ void search(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<j
     ofstream fp_param(param);
     //vector<int> yield_log;
     //yield_log.push_back(50);
-    double therm = 1;
     vector<int> yield_his;
     yield_his.resize(5,0);
     vector<double> global_rand;
@@ -86,7 +76,7 @@ void search(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<j
     //local_nd = 0.1;
 
     for (int m = 0; m < MONTE_CARLO; m++){
-        for (int r = 0; r < global_rand.size(); r++){
+        for (size_t r = 0; r < global_rand.size(); r++){
             global_rand[r] = rand_global_yield(local_nd);
         }
         //cout << endl;
@@ -140,8 +130,7 @@ void search(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<j
 
 
         if( opt->success == 0 ){    // 開発者確認用
-            lambda = (MULTI_NUM - opt->success) / MULTI_NUM;
-            for(int i = 0; i < element.size(); i++){
+            for(size_t i = 0; i < element.size(); i++){
                 if(element[i].value < element[i].MIN){  //新たなパラメータが最小値を下回っていたらパラメータを最小値に置き換える
                         element[i].value = element[i].MIN;
                 }
@@ -154,7 +143,7 @@ void search(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<j
             }
         }
         else if(opt->success > 0){
-            for(int i = 0; i < element.size(); i++){
+            for(size_t i = 0; i < element.size(); i++){
                 element[i].value = opt->best_value[i];
             }
             break;
@@ -166,7 +155,7 @@ void search(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<j
         
         //全て初期化
         opt->success = 0;
-        for(int i = 0; i < element.size(); i++){
+        for(size_t i = 0; i < element.size(); i++){
             opt->sum_value[i] = 0;
         }
         //初期化終了
@@ -178,7 +167,7 @@ void search(vector<ele_unit> &element, vector<string> &data_cir, vector<vector<j
     Margin_low(element,  jud, data_cir, arg_arr, 2);
     //cri_bias_sum = min({-element[find_critical_bias(element)].margin_L, element[find_critical_bias(element)].margin_H});
     //cout << "cri_bias_sum : " << cri_bias_sum << endl; 
-    for(int i = 0; i < element.size(); i++){
+    for(size_t i = 0; i < element.size(); i++){
         element[i].value = opt->best_value[i];  //最終的な最良の回路のパラメータをelement配列に格納
     }
 

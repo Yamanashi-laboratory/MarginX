@@ -4,7 +4,8 @@
 #include <string>
 #include <vector>
 
-#define JOSIM_COMMAND "josim"   //JoSIMのコマンドを変更する位はここを書き換える
+#define JOSIM_COMMAND "josim"
+#define JSIM_COMMAND "jsim"
 
 //file.cpp
 #define SMALL_SUM 200           /* L_MAX + K_MAX + B_MAX + BI_MAX + PI_MAX + R_MAX + V_MAX + I_MAX */
@@ -12,8 +13,6 @@
 //margin.cpp
 #define MARGIN_UPPER 2          /* マージン測定の上限が100％ */
 #define MARGIN_FIG "#"
-
-#define PATH "/programs/matsuoka/MarginX/python_source/"
 
 //optimize.hpp
 #define MULTI_NUM 100
@@ -92,13 +91,15 @@ void display_help ();
 //setup
 void setup_python_path(std::vector<std::string> arg_arr);
 void setup(std::vector<std::string> &arg_arr);
-void setup_josim_command();
+void setup_josim_command(std::vector<std::string> arg_arr);
+void setup_jsim_command(std::vector<std::string> arg_arr);
 
 //time
 void end_time(time_t start, time_t end);
 
 //menu
 int menu();
+int menu_jsim();
 
 //read_file
 int readJudgementFile(std::vector<std::vector<judge>> &jud, std::string &judgefilename, std::vector<std::string> arg_arr);
@@ -106,6 +107,7 @@ void make_data_cir(std::vector<std::string>& data_cir, std::string &filename, st
 int judge_element(std::string &line);
 range find_range(range range, std::string line); //各パラメータの上限・下限をチェック
 std::string sub_unit(std::string &main);
+void convert_jsim(std::vector<std::string> &data_cir, std::string &filename);
 
 //miscellaneous
 void delete_file();
@@ -119,6 +121,7 @@ int search_command(std::vector<std::string> arg_arr, const std::string command);
 void detail_out(std::vector<ele_unit> &element);
 void fig_out(std::vector<ele_unit> &element);
 void file_out(std::string &filename, std::vector<ele_unit> &element);
+int margin_py();
 
 //synchro
 void synchro(std::vector<ele_unit> &element, int ele_num, double syn_value);
@@ -127,15 +130,22 @@ void synchro_opt(std::vector<ele_unit> &element, int ele_num);
 //calc_margin
 void Margin(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
 int margin_ele(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
+void Margin_jsim(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
+int margin_ele_jsim(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
+
 
 //calc_margin_low
 void Margin_low(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
 int margin_ele_low(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
+void Margin_low_jsim(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
+int margin_ele_low_jsim(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
+void Margin_low_jsim_seq(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
 
-//calc_margin_jsim
-void Margin_jsim(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
-int margin_ele_jsim(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
-void Margin_jsim_seq(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
+//calc_margin_syn
+void Margin_syn(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
+int margin_ele_syn(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
+void Margin_syn_jsim(std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr, int menu);
+int margin_ele_syn_jsim(int ele_num, std::vector<ele_unit> &element,std::vector<std::vector<judge>> &jud, board *top, std::vector<std::string> &data_cir);
 
 //critical_find
 int find_critical(std::vector<ele_unit> &element);//クリティカルな素子を探索して、それが格納されているelement内の要素番号返す
@@ -166,18 +176,21 @@ int make_cir_last(std::vector<ele_unit> &element, std::vector<std::string>& data
 
 //critical_margin_method
 void critical_margin_method(std::vector<ele_unit> &element, std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr);
+void critical_margin_method_jsim(std::vector<ele_unit> &element, std::vector<std::vector<judge>> &jud ,std::vector<std::string>& data_cir, std::vector<std::string>& arg_arr);
 
-//optimize_com
-void optimize(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
-
+/*
 //optimize_monte
 void optimize_monte(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
 void optimize_monte_ul(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
 
-//optimize_yield
+//optimize_con
 void optimize_yield(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
-void optimize_yield_up(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
 void optimize_yield_up_down(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
+void optimize(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
+*/
+
+//optimize_yield
+void optimize_yield_up(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
 void optimize_yield_up_jsim(std::vector<ele_unit> &element, std::vector<std::string> &data_cir, std::vector<std::vector<judge>> &jud, std::vector<std::string>& arg_arr);
 
 //optimize_seq

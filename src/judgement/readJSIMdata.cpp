@@ -18,9 +18,7 @@ using namespace std;
 
 /* Josimの結果を配列に格納 */
 vector<vector<double>> readJSIMData() {
-    int i = 0;
     double out;
-    double val;
     string line;
     vector<double> pArray;
     vector<vector<double>> out_array;
@@ -31,7 +29,7 @@ vector<vector<double>> readJSIMData() {
     ifstream fp_margin(outfile.str());
     
     if (!fp_margin.is_open()) {
-        cerr << "No output of JoSIM." << endl;
+        cerr << "No output of JSIM." << endl;
     }
 
     fp_margin.seekg(0, ios::end);

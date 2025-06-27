@@ -12,27 +12,50 @@
 
 using namespace std;
 
-void setup_josim_command(){
+void setup_josim_command(vector<string> arg_arr){
     int cou = 0;
     int lineNumberToReplace = 0;
     string josim_commnad = "";
 
-    ifstream fmargin("function.hpp");
+    // 実行ファイルのパスを取得
+    filesystem::path executablePath = filesystem::absolute(filesystem::path(arg_arr[0]));
+    // ディレクトリ部分を取得
+    filesystem::path directoryPath = executablePath.parent_path();
+
+    // ディレクトリの絶対パスを文字列として取得
+    string absoluteDirectoryPath = directoryPath.string();
+
+    if(absoluteDirectoryPath.rfind(".") != string::npos){
+        absoluteDirectoryPath.pop_back();
+    }
+
+    //absoluteDirectoryPath.pop_back();
+    string absoluteDirectoryPath_cmake = absoluteDirectoryPath + "../include/function.hpp";
+    absoluteDirectoryPath += "/include/function.hpp";
+    //cout << absoluteDirectoryPath << endl;
+
+    if(!filesystem::is_regular_file(absoluteDirectoryPath)){ //if there is [input].cir, change the name of filename to .inp
+        absoluteDirectoryPath = absoluteDirectoryPath_cmake;
+    }
+            cout << absoluteDirectoryPath << endl;
+
+    ifstream fmargin(absoluteDirectoryPath);
     if (!fmargin){
-        cout << "can't open file!" << endl;
-        exit(1);
+
+            cout << "can't open file!" << endl;
+            exit(1);
+        
     }
 
     vector<string> lines;
     string line;
-    string replacementText = "#define JOSIM_COMMAND ";
+    string replacementText = "#define JOSIM_COMMAND \"";
 
 
     while (getline(fmargin, line)) {
         lines.push_back(line);
         if(line.find("#define JOSIM_COMMAND") != string::npos){
             lineNumberToReplace = cou;
-            break;
         }
         cou++;
     }
@@ -42,19 +65,18 @@ void setup_josim_command(){
     cin >> josim_commnad; 
     cout << endl;
 
-    replacementText += josim_commnad;
+    replacementText = replacementText + josim_commnad + "\"";
 
     // ファイルの10行目を変換する（0ベースのインデックスなので9行目）
     lines[lineNumberToReplace] = replacementText;
 
     // ファイルに変更内容を書き込む
-    ofstream outputFile("function.hpp");
+    ofstream outputFile(absoluteDirectoryPath);
     for (const string& updatedLine : lines) {
         outputFile << updatedLine << endl;
     }
 
     outputFile.close();
-    fmargin.close();
 }
 
 

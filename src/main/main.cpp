@@ -25,7 +25,7 @@ int main(int argc, const char *argv[]) {
     vector<string> elej;                 //各判定素子の名前
     vector<string> data_cir;          //サーキットファイルを格納
     time_t start, end;                //開始時間と終了時間
-    struct tm *tps, *tpe;             //開始時間と終了時間
+    struct tm *tps;             //開始時間と終了時間
     char date[100];                   //日付・日時を格納する文字列配列
     vector<ele_unit> element;         //測定素子の情報を格納する構造体を格納する配列
     stringstream commandname;          //JoSIM実行用のストリングストリーム
@@ -80,49 +80,77 @@ int main(int argc, const char *argv[]) {
             if(system((commandname.str()).c_str()) == -1){
                 cout << "ERROR : can't execute JoSIM." << endl;
             }
-            judge_operation( jud, 1);
+            judge_operation(jud, 1);
             make_cir_last(element, data_cir, arg_arr);
             break;
         case 2:
-            Margin(element,  jud, data_cir, arg_arr, 0);
+            Margin(element, jud, data_cir, arg_arr, 0);
             break;
         case 3:
-            critical_margin_method(element,  jud, data_cir, arg_arr);
+            Margin_low(element, jud, data_cir, arg_arr, 0);
+            break;      
+        case 4:
+            Margin_syn(element, jud, data_cir, arg_arr, 0);
+            break;  
+        case 5:
+            critical_margin_method(element, jud, data_cir, arg_arr);
             make_cir_last(element, data_cir, arg_arr);
             break;
-        case 4:
-            optimize_monte(element,data_cir,jud, arg_arr);
-            break;
-        case 5:
-            optimize(element,data_cir,jud, arg_arr);
-            break;
         case 6:
-            optimize_monte_ul(element,data_cir,jud, arg_arr);
-            break;
-        case 7:
             optimize_yield_up(element,data_cir,jud, arg_arr);
             break;
-        case 8:
-            Margin_low(element,  jud, data_cir, arg_arr, 0);
-            break;
-        case 9:
+        case 7:
             optimize_seq(element,data_cir,jud, arg_arr);
             break;
-        case 10:
-            optimize_yield_up_jsim(element,data_cir,jud, arg_arr);
+        case 8:
             break;
-        case 11:
-            optimize_seq_jsim(element,data_cir,jud, arg_arr);
-            break;
-        case 12:
-            search(element,data_cir,jud, arg_arr);
-            break;
-            
+         
         default: //適切な値が入力されていなければエラーを吐き終了
             cout << " ERROR : Please input a correct number." << endl;
             return 0;
     }
 
+    if(menu_num == 8){
+        convert_jsim(data_cir, filename);
+        int menu_num_jsim = menu_jsim();
+        switch(menu_num_jsim){
+            case 1:
+                commandname << JSIM_COMMAND << " OPTIMIZE" << getpid() << ".cir > /dev/null"; 
+                make_cir_opt(element, data_cir);
+                if(system((commandname.str()).c_str()) == -1){
+                    cout << "ERROR : can't execute JSIM." << endl;
+                }
+                judge_operation_jsim(jud, 1);
+                make_cir_last(element, data_cir, arg_arr);
+            break;
+            case 2:
+                Margin_jsim(element, jud, data_cir, arg_arr, 0);
+                break;
+            case 3:
+                Margin_low_jsim(element, jud, data_cir, arg_arr, 0);   
+                break;      
+            case 4:
+                Margin_syn_jsim(element, jud, data_cir, arg_arr, 0);
+                break;  
+            case 5:
+                critical_margin_method_jsim(element, jud, data_cir, arg_arr);////////
+                make_cir_last(element, data_cir, arg_arr);
+                break;
+            case 6:
+                optimize_yield_up_jsim(element,data_cir,jud, arg_arr);
+                break;
+            case 7:
+                optimize_seq_jsim(element,data_cir,jud, arg_arr);
+                break;
+            default: //適切な値が入力されていなければエラーを吐き終了
+                cout << " ERROR : Please input a correct number." << endl;
+                return 0;            
+                break;
+        }
+    }
+
+    
+    end = time(nullptr);
     end_time(start,end);  //終了時間を表示
 
     delete_file();  //中間ファイルをすべて削除

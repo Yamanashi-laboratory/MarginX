@@ -30,8 +30,6 @@ void opt_ele_yield_jsim(vector<ele_unit> &element, vector<string> &data_cir, vec
     std::random_device rnd;
     std::mt19937 mt(rnd()); 
 
-    int power = 10;
-
     //double sigma = ( element[find_critical(element)].margin_H - element[find_critical(element)].margin_L ) / 2 / 1000 * 5;
     //double sigma = min({-element[find_critical(element)].margin_L, element[find_critical(element)].margin_H}) / 1000 * power;   // 3 ? 5 ? I dont know which number is correct.
     //cout << "sigma = " << sigma << endl;
@@ -47,7 +45,7 @@ void opt_ele_yield_jsim(vector<ele_unit> &element, vector<string> &data_cir, vec
 
     double judge = 0;
 
-    for(int j = 0; j < copy.size(); j++){
+    for(size_t j = 0; j < copy.size(); j++){
         if(copy[j].FIX != 1){
             
             switch(copy[j].ide_num){
@@ -121,12 +119,12 @@ void opt_ele_yield_jsim(vector<ele_unit> &element, vector<string> &data_cir, vec
 
     if(judge == 1){ //正常動作したら
         opt->success += 1;
-        for(int i = 0; i < copy.size(); i++){
+        for(size_t i = 0; i < copy.size(); i++){
             opt->sum_value[i] += copy[i].value;
         }
     }
     else if(judge == 0){
-        for(int i = 0; i < copy.size(); i++){
+        for(size_t i = 0; i < copy.size(); i++){
             opt->sum_value_f[i] += copy[i].value;
         }
     }

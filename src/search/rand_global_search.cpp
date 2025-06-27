@@ -25,7 +25,6 @@
 using namespace std;
 
 double rand_global_search(vector<ele_unit> &element){
-    int power = 4;
 
     double sigma = 0.1;
     std::random_device rnd;

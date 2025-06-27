@@ -16,8 +16,8 @@ void display_title (vector<string> &arg_arr){
     cout << "                                                        Gg                                                \n";
     cout << "                                                gg.   .gg                                                  \n";
     cout << "                                                 'gGGGg'                                                   \n";
-    cout << "                                                                            Version 2.1               \n";
-    cout << " ~~ Parallel Algorithm with Josim ~~ " << endl << endl;
+    cout << "                                                                            Version 1.0               \n";
+    cout << " ~~ Parallel Algorithm with JoSIM ~~ " << endl << endl;
 
 
     if(arg_arr.size() == 1){

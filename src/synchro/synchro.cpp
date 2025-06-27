@@ -18,7 +18,6 @@ using namespace std;
 
 void synchro(vector<ele_unit> &element, int ele_num, double syn_value){
     if(element[ele_num].SYN != 0){
-        double value = element[ele_num].value;
         for(size_t i = 0; i < element.size(); i++){
             if(element[i].SYN == element[ele_num].SYN){
                 element[i].value = syn_value;

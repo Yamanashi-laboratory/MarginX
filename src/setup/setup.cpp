@@ -8,18 +8,18 @@ void setup(vector<string> &arg_arr){
     int menu;
 
     cout << " Please select a setting you want to setup." << endl << endl;
-    cout << " 1. setting for using function of outputting margin figure (only to execute)" << endl;
-    cout << " 2. setting JoSIM command (default command is \"josim\")" << endl;
+    cout << " 1. setting JoSIM command (default command is \"josim\")" << endl;
+    cout << " 2. setting JSIM command (default command is \"jsim\")" << endl;
     cout << "  Selected Mode : ";
     cin >> menu;
     cout << endl;
 
     switch(menu){
         case 1:
-            setup_python_path(arg_arr);
+            setup_josim_command(arg_arr);
             break;
         case 2:
-            setup_josim_command();
+            setup_jsim_command(arg_arr);
             break;
         default:
             cerr << " ERROR : Please input a correct number." << endl;

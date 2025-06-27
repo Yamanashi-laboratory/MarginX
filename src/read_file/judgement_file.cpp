@@ -24,14 +24,13 @@ int readJudgementFile(vector<vector<judge>> &jud, string &judgefilename, vector<
 
     int judge = search_command(arg_arr, "-j");  // コマンドラインに "-j" があれば、その次のコマンドラインの文字列をjudgementfile_name に格納
         if(judge != -1){
-            if(judge + 1 < arg_arr.size()){
+            if(judge + 1 < (int)arg_arr.size()){
                 judgefilename = arg_arr[judge + 1];
             }
         }
 
     judgefilename += ".txt";
     int x = 0;
-    int y = 0;
     int num_jud = 0; 
     int btime = 0, etime = 0, anti = 0;
     double phase = 0;

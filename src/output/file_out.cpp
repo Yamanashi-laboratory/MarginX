@@ -24,7 +24,7 @@ void file_out(string &filename, vector<ele_unit> &element) {
     ofstream fpout(txtfilename.str());
     string name;
 
-    for (int i = 0; i < element.size(); i++) {
+    for (size_t i = 0; i < element.size(); i++) {
         name = element[i].element;
         if(element[i].ide_num == 2 ||element[i].ide_num == 3){
             name.replace(0,1,"J");
@@ -35,7 +35,7 @@ void file_out(string &filename, vector<ele_unit> &element) {
         fpcsv << out_csv.str() << endl;
     }
 
-    for (int i = 0; i < element.size(); i++) {
+    for (size_t i = 0; i < element.size(); i++) {
         name = element[i].element;
         if(element[i].ide_num == 2 ||element[i].ide_num == 3){
             name.replace(0,1,"J");

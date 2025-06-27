@@ -43,7 +43,7 @@ void Margin_low(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<st
     top = (board *)shmat(shmid, NULL, 0);
     //top->cri_m = 100;
 
-    for(int i = 0; i < element.size(); i++){
+    for(size_t i = 0; i < element.size(); i++){
             board  *shmaddr;
                 //マルチプロセスL
                     pid.emplace_back(fork());
@@ -120,12 +120,8 @@ void Margin_low(vector<ele_unit> &element, vector<vector<judge>> &jud, vector<st
         }
         if (cmd == "-f"){     // -f があった場合、 matplotlib を用いたグラフを出力
             cout << " Please wait for outputting the graph..." << endl;
-            string path = PATH;              //23行目の #define PATH "展開したフォルダの絶対パス" を参照してgnuplot.pyまでの絶対パス文字列を作成
-            string margin = "python " + path + "margin.py";      
-            int result_py = system(margin.c_str());
-            if (result_py != 0) {
-                cerr << "Error executing Python script." << endl;
-            }
+            margin_py();
+
         }
     }
 

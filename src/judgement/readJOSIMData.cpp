@@ -18,10 +18,7 @@ using namespace std;
 
 /* Josimの結果を配列に格納 */
 vector<vector<double>> readJOSIMData() {
-    int i = 0;
     double out;
-    double val;
-    char *tok;
     stringstream outfile;
     string line;
     vector<double> pArray;
