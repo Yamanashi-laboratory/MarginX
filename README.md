@@ -10,8 +10,11 @@ cmake ..
 cmake --build .
 ```
 
+This is the link of documentation (currently in production)　　
+https://yamanashi-laboratory.github.io/MarginX_docs/　　
 
-##MarginX : Margin Calculator and Circuit Optimizer from Yamanashi Lab, YNU Developed by Sho Matsuoka (in 2023) and Nakaishi Sotaro (in 2017)   
+
+## MarginX : Margin Calculator and Circuit Optimizer from Yamanashi Lab, YNU Developed by Sho Matsuoka (in 2023) and Nakaishi Sotaro (in 2017)   
  --------------------------------------------------------------------------  
 Please wait for documentation of MarginX.  
   
@@ -43,4 +46,5 @@ There are some commands below.
 -j | Specify optional name of Judgement File. You must write optional judgement file name without extension to the right of -j   
 Example :) ./Marginx ex02 -j ex01 -o hoge -f  
   
+
 
