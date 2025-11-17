@@ -28,7 +28,7 @@ B1
 B3  
 200 300 -1   
 300 400 -3   
-900 1000 -5   
+900 1000 -5  
   
 ...  
   
@@ -37,21 +37,10 @@ without extension.
   
 --------------------------------------------------------------------------  
 There are some commands below.    
--d        | You can see the details of results. you can also see them  
-(details) | in outputted text file.  
-          |  
-          |  
--f        | the output of a figure of Margins. You can also make  
-(figure)  | figures of Margins from CSV file normally outputted  
-          |  
-          |  
--o        | change outputted file name. You must write new outputted  
-(output)  | file name without extension to the right of -o   
-          |  
-          |  
--j        | Specify optional name of Judgement File. You must write  
-(jud file)| optional judgement file name without extension to the right of -j   
-          |  
-          |  
+-d | You can see the details of results. you can also see them in outputted text file.  
+-f | the output of a figure of Margins. You can also make figures of Margins from CSV file normally outputted  
+-o | change outputted file name. You must write new outputted file name without extension to the right of -o    
+-j | Specify optional name of Judgement File. You must write optional judgement file name without extension to the right of -j   
 Example :) ./Marginx ex02 -j ex01 -o hoge -f  
   
+
