@@ -10,7 +10,7 @@ cmake ..
 cmake --build .
 ```
 
-This is the link of documentation (currently in production)　　
+This is the link of documentation (currently in production)  
 https://yamanashi-laboratory.github.io/MarginX_docs/　　
 
 
@@ -46,5 +46,6 @@ There are some commands below.
 -j | Specify optional name of Judgement File. You must write optional judgement file name without extension to the right of -j   
 Example :) ./Marginx ex02 -j ex01 -o hoge -f  
   
+
 
 
