@@ -24,7 +24,7 @@ int menu(){
 
     cout << " 0. Remove Intermediary File" << endl;
     cout << " 1. Judge operation" << endl;
-    cout << " 2. Calculate Margin (acurate)" << endl;
+    cout << " 2. Calculate Margin (accurately)" << endl;
     cout << " 3. Calculate Margin (binary search)" << endl;
     cout << " 4. Calculate Margin (binary search with synchro)" << endl;
     cout << " 5. Optimization with Critical Margin Method" << endl;

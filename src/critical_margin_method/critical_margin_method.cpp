@@ -110,6 +110,8 @@ void critical_margin_method(vector<ele_unit> &element,  vector<vector<judge>> &j
     }
     cout << " Critical Margin Method is over!" << endl; 
     Margin_low(element, jud, data_cir, arg_arr, 0);
+    make_cir_last(element, data_cir, arg_arr);
+
 
 }
 
